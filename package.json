@@ -1,0 +1,19 @@
+{
+  "name": "int-i-official-site",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.com/int-i/int-i-official-site.svg?branch=master)](https://travis-ci.com/int-i/int-i-official-site)\r # 인트아이 공식 홈페이지",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo test.js && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/int-i/int-i-official-site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/int-i/int-i-official-site/issues"
+  },
+  "homepage": "https://github.com/int-i/int-i-official-site#readme"
+}
