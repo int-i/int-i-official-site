@@ -1,8 +1,12 @@
-import prod from "./prod";
-import dev from "./dev" ;
+import prod from "./prod.js";
+import dev from "./dev.js";
 
-if (process.env.NODE_ENV === 'production') {
-    module.exports = prod
-} else {
-    module.exports = dev
+const getKey = function() {
+    if (process.env.NODE_ENV === "production") {
+        return prod;
+    } else {
+        return dev;
+    }
 }
+
+export default getKey();
