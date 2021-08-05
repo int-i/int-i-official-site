@@ -7,7 +7,7 @@ const LOGIN = "/login";
 
 
 const routes = {
-    users: USERS,
-    login: LOGIN,
-    logout: LOGOUT,
+	users: USERS,
+	login: LOGIN,
+	logout: LOGOUT,
 }
