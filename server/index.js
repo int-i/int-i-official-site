@@ -1,6 +1,6 @@
 import express from "express";
-import routes from "./routers/routes";
 import userRouter from "./routers/userRouter";
+import routes from "./routers/routes";
 // 추가해야 할 모듈 및 미들웨어 : path, cors, cookie-parser, config, mongoose, Routers, routes
 
 const app = express();

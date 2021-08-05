@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "start": "node server/index.js",
-    "backend": "nodemon server/index.js",
+    "backend": "nodemon --experimental-modules --es-module-specifier-resolution=node server/index.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "test": "echo test successful!"
@@ -22,6 +22,12 @@
   "homepage": "https://github.com/int-i/int-i-official-site#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0"
   },
   "type": "module"
 }

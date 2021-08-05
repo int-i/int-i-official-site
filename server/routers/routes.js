@@ -5,8 +5,10 @@ const LOGIN = "/login";
 // const GLOBAL_SEARCH = "";
 
 
-export const routes = {
+const routes = {
     users: USERS,
     login: LOGIN,
-    logout: LOGOUT,
+    // logout: LOGOUT,
 }
+
+export default routes;
