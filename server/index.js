@@ -9,19 +9,19 @@ const app = express();
 // app.use(cors()); // CORS 도입 후 주석 해제
 
 // 여기서 라우팅 설정(dev)
-app.get('/', (req,res) => {
-    res.send('First Routing');
+app.get('/', (req, res) => {
+	res.send('First Routing');
 });
 app.use(routes.users, userRouter);
 
-if(process.env.NODE_ENV === "production") {
-    // 빌드 배포 환경에서의 라우팅 설정
+if (process.env.NODE_ENV === "production") {
+	// 빌드 배포 환경에서의 라우팅 설정
 
-    app.use(express.static("clicent/build"));
+	app.use(express.static("clicent/build"));
 
-    app.get("*", (req, res) => { 
-        // res.sendFile()
-     })
+	app.get("*", (req, res) => {
+		// res.sendFile()
+	})
 }
 
 // 서버 리스닝

@@ -5,7 +5,6 @@ const LOGIN = "/login";
 // const GLOBAL_SEARCH = "";
 
 
-
 export const routes = {
     users: USERS,
     login: LOGIN,
