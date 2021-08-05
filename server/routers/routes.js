@@ -6,7 +6,7 @@ const LOGIN = "/login";
 
 
 
-const routes = {
+export const routes = {
     users: USERS,
     login: LOGIN,
     logout: LOGOUT,

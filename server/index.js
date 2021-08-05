@@ -28,7 +28,7 @@ if(process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000
 
-function HandleListening() {
+const HandleListening = () => {
     console.log(`✅ http://localhost:${port} 에서 서버 리스닝에 성공했습니다.`)
 }
 
