@@ -3,7 +3,6 @@ import express from "express";
 
 const app = express();
 
-
 // 여기서 미들웨어 세팅
 // app.use(cors()); // CORS 도입 후 주석 해제
 
