@@ -1,4 +1,6 @@
 import express from "express";
+import routes from "./routers/routes";
+import userRouter from "./routers/userRouter";
 // 추가해야 할 모듈 및 미들웨어 : path, cors, cookie-parser, config, mongoose, Routers, routes
 
 const app = express();
@@ -10,6 +12,7 @@ const app = express();
 app.get('/', (req,res) => {
     res.send('First Routing');
 });
+app.use(routes.users, userRouter);
 
 if(process.env.NODE_ENV === "production") {
     // 빌드 배포 환경에서의 라우팅 설정
