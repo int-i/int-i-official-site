@@ -4,12 +4,12 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
-import config from "./config/key.js";
-import passportConfig from "./passport.js";
-import connectDB from "./db.js";
-import routes from "./routers/routes.js";
-import userRouter from "./routers/userRouter.js";
-// 추가해야 할 모듈 및 미들웨어 : path, cors, cookie-parser, config, mongoose, Routers, routes
+import config from "./config/key";
+import passportConfig from "./passport";
+import connectDB from "./db";
+import routes from "./routers/routes";
+import userRouter from "./routers/userRouter";
+// 추가해야 할 모듈 및 미들웨어 : path, cors
 
 const app = express();
 
@@ -44,10 +44,11 @@ connectDB();
 passportConfig();
 
 // 여기서 라우팅 설정(dev)
+app.use(routes.api, userRouter);
+
 app.get('/', (req, res) => {
 	res.send('First Routing');
 });
-app.use(routes.users, userRouter);
 
 if (process.env.NODE_ENV === "production") {
 	// 빌드 배포 환경에서의 라우팅 설정
@@ -63,8 +64,8 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000
 
-function HandleListening() {
-	console.log(`✅ http://localhost:${port} 에서 서버 리스닝에 성공했습니다.`)
+const HandleListening = () => {
+    console.log(`✅ http://localhost:${port} 에서 서버 리스닝에 성공했습니다.`)
 }
 
 app.listen(port, HandleListening);

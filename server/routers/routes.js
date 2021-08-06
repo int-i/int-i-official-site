@@ -1,16 +1,19 @@
-const USERS = "/api/users";
+const USERS = "/users";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
-// const LOGOUT = "";
-// const GLOBAL_SEARCH = "";
 
+
+const API = "/api";
+// const GLOBAL_SEARCH = "";
 
 
 const routes = {
 	users: USERS,
 	login: LOGIN,
-	logout: LOGOUT
+	logout: LOGOUT,
+    join: JOIN,
+    api: API
 }
 
 export default routes;

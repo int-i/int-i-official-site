@@ -12,6 +12,8 @@
 
 ## 시작하기 전
 
+*pull 할 때마다 root경로 및 client경로에서 npm install 해줘야 함!*
+
 server/config 폴더에 dev.js를 작성하고 시작 (gitignore)
 
 ## 백엔드 개발 스크립트

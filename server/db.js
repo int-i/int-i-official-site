@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "./config/key.js";
+import config from "./config/key";
 
 const mongoURI = config.mongoURI;
 

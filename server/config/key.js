@@ -1,5 +1,5 @@
-import prod from "./prod.js";
-import dev from "./dev.js";
+import prod from "./prod";
+import dev from "./dev";
 
 const getKey = function() {
     if (process.env.NODE_ENV === "production") {
