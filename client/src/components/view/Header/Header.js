@@ -1,26 +1,33 @@
 import logo from "../../../assets/images/logo/logo.png";
-import styles from "../../../assets/style/partials/Header.scss"
+import style from "../../../assets/style/partials/Header.module.scss"
 
 const Header = () => {
 	return (
-		<header className={styles.header}>
-			<div className={styles.content}>
+		<header className={style.header}>
+			<div className={style.contents}>
 				<div>
-					<img
-					src={logo}
+					<img src={logo}
 					width="48"
-					height="48"
-					alt="인트아이 로고" />
-					인트아이
+					heigh="48"
+					alt="인트아이 로고" /> 로고 자리
 				</div>
 
-				<nav className={styles.navigation}>
+				<nav className={style.navigation}>
 					<ul>
 						<li>
-							메뉴1
+							코드 저장소
 						</li>
 						<li>
-							메뉴2
+							질문
+						</li>
+						<li>
+							기술 뉴스
+						</li>
+						<li>
+							정보 및 홍보
+						</li>
+						<li>
+							공지사항
 						</li>
 					</ul>
 				</nav>
@@ -29,4 +36,4 @@ const Header = () => {
 	);
 }
 
-export default Header;
+export default Header

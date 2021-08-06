@@ -5,6 +5,7 @@ const Layout = () => {
 	return (
 		<div>
 			<Header />
+				스타일 적용 왜 안돼 으아악
 			<Footer />
 		</div>
 	);
