@@ -19,11 +19,6 @@ export const PostJoin = async (req, res, next) => {
     // 요청 정보 추출
     const { username, id, nickname, email, password, password2 } = req.body;
 
-    if (password !== password2) {
-        res.status(400).json({ joinSuccess: false, reason: "check password or password2" });
-		// redirect 부분
-    } else {
-
         try{
 
             // 필드 값 존재성 검사
@@ -54,7 +49,6 @@ export const PostJoin = async (req, res, next) => {
             console.log(err);
             next(err)
         }
-	}
 };
 
 // 유효성 검사 필요.
