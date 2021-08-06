@@ -9,7 +9,8 @@ const Header = () => {
 					<img src={logo}
 					width="48"
 					heigh="48"
-					alt="인트아이 로고" /> 인트아이
+					alt="인트아이 로고" />
+					인트아이
 				</div>
 
 				<nav className={style.navigation}>

@@ -1,7 +1,13 @@
+import style from "../../../assets/style/partials/Footer.module.scss"
+
 const Footer = () => {
 	return (
-		<footer>
-			<h2>푸터 테스트입니다.</h2>
+		<footer className={style.footer}>
+			<div className={style.contents}>
+				<h2 className={style.title}>
+					Copyright © Inha University int i All Rights Reserved
+				</h2>
+			</div>
 		</footer>
 	);
 }
