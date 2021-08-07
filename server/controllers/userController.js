@@ -5,9 +5,9 @@ import bcrypt from "bcrypt";
 // 해쉬 복잡도. 환경변수로 빼야함. 보안 떨어진다 싶으면 salt 사용.
 const SECRET_HASH = 12
 
-
-
 export const PostJoin = async (req, res, next) => {
+    
+    // 공백확인 함수
     const IsEmpty = function(fieldValue, fieldName) {
         if (typeof fieldValue == "undefined" || fieldValue == null || fieldValue == "") {
             return res.status(400).json({ joinSuccess: false, reason: fieldName + " is required" });
@@ -15,9 +15,9 @@ export const PostJoin = async (req, res, next) => {
             return res.status(400).json({ joinSuccess: false, reason: "already exist " + fieldName });
         }
     }
-    
+
     // 요청 정보 추출
-    const { username, id, nickname, email, password, password2 } = req.body;
+    const { username, id, nickname, email, studentId, password, password2 } = req.body;
 
         try{
 
@@ -38,11 +38,10 @@ export const PostJoin = async (req, res, next) => {
                 return IsEmpty(email, "email");
             } else {
 
-                // 필드 값 유효성 검사
-
+                // 유효성 나중에 추가
                 // 해쉬 보안을 위해 salt 도입 필요하긴 함. 회의 후 결정.
                 const hash = await bcrypt.hash(password, SECRET_HASH);
-                await User.create({ username, id, nickname, email, hash });
+                await User.create({ username, id, nickname, email, studentId, hash });
             }
             return res.status(200).json({ joinSuccess: true, user: { id: id }})
         } catch (err) {
@@ -60,6 +59,9 @@ export const PostLogin = (req, res, next) => {
             return next(authErr);
         }
         if (!user) {
+            if (info.message === "Missing credentials") {
+                return res.status(400).json({ loginSuccess: false, reason: "id and password are required" });
+            }
             return res.status(400).json({ loginSuccess: false, reason: "id or password is incorrect" });
         }
         req.login(user, (err) => {

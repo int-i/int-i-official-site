@@ -13,7 +13,7 @@ export default function() {
         },
         async (id, password, done) => {
             try {
-
+                
                 // 유저정보 id 기준으로 검색
                 const existUser = await User.findOne({ id });
                 if (existUser) {

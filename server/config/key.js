@@ -1,7 +1,7 @@
 import prod from "./prod";
 import dev from "./dev";
 
-const getKey = function() {
+const GetKey = function() {
     if (process.env.NODE_ENV === "production") {
         return prod;
     } else {
@@ -9,4 +9,4 @@ const getKey = function() {
     }
 }
 
-export default getKey();
+export default GetKey();
