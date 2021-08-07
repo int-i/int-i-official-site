@@ -1,4 +1,4 @@
-import style from "../../../assets/style/partials/Footer.module.scss"
+import style from "./Footer.module.scss"
 
 const Footer = () => {
 	return (

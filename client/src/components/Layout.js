@@ -1,6 +1,6 @@
 import Header from "./view/Header/Header";
 import Footer from "./view/Footer/Footer";
-import style from "../assets/style/partials/Layout.module.scss"
+import style from "../assets/style/Layout.module.scss"
 
 const Layout = () => {
 	return (

@@ -1,16 +1,16 @@
 import logo from "../../../assets/images/logo/logo.png";
-import style from "../../../assets/style/partials/Header.module.scss"
+import style from "./Header.module.scss"
 
 const Header = () => {
 	return (
 		<header className={style.header}>
 			<div className={style.contents}>
-				<div>
+				<div className={style.logo}>
 					<img src={logo}
 					width="48"
 					heigh="48"
 					alt="인트아이 로고" />
-					인트아이
+					<div>인트아이</div>
 				</div>
 
 				<nav className={style.navigation}>
