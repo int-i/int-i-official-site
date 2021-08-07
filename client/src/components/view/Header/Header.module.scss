@@ -10,16 +10,19 @@
 // 헤더 상자 안의 내용
 .contents {
 	display: flex;
-	width: 100%;
+	width: 90%;
 	height: 100%;
 	margin: 0 auto;
+	font-weight: 800;
+	font-size: 20px;
+	color: #2C3E50;
 	align-items: center;
 }
 
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
 	display: flex;
-	margin-left: 5%;
+	font-size: 36px;
 	align-items: center
 }
 
@@ -37,7 +40,7 @@
 		
 		// 각 텍스트끼리의 거리
 		li + li {
-			margin-left: 30px;
+			margin-left: 40px;
 		}
 	}
 }
