@@ -1,5 +1,6 @@
 import Layout from "./Layout";
 import "../assets/style/reset.css";
+import "../assets/style/global.scss";
 
 
 const App = () => {

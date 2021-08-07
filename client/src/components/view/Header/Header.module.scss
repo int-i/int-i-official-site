@@ -1,46 +1,46 @@
 // 헤더 상자 스타일
 .header {
-	position: fixed;
-	width: 100%;
-	height: 75px;
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); // 상자 그림자
-	background-color: #FFFFFF;
+  position: fixed;
+  width: 100%;
+  height: 75px;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1); // 상자 그림자
+  background-color: #ffffff;
 }
 
 // 헤더 상자 안의 내용
 .contents {
-	display: flex;
-	width: 90%;
-	height: 100%;
-	margin: 0 auto;
-	font-weight: 800;
-	font-size: 20px;
-	color: #2C3E50;
-	align-items: center;
+  display: flex;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  font-weight: 800;
+  font-size: 20px;
+  color: #2c3e50;
+  align-items: center;
 }
 
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
-	display: flex;
-	font-size: 36px;
-	align-items: center
+  display: flex;
+  font-size: 36px;
+  align-items: center;
 }
 
 // 네비게이션 텍스트(각 게시판 링크) 스타일
 .navigation {
-	ul {
-		display: flex;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		list-style: none; // ul의 불릿 안뜨게 하는 옵션
-		
-		justify-content: center;
-		
-		// 각 텍스트끼리의 거리
-		li + li {
-			margin-left: 40px;
-		}
-	}
+  ul {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none; // ul의 불릿 안뜨게 하는 옵션
+
+    justify-content: center;
+
+    // 각 텍스트끼리의 거리
+    li + li {
+      margin-left: 40px;
+    }
+  }
 }
