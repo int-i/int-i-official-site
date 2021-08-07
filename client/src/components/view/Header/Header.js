@@ -7,8 +7,8 @@ const Header = () => {
 			<div className={style.contents}>
 				<div className={style.logo}>
 					<img src={logo}
-					width="48"
-					heigh="48"
+					width="60"
+					heigh="60"
 					alt="인트아이 로고" />
 					<div>인트아이</div>
 				</div>
