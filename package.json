@@ -4,7 +4,7 @@
   "description": "[![Build Status](https://travis-ci.com/int-i/int-i-official-site.svg?branch=master)](https://travis-ci.com/int-i/int-i-official-site)\r # 인트아이 공식 홈페이지",
   "main": "test.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node server/index.js",
     "backend": "nodemon --experimental-modules --es-module-specifier-resolution=node server/index.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
@@ -30,12 +30,6 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/node": "^7.14.9",
-    "@babel/preset-env": "^7.15.0"
   },
   "type": "module"
 }

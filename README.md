@@ -21,7 +21,7 @@ server/config 폴더에 dev.js를 작성하고 시작 (gitignore)
 
 그냥 npm run start를 할 경우 nodemon을 사용하지 않습니다.
 
-## 프론트 개발 스크립트 
+## 프론트 개발 스크립트
     npm run frontend
 
 ## 종합 환경 개발 스크립트
