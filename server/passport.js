@@ -1,11 +1,15 @@
 import passport from "passport";
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
 import { Strategy as localStrategy } from "passport-local";
+import { Strategy as GithubStrategy } from "passport-github2";
 import User from "./models/User";
-
+import config from "./config/key";
 
 // index.js 에서 import 후 실행.
 export default function() {
+
+    // 로컬로그인
     passport.use("local-login", new localStrategy(
         {
             usernameField: "id",
@@ -40,6 +44,31 @@ export default function() {
                 done(err);
             }
         }
+    ));
+
+    // 깃헙
+    passport.use(new GithubStrategy({
+        clientID: config.githubClientId,
+        clientSecret: config.githubSecret,
+        callbackURL: "http://localhost:5000/api/auth/github/callback"
+    },
+    
+    async (accessToken, refreshToken, profile, cb) => {
+        try {
+            const newUser = await User.create({
+                email: profile._json.email,
+                username: profile.username,
+                id: profile.username + "Github",
+                githubId: profile.id,
+                nickname: profile.username,
+                avatarUri: profile._json.avatar_url
+            });
+            return cb (null, newUser);
+
+        } catch (err) { 
+            return cb(err);
+        }
+    }
     ));
 
     passport.serializeUser((user, done) => {
