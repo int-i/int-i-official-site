@@ -6,7 +6,7 @@ import {
     PostLogin,
     PostJoin,
     Logout
-} from "../controllers/userController";
+} from "../controllers/globalController";
 import {
     IsLogged,
     IsNotLogged
@@ -14,8 +14,8 @@ import {
 
 const globalRouter = express.Router();
 
-globalRouter.post(routes.join, IsNotLogged, PostJoin);
+globalRouter.post(routes.join, IsNotLogged, PostJoin, PostLogin);
 globalRouter.post(routes.login, IsNotLogged, PostLogin);
-globalRouter.post(routes.logout, IsLogged, Logout);
+globalRouter.get(routes.logout, IsLogged, Logout);
 
 export default globalRouter;

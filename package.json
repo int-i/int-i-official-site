@@ -30,6 +30,9 @@
     "express-session": "^1.17.2",
     "mongoose": "^5.13.5",
     "passport": "^0.4.1",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-kakao": "^1.0.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0",
     "react-cookie": "^4.0.3"

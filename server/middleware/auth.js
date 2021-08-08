@@ -13,6 +13,7 @@ export const IsLogged = (req, res, next) => {
 
 // 로그인 안된시에만 패스. 로그인창 등
 export const IsNotLogged = (req, res, next) => {
+    console.log(req.isAuthenticated())
     if (!req.isAuthenticated()) {
         next();
     } else {

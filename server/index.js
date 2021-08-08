@@ -19,11 +19,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.COOKIE_ID));
+//process.env.COOKIE_ID
+app.use(cookieParser());
 app.use(session({
 
 	// secret 값 배포시 환경변수로 설정.
-	secret: config.sessionSecret,
+    secret: config.sessionSecret,
 
 	// request 시 아무런 변경사항 없어도 저장. 대부분 false
     resave: false,

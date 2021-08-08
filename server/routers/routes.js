@@ -9,7 +9,12 @@ const LOGOUT = "/logout";
 
 const API = "/api";
 const AUTH = "/auth";
+const CALLBACK = "/callback";
 const USERINFO = "/userinfo";
+
+const GITHUB = "/github";
+const KAKAO = "/kakao";
+const GOOGLE = "/google";
 // const GLOBAL_SEARCH = "";
 
 
@@ -21,7 +26,12 @@ const routes = {
 
     api: API,
 	auth: AUTH,
-	userinfo: USERINFO
+	callback: CALLBACK,
+	userinfo: USERINFO,
+
+	github: GITHUB,
+	kakao: KAKAO,
+	google: GOOGLE
 }
 
 export default routes;

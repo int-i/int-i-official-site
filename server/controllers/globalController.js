@@ -43,7 +43,7 @@ export const PostJoin = async (req, res, next) => {
                 const hash = await bcrypt.hash(password, SECRET_HASH);
                 await User.create({ username, id, nickname, email, studentId, hash });
             }
-            return res.status(200).json({ joinSuccess: true, user: { id: id }})
+            next();
         } catch (err) {
             console.log(err);
             next(err)

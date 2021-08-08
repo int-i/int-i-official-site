@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
     privateAbout: String,
     privateGitUri: String,
     privateBlogUri: String,
+    avatarUri: String,
+
+    githubId: String,
+    kakaoId: String,
+    googleId: String,
 
     nickname: {
         type: String,
@@ -26,7 +31,6 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        require: true,
         unique: true
     },
     username: {
