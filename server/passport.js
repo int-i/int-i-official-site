@@ -50,7 +50,7 @@ export default function() {
     passport.use(new GithubStrategy({
         clientID: config.githubClientId,
         clientSecret: config.githubSecret,
-        callbackURL: "http://localhost:5000/api/auth/github/callback"
+        callbackURL: config.githubCallbackUri
     },
     
     async (accessToken, refreshToken, profile, cb) => {
