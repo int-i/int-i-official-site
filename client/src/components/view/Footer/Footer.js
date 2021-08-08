@@ -9,9 +9,9 @@ const Footer = () => {
 		<footer className={style.footer}>
 			<div className={style.contents}>
 				<div className={style.shortcut}>
-					<a href="https://int-i.github.io/"><img src ={Blog} width='134'alt='blog'/></a>
-					<a href="https://github.com/int-i"><img src ={Github} width='80'alt='github'/></a>
-					<a href="https://ice.inha.ac.kr/ice/index.do"><img src ={Inha} width='120'alt='inha'/></a>
+					<a href="https://int-i.github.io/" target="_blank"><img src ={Blog} width='134'alt='blog'/></a>
+					<a href="https://github.com/int-i" target="_blank"><img src ={Github} width='80'alt='github'/></a>
+					<a href="https://ice.inha.ac.kr/ice/index.do" target="_blank"><img src ={Inha} width='120'alt='inha'/></a>
 				</div>
 				<div className={style.copyright}>
 					Copyright © Inha University int i All Rights Reserved

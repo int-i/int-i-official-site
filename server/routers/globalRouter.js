@@ -6,7 +6,7 @@ import {
     PostLogin,
     PostJoin,
     Logout
-} from "../controllers/userController";
+} from "../controllers/globalController";
 import {
     IsLogged,
     IsNotLogged

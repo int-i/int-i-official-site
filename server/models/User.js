@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     avatarUri: String,
 
     githubId: String,
+    kakaoId: String,
+    googleId: String,
 
     nickname: {
         type: String,
