@@ -102,12 +102,7 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						value={Name}
-						onChange={onNameHandler}
-						required
-					/>
+					<input className={styles.inputstyle} value={Name} onChange={onNameHandler} required />
 					<span ref={checkName} style={{ color: "gray" }}>
 						&nbsp;&nbsp; 한글 또는 영문 최소 2자리 입력
 					</span>
@@ -124,12 +119,7 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						value={Nickname}
-						onChange={onNicknameHandler}
-						required
-					/>
+					<input className={styles.inputstyle} value={Nickname} onChange={onNicknameHandler} required />
 					<span ref={checkNickname} style={{ color: "gray" }}>
 						&nbsp;&nbsp; 한글 또는 영문 최대 6자리 입력
 					</span>
@@ -146,15 +136,9 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						value={ID}
-						onChange={onIDHandler}
-						required
-					/>
+					<input className={styles.inputstyle} value={ID} onChange={onIDHandler} required />
 					<span ref={checkID} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리 입력 (특수문자, 대문자 사용
-						불가)
+						&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리 입력 (특수문자, 대문자 사용 불가)
 					</span>
 				</div>
 			),
@@ -169,15 +153,9 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						value={Password}
-						onChange={onPasswordHandler}
-						required
-					/>
+					<input className={styles.inputstyle} value={Password} onChange={onPasswordHandler} required />
 					<span ref={checkPassword} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자, 특수문자 필수 최소 7자리 입력 (대문자 사용
-						불가)
+						&nbsp;&nbsp; 영문, 숫자, 특수문자 필수 최소 7자리 입력 (대문자 사용 불가)
 					</span>
 				</div>
 			),
@@ -192,12 +170,7 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						value={ConfirmPassword}
-						onChange={onConfirmPasswordHandler}
-						required
-					/>
+					<input className={styles.inputstyle} value={ConfirmPassword} onChange={onConfirmPasswordHandler} required />
 				</div>
 			),
 		},
@@ -211,13 +184,7 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-					<input
-						className={styles.inputstyle}
-						type="email"
-						value={Email}
-						onChange={onEmailHandler}
-						required
-					/>
+					<input className={styles.inputstyle} type="email" value={Email} onChange={onEmailHandler} required />
 					&nbsp;
 				</div>
 			),
@@ -225,13 +192,7 @@ const RegisterPage = () => {
 		{
 			key: "7",
 			data: "학번",
-			dataInput: (
-				<input
-					className={styles.inputstyle}
-					value={StudentID}
-					onChange={onStudentIDHandler}
-				/>
-			),
+			dataInput: <input className={styles.inputstyle} value={StudentID} onChange={onStudentIDHandler} />,
 		},
 	];
 
@@ -245,10 +206,7 @@ const RegisterPage = () => {
 					props: {
 						style: {
 							background: "#f5f5f5",
-							borderBottom:
-								dataSource.key === "7"
-									? "solid 2px gray"
-									: "solid 1px lightgray",
+							borderBottom: dataSource.key === "7" ? "solid 2px gray" : "solid 1px lightgray",
 							borderTop: dataSource.key === "1" ? "solid 2px gray" : "none",
 						},
 					},
@@ -269,10 +227,7 @@ const RegisterPage = () => {
 				return {
 					props: {
 						style: {
-							borderBottom:
-								dataSource.key === "7"
-									? "solid 2px gray"
-									: "solid 1px lightgray",
+							borderBottom: dataSource.key === "7" ? "solid 2px gray" : "solid 1px lightgray",
 							borderTop: dataSource.key === "1" ? "solid 2px gray" : "none",
 						},
 					},

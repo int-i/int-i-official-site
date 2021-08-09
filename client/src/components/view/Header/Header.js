@@ -18,14 +18,14 @@ const 로그인UI = {
 	user: (
 		<ul className={style.loginUI}>
 			<li>마이 페이지</li>
-			<li>로그인</li>
+			<li>로그아웃</li>
 		</ul>
 	),
 	admin: (
 		<ul className={style.loginUI}>
 			<li>관리자 페이지</li>
 			<li>마이 페이지</li>
-			<li>로그인</li>
+			<li>로그아웃</li>
 		</ul>
 	),
 };
@@ -33,7 +33,7 @@ const 로그인UI = {
 const Header = () => {
 	const [로그인상태, 로그인상태변경] = useState("guest"); // 이 로그인 상태가 뭔지에 따라서 유저 UI가 변함
 	return (
-		<header className={[style.header, "NanumSquare"].join(' ')}>
+		<header className={[style.header, "NanumSquare"].join(" ")}>
 			<div className={style.contents}>
 				<Link to="/">
 					<div className={style.logo}>
