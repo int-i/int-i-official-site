@@ -5,8 +5,6 @@ import { Carousel } from "antd"
 import banner1 from "../../../assets/images/banner/banner1.png"
 
 const MainPage = () => {
-	//const [slide, setSlide] = useState(0);
-
 	return (
 		<div className={style.banner}>
 			<Carousel
