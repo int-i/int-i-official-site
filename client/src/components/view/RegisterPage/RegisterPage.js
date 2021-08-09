@@ -1,7 +1,7 @@
 //회원가입 페이지
 import React, { useState, useRef } from "react";
 import { Table, Button } from "antd";
-import styles from "./RegisterPage.module.css";
+import styles from "./RegisterPage.module.scss";
 import "antd/dist/antd.css";
 //npm install antd
 
