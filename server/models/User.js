@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 // 필드값 추가는 딱히 상관없음.
 const userSchema = new mongoose.Schema({
     studentId: Number,
+
+    // (인트아이) 비회원 = -1 회원 = 1, 어드민 = 2
     role: Number,
     hash: String,
     
