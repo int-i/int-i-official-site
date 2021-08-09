@@ -1,0 +1,24 @@
+.slick-slider {
+	position: relative;
+
+	// 좌우 폭에 따라 이미지 줄어들게 함
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	max-width: 1920px; // 최대 가로폭
+
+	// 이미지 중앙 정렬
+	left: 50%;
+	transform: translate(-50%);
+}
+
+.ant-carousel {
+	.slick-prev,
+	.slick-next {
+		color: red;
+		background-color: red;
+		font-size: 100px;
+		width: 100px;
+		z-index: 100;
+	}
+}
