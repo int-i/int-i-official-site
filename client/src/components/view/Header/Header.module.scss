@@ -20,7 +20,15 @@
 	color: var(--navy);
 	align-items: center;
 	justify-content: space-between;
+
+	a {
+		color: var(--navy);
+	}
+	a:hover {
+		color: var(--mint);
+	}
 }
+
 
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
