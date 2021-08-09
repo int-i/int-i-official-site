@@ -1,6 +1,5 @@
 import express from "express";
 // 추가해야 할 모듈 및 미들웨어 : path, cors, cookie-parser, config, mongoose, Routers, routes
-
 const app = express();
 
 // 여기서 미들웨어 세팅
