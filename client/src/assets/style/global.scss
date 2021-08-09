@@ -1,4 +1,10 @@
 // 폰트
-* {
-  // font-family: ;
+.NanumSquare {
+	font-family: "나눔스퀘어", NanumSquare;
+	src: local(NanumSquare); // 외부 글꼴 참조 전에 시스템 글꼴을 우선 참조
+}
+
+.Spoqa {
+	font-family: "Spoqa Han Sans Neo";
+	src: local(SpoqaHanSansNeo);
 }

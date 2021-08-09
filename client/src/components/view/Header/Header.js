@@ -27,7 +27,7 @@ const 로그인UI = {
 const Header = () => {
 	const [로그인상태, 로그인상태변경] = useState("guest"); // 이 로그인 상태가 뭔지에 따라서 유저 UI가 변함
 	return (
-		<header className={style.header}>
+		<header className={[style.header, "NanumSquare"].join(' ')}>
 			<div className={style.contents}>
 				<div className={style.logo}>
 					<img src={logo} width="40" alt="인트아이 로고" />
