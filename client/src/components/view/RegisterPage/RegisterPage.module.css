@@ -10,8 +10,6 @@
 }
 
 .register {
-	position: absolute;
-	top: 10%;
-	left: 20%;
+	position: relative;
 	text-align: center;
 }
