@@ -1,0 +1,16 @@
+.inputstyle {
+	width: 400px;
+	height: 35px;
+
+	.inputstyle:focus {
+		outline: none;
+	}
+}
+
+.register {
+	display: flex; // position이 absolute라 div 겹침 문제가 발생했어서 요걸로 수정
+	justify-content: center; // 요소 중앙으로 정렬
+	text-align: center; // 버튼 중앙으로 정렬
+	
+	padding-top: 40px;
+}
