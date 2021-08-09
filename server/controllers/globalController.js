@@ -79,6 +79,11 @@ export const PostLogin = (req, res, next) => {
                 console.log("err", err);
                 return res.json(500).json({ loginSuccess: false, reason: "correct id and password but internal server error"});
             }
+
+            // 아이디 기억
+            if (req.body.rememberId) {
+                res.cookie("loginId", user.id);
+            }
             return res.status(200).json({ loginSuccess: true, user: { _id: user._id, id: user.id, email: user.email }});
         });
     })(req, res, next);
