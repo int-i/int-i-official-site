@@ -1,9 +1,10 @@
-.loginStyle {
-	position: absolute;
-	top: 10%;
-	left: 40%;
-	text-align: center;
-	border: solid 1px white;
+.inputStyle {
+	width: 400px;
+	height: 35px;
+}
+
+.inputStyle:focus {
+	outline: none;
 }
 
 .hrSect {
