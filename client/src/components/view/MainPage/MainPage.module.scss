@@ -1,0 +1,12 @@
+// 배너 이미지 스타일
+.banner {
+	img {
+		position: relative;
+		object-fit: cover;
+		max-width: 1920px;
+		width: 100%;
+		height: 100%;
+		left: 50%;
+		transform: translate(-50%);
+	}
+}

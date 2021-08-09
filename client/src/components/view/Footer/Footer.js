@@ -13,7 +13,7 @@ const Footer = () => {
 					<a href="https://github.com/int-i" target="_blank"><img src ={Github} width='80'alt='github'/></a>
 					<a href="https://ice.inha.ac.kr/ice/index.do" target="_blank"><img src ={Inha} width='120'alt='inha'/></a>
 				</div>
-				<div className={style.copyright}>
+				<div className={[style.copyright, "Spoqa"].join(' ')}>
 					Copyright © Inha University int i All Rights Reserved
 				</div>
 			</div>

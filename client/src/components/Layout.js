@@ -1,5 +1,6 @@
 import Header from "./view/Header/Header";
 import Footer from "./view/Footer/Footer";
+import MainPage from "./view/MainPage/MainPage";
 import style from "../assets/style/Layout.module.scss"
 
 const Layout = () => {
@@ -7,11 +8,11 @@ const Layout = () => {
 		<div>
 			<Header />
 			<div className={style.layout}>
-				여기가 메인이 들어올 공간입니다.
+				<MainPage />
 			</div>
 			<Footer />
 		</div>
 	);
 }
 
-export default Layout
+export default Layout;
