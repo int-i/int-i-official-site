@@ -8,7 +8,7 @@
 }
 
 .register {
-  position: absolute;
+  position: flex;
   top: 10%;
   left: 20%;
   text-align: center;
