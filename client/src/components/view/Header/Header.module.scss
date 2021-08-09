@@ -1,5 +1,6 @@
 // 헤더 상자 스타일
 .header {
+	z-index: 10; // 헤더는 항상 위에 있도록 z축을 10으로 설정
 	position: fixed;
 	width: 100%;
 	height: 60px;
@@ -15,7 +16,7 @@
 	height: 100%;
 	margin: 0 auto;
 	font-weight: 800;
-	font-size: 16px;
+	font-size: 17px;
 	color: var(--navy);
 	align-items: center;
 	justify-content: space-between;
@@ -37,6 +38,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		list-style: none; // ul의 불릿 안뜨게 하는 옵션
+		font-weight: 700;
 
 		justify-content: center;
 

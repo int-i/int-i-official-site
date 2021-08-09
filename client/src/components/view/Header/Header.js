@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import logo from "../../../assets/images/logo/logo.png";
 import style from "./Header.module.scss";
 
 const 로그인UI = {
 	guest: (
 		<ul className={style.loginUI}>
-			<li>회원가입</li>
-			<li>로그인</li>
+			<li>
+				<Link to="/RegisterPage">회원가입</Link>
+			</li>
+			<li>
+				<Link to="/LoginPage">로그인</Link>
+			</li>
 		</ul>
 	),
 	user: (
@@ -29,10 +35,12 @@ const Header = () => {
 	return (
 		<header className={[style.header, "NanumSquare"].join(' ')}>
 			<div className={style.contents}>
-				<div className={style.logo}>
-					<img src={logo} width="40" alt="인트아이 로고" />
-					<div>인트아이</div>
-				</div>
+				<Link to="/">
+					<div className={style.logo}>
+						<img src={logo} width="40" alt="인트아이 로고" />
+						<div>인트아이</div>
+					</div>
+				</Link>
 
 				<nav className={style.navigation}>
 					<ul>
