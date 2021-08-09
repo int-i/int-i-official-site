@@ -4,6 +4,6 @@ import routes from "../routers/routes";
 
 const adminRouter = express.Router();
 
-adminRouter.get(routes.inti, PostAddMember);
+adminRouter.post(routes.inti, PostAddMember);
 
 export default adminRouter;

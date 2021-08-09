@@ -1,3 +1,6 @@
+import User from "../models/User";
+
+
 // 로그인 시에만 패스. 프로필 페이지, 로그아웃 버튼 등
 export const IsLogged = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -10,7 +13,6 @@ export const IsLogged = (req, res, next) => {
 
 // 로그인 안된시에만 패스. 로그인창 등
 export const IsNotLogged = (req, res, next) => {
-    console.log(req.isAuthenticated())
     if (!req.isAuthenticated()) {
         next();
     } else {
@@ -25,12 +27,11 @@ export const IsAdmin = async (req, res, next) => {
     // 로그인 된 유저만 가능
     const user = req.user;
     try {
-        const exUser = await User.findOne({ studentId: user.studentId });
-        if (exUser && exUser.role == 2) {
-            console.log("관리자 입니다");
+        if (user.role === 2) {
+            // console.log("관리자 입니다");
             next();
         } else {
-            console.log("관리자가 아닙니다");
+            // console.log("관리자가 아닙니다");
             return res.status(403).json({ isAdmin: false });
         }
     } catch (err) {
