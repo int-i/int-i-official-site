@@ -1,15 +1,15 @@
 .inputstyle {
-  width: 400px;
-  height: 35px;
+	width: 400px;
+	height: 35px;
 }
 
 .inputstyle:focus {
-  outline: none;
+	outline: none;
 }
 
 .register {
-  position: absolute;
-  top: 10%;
-  left: 20%;
-  text-align: center;
+	position: absolute;
+	top: 10%;
+	left: 20%;
+	text-align: center;
 }
