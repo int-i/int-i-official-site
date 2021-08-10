@@ -9,7 +9,8 @@ const connectDB = function() {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
-        ignoreUndefined: true
+        ignoreUndefined: true,
+        useFindAndModify: false
         })
     .then(() => console.log('mongoDB connected'))
     .catch((err) => console.log(err));
