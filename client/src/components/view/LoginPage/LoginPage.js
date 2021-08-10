@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import styles from "./LoginPage.module.css";
+import styles from "./LoginPage.module.scss";
+import Google from "../../../assets/images/logo/Google.png";
+import KaKao from "../../../assets/images/logo/kakao.png";
+import Github from "../../../assets/images/logo/Github.png";
 
 const LoginPage = () => {
 	const [id, SetId] = useState("");
@@ -48,67 +51,71 @@ const LoginPage = () => {
 	};
 
 	return (
-		<center style={{ paddingTop: "40px" }}>
-			<div style={{ width: "400px" }}>
-				<h2 style={{ textAlign: "center" }}>로그인</h2>
+		<center className="loginCenter">
+			<div className={[styles.loginPage, "NanumSquare"].join(" ")}>
+				<h2>로그인</h2>
 				<br />
 
-				<form
-					style={{ display: "flex", flexDirection: "column" }}
-					onSubmit={OnSubmitHandler}
-				>
+				<form onSubmit={OnSubmitHandler}>
 					<input
-						className={styles.inputStyle}
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={id}
 						placeholder="아이디"
 						onChange={OnIdHandler}
 						required
 					/>
-					<span style={{ lineHeight: "50%" }}>
+					<span>
 						<br />
 					</span>
 
 					<input
-						className={styles.inputStyle}
+						type="password"
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={password}
 						placeholder="비밀번호"
 						onChange={OnPasswordHandler}
 						required
 					/>
-					<span style={{ lineHeight: "40%" }}>
+					<span>
 						<br />
 					</span>
 
-					<label style={{ textAlign: "left" }}>
+					<label>
 						<input
 							type="checkbox"
 							onChange={OnChangeHandler}
 							checked={isRemember}
 						/>
-						&nbsp;아이디 저장하기
+						&nbsp;아이디 기억하기
 					</label>
 					<br />
 
 					<button onClick={OnClickHandler}>로그인</button>
-					<span style={{ lineHeight: "50%" }}>
-						<br />
-					</span>
 
 					<button>회원가입</button>
 
 					<div className={styles.hrSect}>SNS 로그인</div>
 
-					<button>구글 로그인</button>
-					<span style={{ lineHeight: "50%" }}>
-						<br />
-					</span>
+					<button className={styles.google}>
+						<img alt="Google로고" src={Google} />
+						구글 로그인
+					</button>
 
-					<button>카카오 로그인</button>
-					<span style={{ lineHeight: "50%" }}>
-						<br />
-					</span>
+					<button className={styles.kakao}>
+						<img alt="KaKao로고" src={KaKao} />
+						카카오 로그인
+					</button>
 
-					<button>GitHub 로그인</button>
+					<button className={styles.github}>
+						<img alt="Github로고" src={Github} />
+						GitHub 로그인
+					</button>
 				</form>
 			</div>
 		</center>
