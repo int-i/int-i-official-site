@@ -1,6 +1,5 @@
 //import { useState } from "react";
 import style from "./MainPage.module.scss";
-import "./arrow.scss";
 import "antd/dist/antd.css";
 import { Carousel } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
