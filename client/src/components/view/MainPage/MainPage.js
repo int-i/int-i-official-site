@@ -39,7 +39,7 @@ const MainPage = () => {
 				{BannerImage.map(image => {
 					return (
 						<div>
-							<a href="/" target="_blank">
+							<a href={image.url} rel="noreferrer" target="_blank">
 								<img src={banner1} alt={image.title} />
 							</a>
 						</div>
