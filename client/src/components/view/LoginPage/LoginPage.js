@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import styles from "./LoginPage.module.scss";
+import Google from "../../../assets/images/logo/Google.png";
+import KaKao from "../../../assets/images/logo/kakao.png";
+import Github from "../../../assets/images/logo/Github.png";
 
 const LoginPage = () => {
 	const [id, SetId] = useState("");
@@ -55,7 +58,10 @@ const LoginPage = () => {
 
 				<form onSubmit={OnSubmitHandler}>
 					<input
-						className={styles.inputStyle}
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={id}
 						placeholder="아이디"
 						onChange={OnIdHandler}
@@ -67,7 +73,10 @@ const LoginPage = () => {
 
 					<input
 						type="password"
-						className={styles.inputStyle}
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={password}
 						placeholder="비밀번호"
 						onChange={OnPasswordHandler}
@@ -93,11 +102,20 @@ const LoginPage = () => {
 
 					<div className={styles.hrSect}>SNS 로그인</div>
 
-					<button>구글 로그인</button>
+					<button className={styles.google}>
+						<img alt="Google로고" src={Google} />
+						구글 로그인
+					</button>
 
-					<button>카카오 로그인</button>
+					<button className={styles.kakao}>
+						<img alt="KaKao로고" src={KaKao} />
+						카카오 로그인
+					</button>
 
-					<button>GitHub 로그인</button>
+					<button className={styles.github}>
+						<img alt="Github로고" src={Github} />
+						GitHub 로그인
+					</button>
 				</form>
 			</div>
 		</center>
