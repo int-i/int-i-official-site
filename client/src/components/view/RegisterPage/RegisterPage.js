@@ -297,7 +297,7 @@ const RegisterPage = () => {
 	];
 
 	return (
-		<div className={styles.register}>
+		<div style={{ paddingBottom: "106px" }} className={styles.register}>
 			<form onSubmit={OnSubmitHandler}>
 				<Table
 					dataSource={dataSource}

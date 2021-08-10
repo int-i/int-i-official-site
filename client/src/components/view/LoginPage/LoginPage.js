@@ -6,6 +6,7 @@ import styles from "./LoginPage.module.scss";
 import Google from "../../../assets/images/logo/Google.png";
 import KaKao from "../../../assets/images/logo/kakao.png";
 import Github from "../../../assets/images/logo/Github.png";
+import FormBtn from "../FormBtn/FormBtn";
 
 const LoginPage = () => {
 	const [id, SetId] = useState("");
@@ -96,9 +97,23 @@ const LoginPage = () => {
 					</label>
 					<br />
 
-					<button onClick={OnClickHandler}>로그인</button>
-
-					<button>회원가입</button>
+					<FormBtn
+						borderRadius="10px"
+						height="42px"
+						text="로그인"
+						margin="0 0 15px 0px"
+						fontSize="18px"
+						// onClick={}
+						kind="컬러"
+					/>
+					<FormBtn
+						borderRadius="10px"
+						height="42px"
+						text="회원가입"
+						margin="0 0 15px 0px"
+						fontSize="18px"
+						// onClick={}
+					/>
 
 					<div className={styles.hrSect}>SNS 로그인</div>
 
