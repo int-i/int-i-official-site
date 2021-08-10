@@ -2,8 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import styles from "./RegisterPage.module.css";
+import FormBtn from "../FormBtn/FormBtn";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
 	const [name, SetName] = useState("");
 	const [nickname, SetNickname] = useState("");
 	const [id, SetId] = useState("");
@@ -98,32 +99,15 @@ const RegisterPage = () => {
 	};
 
 	return (
-<<<<<<< HEAD
-		<div style={{ paddingBottom: "106px" }} className={styles.register}>
-			<form onSubmit={OnSubmitHandler}>
-				<Table
-					dataSource={dataSource}
-					columns={columns}
-					pagination={false}
-				/>
-				<br />
-				<Button type="primary" htmlType="submit">
-					회원가입
-				</Button>
-				&nbsp;&nbsp;
-				<Button htmlType="button">취소</Button>
-			</form>
-		</div>
-=======
-		<center>
-			<div>
-				<form onSubmit={OnSubmitHandler}>
+		<center className="registerCenter">
+			<div className={[styles.registerPage, "NanumSquare"].join(" ")}>
+				<form id="register" onSubmit={OnSubmitHandler}>
 					<table className={styles.tablestyle}>
 						<thead className={styles.headtr}>
 							<tr>
 								<td
 									className={styles.headtd}
-									style={{ fontSize: "18px" }}
+									style={{ fontSize: "24px" }}
 								>
 									기본 정보
 								</td>
@@ -207,7 +191,11 @@ const RegisterPage = () => {
 								</td>
 								<td className={styles.bodytd}>
 									<input
-										className={styles.inputstyle}
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
 										value={password}
 										onChange={OnPasswordHandler}
 										required
@@ -228,7 +216,11 @@ const RegisterPage = () => {
 								</td>
 								<td className={styles.bodytd}>
 									<input
-										className={styles.inputstyle}
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
 										value={confirmPassword}
 										onChange={OnConfirmPasswordHandler}
 										required
@@ -263,13 +255,31 @@ const RegisterPage = () => {
 						</tbody>
 					</table>
 					<br />
-					<button type="submit">회원가입</button>
-					&nbsp;&nbsp;
-					<button type="button">취소</button>
 				</form>
+				<FormBtn
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					onClick={() => {
+						props.history.push("/");
+					}}
+					text="취소"
+				/>
+				<FormBtn
+					type="submit"
+					form="register"
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					kind="컬러"
+					text="회원가입"
+				/>
 			</div>
 		</center>
->>>>>>> 2aee3f234e3e3594b3f4640b5b72ee5595165c61
 	);
 };
 

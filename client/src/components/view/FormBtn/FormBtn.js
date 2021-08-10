@@ -4,6 +4,8 @@ import styles from "./FormBtn.module.scss";
 function FormBtn(props) {
 	return (
 		<button
+			type={props.type}
+			form={props.form}
 			className={[
 				props.kind === "컬러" ? styles.filledBtn : styles.lineBtn,
 				"NanumSquare",
@@ -15,8 +17,7 @@ function FormBtn(props) {
 				borderRadius: props.borderRadius,
 				margin: props.margin,
 			}}
-			onSubmit={props.submit}
-			onClick={props.click}
+			onClick={props.onClick}
 		>
 			{props.text}
 		</button>
