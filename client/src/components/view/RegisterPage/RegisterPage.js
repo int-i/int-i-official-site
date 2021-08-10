@@ -110,10 +110,6 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} value={Name} onChange={onNameHandler} required />
-					<span ref={checkName} style={{ color: "gray" }}>
-=======
 					<input
 						className={styles.inputstyle}
 						value={name}
@@ -121,7 +117,6 @@ const RegisterPage = () => {
 						required
 					/>
 					<span ref={CheckName} style={{ color: "gray" }}>
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 						&nbsp;&nbsp; 한글 또는 영문 최소 2자리 입력
 					</span>
 				</div>
@@ -137,10 +132,6 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} value={Nickname} onChange={onNicknameHandler} required />
-					<span ref={checkNickname} style={{ color: "gray" }}>
-=======
 					<input
 						className={styles.inputstyle}
 						value={nickname}
@@ -148,7 +139,6 @@ const RegisterPage = () => {
 						required
 					/>
 					<span ref={CheckNickname} style={{ color: "gray" }}>
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 						&nbsp;&nbsp; 한글 또는 영문 최대 6자리 입력
 					</span>
 				</div>
@@ -164,11 +154,6 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} value={ID} onChange={onIDHandler} required />
-					<span ref={checkID} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리 입력 (특수문자, 대문자 사용 불가)
-=======
 					<input
 						className={styles.inputstyle}
 						value={id}
@@ -178,7 +163,6 @@ const RegisterPage = () => {
 					<span ref={CheckId} style={{ color: "gray" }}>
 						&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리 입력 (특수문자,
 						대문자 사용 불가)
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 					</span>
 				</div>
 			),
@@ -193,11 +177,6 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} value={Password} onChange={onPasswordHandler} required />
-					<span ref={checkPassword} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자, 특수문자 필수 최소 7자리 입력 (대문자 사용 불가)
-=======
 					<input
 						className={styles.inputstyle}
 						value={password}
@@ -207,7 +186,6 @@ const RegisterPage = () => {
 					<span ref={CheckPassword} style={{ color: "gray" }}>
 						&nbsp;&nbsp; 영문, 숫자, 특수문자 필수 최소 7자리 입력
 						(대문자 사용 불가)
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 					</span>
 				</div>
 			),
@@ -222,16 +200,12 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} value={ConfirmPassword} onChange={onConfirmPasswordHandler} required />
-=======
 					<input
 						className={styles.inputstyle}
 						value={confirmPassword}
 						onChange={OnConfirmPasswordHandler}
 						required
 					/>
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 				</div>
 			),
 		},
@@ -245,9 +219,6 @@ const RegisterPage = () => {
 			),
 			dataInput: (
 				<div>
-<<<<<<< HEAD
-					<input className={styles.inputstyle} type="email" value={Email} onChange={onEmailHandler} required />
-=======
 					<input
 						className={styles.inputstyle}
 						type="email"
@@ -255,7 +226,6 @@ const RegisterPage = () => {
 						onChange={OnEmailHandler}
 						required
 					/>
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 					&nbsp;
 				</div>
 			),
@@ -263,9 +233,6 @@ const RegisterPage = () => {
 		{
 			key: "7",
 			data: "학번",
-<<<<<<< HEAD
-			dataInput: <input className={styles.inputstyle} value={StudentID} onChange={onStudentIDHandler} />,
-=======
 			dataInput: (
 				<input
 					className={styles.inputstyle}
@@ -273,7 +240,6 @@ const RegisterPage = () => {
 					onChange={OnStudentIdHandler}
 				/>
 			),
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 		},
 	];
 
@@ -287,10 +253,6 @@ const RegisterPage = () => {
 					props: {
 						style: {
 							background: "#f5f5f5",
-<<<<<<< HEAD
-							borderBottom: dataSource.key === "7" ? "solid 2px gray" : "solid 1px lightgray",
-							borderTop: dataSource.key === "1" ? "solid 2px gray" : "none",
-=======
 							borderBottom:
 								dataSource.key === "7"
 									? "solid 2px gray"
@@ -299,7 +261,6 @@ const RegisterPage = () => {
 								dataSource.key === "1"
 									? "solid 2px gray"
 									: "none",
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 						},
 					},
 					children: <div>{text}</div>,
@@ -319,10 +280,6 @@ const RegisterPage = () => {
 				return {
 					props: {
 						style: {
-<<<<<<< HEAD
-							borderBottom: dataSource.key === "7" ? "solid 2px gray" : "solid 1px lightgray",
-							borderTop: dataSource.key === "1" ? "solid 2px gray" : "none",
-=======
 							borderBottom:
 								dataSource.key === "7"
 									? "solid 2px gray"
@@ -331,7 +288,6 @@ const RegisterPage = () => {
 								dataSource.key === "1"
 									? "solid 2px gray"
 									: "none",
->>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 						},
 					},
 					children: <div>{text}</div>,

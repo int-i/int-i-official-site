@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import User from "../models/User";
 import Inti from "../models/Inti";
 
@@ -30,4 +31,25 @@ export const PostAddMember = async (req, res, next) => {
         console.log(err);
         next(err);
     }
+};
+
+export const PostRemoveUser = async (req, res, next) => {
+    const { id } = req.body;
+
+    try {
+        await User.deleteOne({ id });
+        return res.status(200).json({ delUserSuccess: true });
+    } catch (err) {
+        next(err);
+    }
 }
+
+export const GetUsers = async (req, res, next) => {
+    try {
+        const { whatSolt, isDes } = req.query;
+        const users = await User.find({}).sort((isDes ? "-" : "") + whatSolt);
+        return res.status(200).json({ users: users });
+    } catch (err) {
+        next(err);
+    }
+};

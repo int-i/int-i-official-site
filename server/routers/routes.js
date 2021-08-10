@@ -10,6 +10,7 @@ const API = "/api";
 const AUTH = "/auth";
 const CALLBACK = "/callback";
 const USERINFO = "/userinfo";
+const DELUSER = "/deluser";
 const ADMIN = "/admin";
 const INTI = "/inti";
 
@@ -31,6 +32,7 @@ const routes = {
 	userinfo: USERINFO,
 	admin: ADMIN,
 	inti: INTI,
+	deluser: DELUSER,
 
 	github: GITHUB,
 	kakao: KAKAO,

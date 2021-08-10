@@ -1,0 +1,66 @@
+:global(.loginCenter) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+.loginPage {
+	width: 450px;
+	h2 {
+		text-align: center;
+		font-size: 30px;
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+	span {
+		line-height: 50%;
+	}
+	label {
+		text-align: left;
+		font-size: 14px;
+	}
+}
+.inputStyle {
+	width: 450px;
+	height: 40px;
+	border: 1px solid var(--grey);
+	padding-left: 10px;
+	font-size: 20px;
+}
+
+.inputStyle:focus {
+	outline: none;
+}
+
+.hrSect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	font-size: 17px;
+	margin: 8px 0px;
+}
+
+.hrSect::before {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 20px 20px 20px 0px;
+}
+
+.hrSect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 20px 0px 20px 20px;
+}
