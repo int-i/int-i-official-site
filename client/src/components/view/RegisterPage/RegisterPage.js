@@ -124,9 +124,12 @@ const RegisterPage = (props) => {
 							<tr>
 								<td
 									className={styles.headtd}
-									style={{ fontSize: "24px" }}
+									style={{
+										fontSize: "24px",
+										fontWeight: "700",
+									}}
 								>
-									기본 정보
+									회원가입
 								</td>
 								<td
 									className={styles.headtd}
