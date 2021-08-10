@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import User from "../models/User";
 import Inti from "../models/Inti";
 
@@ -35,7 +34,9 @@ export const PostAddMember = async (req, res, next) => {
 
 export const PostRemoveUser = async (req, res, next) => {
     const { id } = req.body;
-
+    if (!id) {
+        res.status(400).json({ delUserSuccess: false, reason: "id is required" });
+    }
     try {
         await User.deleteOne({ id });
         return res.status(200).json({ delUserSuccess: true });

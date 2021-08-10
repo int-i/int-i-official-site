@@ -54,7 +54,7 @@ const MainPage = () => {
 	);
 
 	return (
-		<div>
+		<div style={{ paddingBottom: "106px" }}>
 			<Carousel
 				className={style.banner}
 				arrows={true} // 좌우 이동 화살표 보이게 하는 속성
