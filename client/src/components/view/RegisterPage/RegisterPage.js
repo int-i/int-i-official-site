@@ -93,9 +93,26 @@ const RegisterPage = (props) => {
 	const OnSubmitHandler = (event) => {
 		event.preventDefault();
 
+		console.log(
+			CheckName.current.style.color,
+			CheckNickname.current.style.color,
+			CheckId.current.style.color,
+			CheckPassword.current.style.color
+		);
+
+		//유효성 체크 통과 못하면 submit 못함
+		if (
+			CheckName.current.style.color &&
+			CheckNickname.current.style.color &&
+			CheckId.current.style.color &&
+			CheckPassword.current.style.color !== "yellowgreen"
+		) {
+			return alert("입력 규칙을 확인해주세요!");
+		}
+
 		if (password !== confirmPassword) {
 			return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
-		} //여기서 걸리면 아래로 못감
+		}
 	};
 
 	return (
