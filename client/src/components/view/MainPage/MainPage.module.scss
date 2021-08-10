@@ -8,7 +8,7 @@
 		width: 100%;
 		height: 100%;
 		max-width: 1920px; // 최대 가로폭
-		
+
 		// 이미지 중앙 정렬
 		left: 50%;
 		transform: translate(-50%);
@@ -23,7 +23,9 @@
 		margin-left: 5% !important;
 		width: 100px !important;
 
-		font-size: calc(min(5vw, 100px)) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		font-size: calc(
+			min(5vw, 100px)
+		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
 		color: rgba(255, 255, 255, 0.6) !important;
 	}
 	:global(.slick-prev:hover) {
@@ -38,13 +40,14 @@
 		margin-right: 5%;
 		width: 100px !important;
 
-		font-size: calc(min(5vw, 100px)) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		font-size: calc(
+			min(5vw, 100px)
+		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
 		color: rgba(255, 255, 255, 0.6) !important;
 	}
 	:global(.slick-next:hover) {
 		color: var(--white) !important;
 	}
-
 }
 
 // 배너 슬라이더 최대 크기 지정 및 중앙 정렬

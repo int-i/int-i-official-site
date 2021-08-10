@@ -1,10 +1,12 @@
 :global(.loginCenter) {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 80vh;
+	position: relative;
+	padding-top: 100px;
+	height: 100%;
+	clear: both;
+	padding-bottom: 106px;
 }
 .loginPage {
+	clear: both;
 	width: 450px;
 	h2 {
 		text-align: center;

@@ -8,7 +8,7 @@ import banner1 from "../../../assets/images/banner/banner1.png";
 
 const MainPage = () => {
 	return (
-		<div>
+		<div style={{ paddingBottom: "106px" }}>
 			<Carousel
 				className={style.banner}
 				arrows={true}
