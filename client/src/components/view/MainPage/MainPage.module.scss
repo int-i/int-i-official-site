@@ -64,3 +64,12 @@
 	left: 50%;
 	transform: translate(-50%);
 }
+table {
+	border-collapse: collapse;
+}
+  
+th,
+td {
+	padding: 0.5rem;
+	border: 1px solid black;
+}

@@ -1,10 +1,16 @@
-//import { useState } from "react";
+import { useMemo } from "react";
+import Table from "./Table";
 import style from "./MainPage.module.scss";
 import "antd/dist/antd.css";
 import { Carousel } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import banner1 from "../../../assets/images/banner/banner1.png";
+<<<<<<< HEAD
 import TestBtn from "../FormBtn/FormBtn";
+=======
+import renderEmpty from "antd/lib/config-provider/renderEmpty";
+
+>>>>>>> 2aee3f234e3e3594b3f4640b5b72ee5595165c61
 // 임시 json 추후 DB에 올릴 예정
 const BannerImage = [
 	{
@@ -25,6 +31,32 @@ const BannerImage = [
 ];
 
 const MainPage = () => {
+	const columns = useMemo(() => [
+		{
+			accessor: "title",
+			Header: "Title",
+		},
+		{
+			accessor: "content",
+			Header: "Content",
+		},
+		{
+			accessor: "nickname",
+			Header: "Nickname",
+		},
+	],
+		[]
+	);
+
+	const data = useMemo(() =>
+		Array(3).fill().map(() => ({
+			title: "제목1",
+			content: "내용1",
+			nickname: "닉네임1",
+		})),
+		[]
+	);
+
 	return (
 		<div style={{ paddingBottom: "106px" }}>
 			<Carousel
@@ -54,6 +86,9 @@ const MainPage = () => {
 					);
 				})}
 			</Carousel>
+			<div>
+				<Table columns={columns} data={data}/>
+			</div>
 		</div>
 	);
 };
