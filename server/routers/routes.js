@@ -6,11 +6,12 @@ const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 
-
 const API = "/api";
 const AUTH = "/auth";
 const CALLBACK = "/callback";
 const USERINFO = "/userinfo";
+const ADMIN = "/admin";
+const INTI = "/inti";
 
 const GITHUB = "/github";
 const KAKAO = "/kakao";
@@ -28,6 +29,8 @@ const routes = {
 	auth: AUTH,
 	callback: CALLBACK,
 	userinfo: USERINFO,
+	admin: ADMIN,
+	inti: INTI,
 
 	github: GITHUB,
 	kakao: KAKAO,

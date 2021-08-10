@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 // 스키마는 웬만해서 수정 X. 특히 unique 건드리면 DB 날라가는 상황 발생할 수 있음.
 // 필드값 추가는 딱히 상관없음.
 const userSchema = new mongoose.Schema({
-    studentId: Number,
+
+    // (인트아이) 비회원 = -1 회원 = 1, 어드민 = 2
     role: Number,
     hash: String,
     
@@ -36,6 +37,10 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
+    },
+    studentId: {
+        type: Number,
+        unique: true
     }
 })
 

@@ -1,5 +1,4 @@
 import passport from "passport";
-import User from  "../models/User";
 
 export const GetAuth = (req, res) => {
     let user = req.user;

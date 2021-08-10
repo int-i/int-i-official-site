@@ -14,3 +14,16 @@
 		transform: translate(-50%);
 	}
 }
+
+.ant-carousel {
+	.slick-prev,
+	.slick-next,
+	.slick-prev:hover,
+	.slick-next:hover,
+	.slick-prev:focus,
+	.slick-next:focus,
+	.slick-prev::before,
+	.slick-next::before {
+		color: red;
+	}
+}

@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 import routes from "./routes";
 import { IsLogged, IsNotLogged } from "../middleware/auth";
 import { 

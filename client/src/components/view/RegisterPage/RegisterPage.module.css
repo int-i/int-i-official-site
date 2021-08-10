@@ -1,8 +1,11 @@
 .inputstyle {
 	width: 400px;
 	height: 35px;
+<<<<<<< HEAD
 	border-radius: 0;
 	border: 1px solid var(--grey);
+=======
+>>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 }
 
 .inputstyle:focus {
@@ -10,6 +13,12 @@
 }
 
 .register {
+<<<<<<< HEAD
 	position: relative;
+=======
+	position: absolute;
+	top: 10%;
+	left: 20%;
+>>>>>>> 94ccdfad0a888168912c0f4566019b775f0393b1
 	text-align: center;
 }

@@ -3,6 +3,7 @@ import style from "./MainPage.module.scss";
 import "./arrow.scss";
 import "antd/dist/antd.css";
 import { Carousel } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import banner1 from "../../../assets/images/banner/banner1.png";
 
 const MainPage = () => {
@@ -10,6 +11,10 @@ const MainPage = () => {
 		<div className={style.banner}>
 			<Carousel
 				arrows={true}
+				className={style["ant-carousel"]}
+				nextArrow={<RightOutlined />}
+				prevArrow={<LeftOutlined />}
+				draggable={true}
 				autoplay={true}
 				autoplaySpeed={10000} // ms 단위
 			>

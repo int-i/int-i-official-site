@@ -10,6 +10,8 @@ import connectDB from "./db";
 import routes from "./routers/routes";
 import globalRouter from "./routers/globalRouter";
 import authRouter from "./routers/authRouter";
+import adminRouter from "./routers/adminRouter";
+import { IsAdmin, IsLogged } from "./middleware/auth";
 // 추가해야 할 모듈 및 미들웨어 : path, cors
 
 const app = express();
@@ -48,6 +50,7 @@ passportConfig();
 // 여기서 라우팅 설정(dev). 기본적으로 api 는 포함이고 그 다음 미들웨어로 라우팅 세부 구성
 app.use(routes.api, globalRouter);
 app.use(routes.api + routes.auth, authRouter);
+app.use(routes.api + routes.admin, IsLogged, IsAdmin, adminRouter);
 
 app.get('/', (req, res) => {
 	res.send('First Routing');
