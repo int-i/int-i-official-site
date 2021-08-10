@@ -1,5 +1,3 @@
-// 글로벌 라우팅
-
 import express from "express";
 import routes from "./routes";
 import {
