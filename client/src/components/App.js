@@ -1,20 +1,15 @@
 import React from "react";
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./view/Header/Header";
 import Footer from "./view/Footer/Footer";
 import MainPage from "./view/MainPage/MainPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
 import LoginPage from "./view/LoginPage/LoginPage";
-import style from "../assets/style/Layout.module.scss"
+import style from "../assets/style/Layout.module.scss";
 
 import "../assets/style/reset.css";
 import "../assets/style/global.scss";
-
 
 const App = () => {
 	return (
@@ -24,7 +19,10 @@ const App = () => {
 					<Header />
 					<div className={style.layout}>
 						<Switch>
-							<Route path="/RegisterPage" component={RegisterPage} />
+							<Route
+								path="/RegisterPage"
+								component={RegisterPage}
+							/>
 							<Route path="/LoginPage" component={LoginPage} />
 							<Route path="/" component={MainPage} />
 						</Switch>
@@ -34,6 +32,6 @@ const App = () => {
 			</Router>
 		</div>
 	);
-}
+};
 
 export default App;
