@@ -96,41 +96,25 @@ const LoginPage = () => {
 					</label>
 					<br />
 
-<<<<<<< HEAD
-					<button onClick={OnClickHandler}>로그인</button>
-=======
 					<button type="submit" onClick={OnClickHandler}>
 						로그인
 					</button>
->>>>>>> seungeun
 
 					<button type="button">회원가입</button>
 
 					<div className={styles.hrSect}>SNS 로그인</div>
 
-<<<<<<< HEAD
-					<button className={styles.google}>
-=======
 					<button type="button" className={styles.google}>
->>>>>>> seungeun
 						<img alt="Google로고" src={Google} />
 						구글 로그인
 					</button>
 
-<<<<<<< HEAD
-					<button className={styles.kakao}>
-=======
 					<button type="button" className={styles.kakao}>
->>>>>>> seungeun
 						<img alt="KaKao로고" src={KaKao} />
 						카카오 로그인
 					</button>
 
-<<<<<<< HEAD
-					<button className={styles.github}>
-=======
 					<button type="button" className={styles.github}>
->>>>>>> seungeun
 						<img alt="Github로고" src={Github} />
 						GitHub 로그인
 					</button>
