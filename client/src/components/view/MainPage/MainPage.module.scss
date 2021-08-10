@@ -6,6 +6,7 @@
 		// 좌우 폭에 따라 이미지 줄어들게 함
 		object-fit: cover;
 		width: 100%;
+		--ui_wid: width;
 		height: 100%;
 		max-width: 1920px; // 최대 가로폭
 
@@ -13,17 +14,30 @@
 		left: 50%;
 		transform: translate(-50%);
 	}
-}
 
-.ant-carousel {
-	.slick-prev,
-	.slick-next,
-	.slick-prev:hover,
-	.slick-next:hover,
-	.slick-prev:focus,
-	.slick-next:focus,
-	.slick-prev::before,
-	.slick-next::before {
-		color: red;
+	// 전역 위치에 정의된 슬라이드 배너 화살표 스타일 재정의
+	// 왼쪽 화살표 스타일
+	:global(.slick-prev),
+	:global(.slick-prev:hover),
+	:global(.slick-prev:focus),
+	:global(.slick-prev::before) {
+		z-index: 9; // z축을 높여 슬라이드 배너보다 위에 표시
+		margin-left: 5% !important;
+		width: 100px !important;
+		font-size: calc(min(5vw, 100px)) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		color: white !important;
+	}
+	
+	// 오른쪽 화살표 스타일
+	:global(.slick-next),
+	:global(.slick-next:hover),
+	:global(.slick-next:focus),
+	:global(.slick-next::before) {
+		z-index: 9;
+		margin-right: 5%;
+		//margin-right: if(var(--ui_wid), 5%, 5%) !important; // 보류
+		width: 100px !important;
+		font-size: calc(min(5vw, 100px)) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		color: white !important;
 	}
 }

@@ -7,20 +7,20 @@ import banner1 from "../../../assets/images/banner/banner1.png";
 
 const MainPage = () => {
 	return (
-		<div className={style.banner}>
+		<div>
 			<Carousel
+				className={style.banner}
 				arrows={true}
-				className={style["ant-carousel"]}
 				nextArrow={<RightOutlined />}
-				prevArrow={<LeftOutlined/>}
+				prevArrow={<LeftOutlined />}
 				draggable={true}
 				autoplay={true}
 				autoplaySpeed={10000} // ms 단위
 			>
 				<div>
-					<a href="/" /*target="_blank"*/>
+					{/* <a href="/" target="_blank"> */}
 						<img src={banner1} alt={"인트아이 배너"} style={{ backgroundColor: "black" }} />
-					</a>
+					{/* </a> */}
 				</div>
 				<div>
 					<img src={banner1} alt={"인트아이 배너"} style={{ backgroundColor: "black" }} />
