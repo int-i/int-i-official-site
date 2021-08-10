@@ -27,6 +27,10 @@
 			min(5vw, 100px)
 		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
 		color: rgba(255, 255, 255, 0.6) !important;
+
+		// hover(마우스 올려놓는 동작)시 0.3초간 천천히 색상 변화
+		transition-property: color;
+		transition-duration: 0.3s;
 	}
 	:global(.slick-prev:hover) {
 		color: var(--white) !important;
@@ -44,6 +48,9 @@
 			min(5vw, 100px)
 		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
 		color: rgba(255, 255, 255, 0.6) !important;
+
+		transition-property: color;
+		transition-duration: 0.3s;
 	}
 	:global(.slick-next:hover) {
 		color: var(--white) !important;
