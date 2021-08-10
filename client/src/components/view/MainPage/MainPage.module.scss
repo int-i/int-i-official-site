@@ -6,7 +6,6 @@
 		// 좌우 폭에 따라 이미지 줄어들게 함
 		object-fit: cover;
 		width: 100%;
-		--ui_wid: width;
 		height: 100%;
 		max-width: 1920px; // 최대 가로폭
 		
@@ -17,10 +16,6 @@
 
 	// 전역 위치에 정의된 슬라이드 배너 화살표 스타일 재정의
 	// 왼쪽 화살표 스타일
-
-	:global(.slick-slider) {
-		max-width: 1920px !important;
-	}
 	:global(.slick-prev),
 	:global(.slick-prev:focus),
 	:global(.slick-prev::before) {
@@ -49,9 +44,13 @@
 	:global(.slick-next:hover) {
 		color: var(--white) !important;
 	}
+
 }
-:global .ant-carousel .slick-slider {
-	max-width: 1920px !important;
+
+// 배너 슬라이더 최대 크기 지정 및 중앙 정렬
+// 전역 스타일 수정
+:global .slick-slider {
+	max-width: 1920px;
 	left: 50%;
 	transform: translate(-50%);
 }
