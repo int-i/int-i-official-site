@@ -1,4 +1,12 @@
 // 폰트
+@font-face {
+	font-family: "나눔스퀘어";
+	src: url("../fonts/NanumSquareB.ttf");
+}
+@font-face {
+	font-family: "Spoqa Han Sans Neo";
+	src: url("../fonts/SpoqaHanSansNeo-Bold.ttf");
+}
 .NanumSquare {
 	font-family: "나눔스퀘어", NanumSquare;
 	src: local(NanumSquare); // 외부 글꼴 참조 전에 시스템 글꼴을 우선 참조
