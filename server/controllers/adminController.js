@@ -30,4 +30,27 @@ export const PostAddMember = async (req, res, next) => {
         console.log(err);
         next(err);
     }
+};
+
+export const PostRemoveUser = async (req, res, next) => {
+    const { id } = req.body;
+    if (!id) {
+        res.status(400).json({ delUserSuccess: false, reason: "id is required" });
+    }
+    try {
+        await User.deleteOne({ id });
+        return res.status(200).json({ delUserSuccess: true });
+    } catch (err) {
+        next(err);
+    }
 }
+
+export const GetUsers = async (req, res, next) => {
+    try {
+        const { whatSolt, isDes } = req.query;
+        const users = await User.find({}).sort((isDes ? "-" : "") + whatSolt);
+        return res.status(200).json({ users: users });
+    } catch (err) {
+        next(err);
+    }
+};

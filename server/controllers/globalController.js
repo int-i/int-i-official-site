@@ -2,46 +2,64 @@ import User from "../models/User";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import Inti from "../models/Inti";
+import config from "../config/dev";
 
 // 해쉬 복잡도. 환경변수로 빼야함. 보안 떨어진다 싶으면 salt 사용.
-const SECRET_HASH = 12
+const hashSecret = config.hashSecret
+
+// 공백확인 함수
+
 
 export const PostJoin = async (req, res, next) => {
-    
-    // 공백확인 함수
-    const IsEmpty = function(fieldValue, fieldName) {
+    const IsEmpty = function(fieldValue) {
         if (typeof fieldValue == "undefined" || fieldValue == null || fieldValue == "") {
-            return res.status(400).json({ joinSuccess: false, reason: fieldName + " is required" });
-        } else {
-            return res.status(400).json({ joinSuccess: false, reason: "already exist " + fieldName });
+            return true;
         }
     }
 
     // 요청 정보 추출
     const { username, id, nickname, email, studentId, password, password2 } = req.body;
+    const fieldValue = [username, id, nickname, email, studentId, password, password2];
 
-        try{
+        try {
 
-            // 필드 값 존재성 검사
-            const existUserId = await User.findOne({ id });
-            const existUserEmail = await User.findOne({ email });
-            const existUserNickname = await User.findOne({ nickname });
-            
-            if (typeof username == "undefined" || username == null || username == "") {
-                return res.status(400).json({ joinSuccess: false, reason: "username is required" });
-            } else if (existUserNickname) {
-                return IsEmpty(nickname, "nickname");
-            } else if (existUserId) {
-                return IsEmpty(id, "id");
+            // 필드값 유무 검사
+            // 나중에 반복문으로 정리. 아님 or 로 아래랑 합쳐도 됨. 대신 상세한 reason 불가능.
+            if (IsEmpty(username)) {
+                return res.status(400).json({ joinSuccess: false, reason:  "username is required" });
+            } else if (IsEmpty(nickname)) {
+                return res.status(400).json({ joinSuccess: false, reason: "nickname is required" });
+            } else if (IsEmpty(id)) {
+                return res.status(400).json({ joinSuccess: false, reason: "id is required" });
+            } else if (IsEmpty(email)) {
+                return res.status(400).json({ joinSuccess: false, reason: "email is required" });
+            } else if (IsEmpty(password)) {
+                return res.status(400).json({ joinSuccess: false, reason: "password is required" });
+            } else if (IsEmpty(password2)) {
+                return res.status(400).json({ joinSuccess: false, reason: "password2 is required" });
+            }
+
+            // 필드 값 중복성 검사
+            // find 안에 빈값 들어가면 절대 안됨..
+            const exId = await User.findOne({ id });
+            const exEmail = await User.findOne({ email });
+            const exNickname = await User.findOne({ nickname });
+            console.log(exNickname);
+
+            if (exId) {
+                return res.status(400).json({ joinSuccess: false, reason: "already exist id" });
+            } else if (exEmail) {
+                return res.status(400).json({ joinSuccess: false, reason: "already exist email" });
+            } else if (exNickname) {
+                console.log(1);
+                return res.status(400).json({ joinSuccess: false, reason: "already exist nickname" });
             } else if (password !== password2) {
-                return res.status(400).json({ joinSuccess: false, reason: "check password or password2" });
-            } else if (existUserEmail) {
-                return IsEmpty(email, "email");
+                return res.status(400).json({ joinSuccess: false, reason: "wrong password or password2" });
             } else {
 
                 // 유효성 나중에 추가
                 // 해쉬 보안을 위해 salt 도입 필요하긴 함. 회의 후 결정.
-                const hash = await bcrypt.hash(password, SECRET_HASH);
+                const hash = await bcrypt.hash(password, hashSecret);
 
                 // 권한 부여
                 const isMember = await Inti.findOne({ studentId });
@@ -78,6 +96,11 @@ export const PostLogin = (req, res, next) => {
             if (err) {
                 console.log("err", err);
                 return res.json(500).json({ loginSuccess: false, reason: "correct id and password but internal server error"});
+            }
+
+            // 아이디 기억
+            if (req.body.rememberId) {
+                res.cookie("loginId", user.id);
             }
             return res.status(200).json({ loginSuccess: true, user: { _id: user._id, id: user.id, email: user.email }});
         });

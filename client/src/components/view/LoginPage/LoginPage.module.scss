@@ -1,0 +1,105 @@
+:global(.loginCenter) {
+	position: relative;
+	padding-top: 100px;
+	height: 100%;
+	clear: both;
+	padding-bottom: 106px;
+}
+.loginPage {
+	clear: both;
+	width: 450px;
+	h2 {
+		text-align: center;
+		font-size: 30px;
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+	span {
+		line-height: 50%;
+	}
+	label {
+		text-align: left;
+		font-size: 14px;
+	}
+	.sns {
+		color: red;
+	}
+}
+// 입력창 스타일
+.inputStyle {
+	width: 450px;
+	height: 40px;
+	border: 1px solid var(--grey);
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+.inputStyle:focus {
+	outline: none;
+}
+// 구분선 스타일
+.hrSect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	font-size: 17px;
+	margin: 8px 0px;
+}
+
+.hrSect::before {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 20px 20px 20px 0px;
+}
+
+.hrSect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 20px 0px 20px 20px;
+}
+
+// SNS버튼 스타일
+.kakao,
+.google,
+.github {
+	position: relative;
+	font-size: 18px;
+	font-weight: 600;
+	border: none;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	padding: 10px 0px 10px 0px;
+	cursor: pointer;
+	box-shadow: var(--button-shadow);
+	line-height: 22px;
+	img {
+		position: absolute;
+		left: 5%;
+		vertical-align: middle;
+		width: 22px;
+	}
+}
+
+.google {
+	background: var(--white);
+}
+.kakao {
+	background: var(--yellow);
+}
+.github {
+	background: var(--navy);
+	color: var(--white);
+}
