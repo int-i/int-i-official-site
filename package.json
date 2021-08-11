@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.13.5",
+    "mongoose-auto-increment": "^5.0.1",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
     "passport-google-oauth2": "^0.2.0",

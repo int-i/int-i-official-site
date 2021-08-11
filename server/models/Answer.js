@@ -6,13 +6,13 @@ const answerSchema = new mongoose.Schema({
     //답변작성자, 답변 제목, 답변 내용, 답변 작성날짜
     author: String, 
 
-    title: {
-        type: String,
-        required: true
-    },
     contents: {
         type: String,
         required: true
+    },
+    anonymous: {
+        type: Boolean,
+        default: false
     },
     createdAt: {
         type: Date,

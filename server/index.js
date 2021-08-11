@@ -11,6 +11,7 @@ import routes from "./routers/routes";
 import globalRouter from "./routers/globalRouter";
 import authRouter from "./routers/authRouter";
 import adminRouter from "./routers/adminRouter";
+import questionRouter from "./routers/questionRouter";
 import { IsAdmin, IsLogged } from "./middleware/auth";
 // 추가해야 할 모듈 및 미들웨어 : path, cors
 
@@ -51,10 +52,12 @@ passportConfig();
 app.use(routes.api, globalRouter);
 app.use(routes.api + routes.auth, authRouter);
 app.use(routes.api + routes.admin, IsLogged, IsAdmin, adminRouter);
+app.use(routes.api + routes.question, questionRouter);
 
 app.get('/', (req, res) => {
-	res.send('First Routing');
+		res.send('First Routing');
 });
+
 
 if (process.env.NODE_ENV === "production") {
 	// 빌드 배포 환경에서의 라우팅 설정
