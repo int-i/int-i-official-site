@@ -1,15 +1,5 @@
 import Question from "../models/Question";
 
-//모든 질문들 다 보여주기
-export const GetAllQuestions = async (req, res) => {
-	try{
-		const questions = await Question.find({});
-		res.status(200).json({ questions: questions });
-	} catch (error) {
-		res.status(400).send({ error: error.message });
-	}
-}
-
 //create : 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res) => {
 	const user = req.user;
@@ -33,6 +23,16 @@ export const PostQuestion = async (req, res) => {
 		res.status(200).json({ addQuestion: true });
 	} catch (error) {
 		res.status(400).send({ error: error.message })
+	}
+}
+
+//read: 모든 질문들 다 보여주기
+export const GetAllQuestions = async (req, res) => {
+	try{
+		const questions = await Question.find({});
+		res.status(200).json({ questions: questions });
+	} catch (error) {
+		res.status(400).send({ error: error.message });
 	}
 }
 
