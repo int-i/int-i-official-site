@@ -17,6 +17,7 @@ const CALLBACK = "/callback";
 const ADMIN = "/admin";
 const INTI = "/inti";
 const QUESTION = "/question";
+const ANSWER = "/answer";
 
 const GITHUB = "/github";
 const KAKAO = "/kakao";
@@ -28,6 +29,12 @@ const WRITEQUES = "/writeques";
 const DELQUES = "/delques";
 const EDITQUES = "/editques";
 const ONEQUES = "/oneques";
+
+//답변
+const WRITEANS = "/writeans";
+const DELANS = "/delans";
+const EDITANS = "/editans";
+const ALLANS = "/allans";
 
 
 const routes = {
@@ -43,6 +50,7 @@ const routes = {
 	admin: ADMIN,
 	inti: INTI,
 	question: QUESTION,
+	answer: ANSWER,
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
 
@@ -54,8 +62,14 @@ const routes = {
 	writeques: WRITEQUES,
 	delques: DELQUES,
 	editques: EDITQUES,
-	oneques: ONEQUES
+	oneques: ONEQUES,
 
+	//답변
+	writeans: WRITEANS,
+	delans: DELANS,
+	editans: EDITANS,
+	allans: ALLANS
+	
 }
 
 export default routes;
