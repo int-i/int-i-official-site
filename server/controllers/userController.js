@@ -1,5 +1,6 @@
 import User from "../models/User";
 import Inti from "../models/Inti";
+import Tag from "../models/Tag";
 import bcrypt from "bcrypt";
 import config from "../config/key";
 
@@ -28,7 +29,8 @@ export const PostEditProfile = async (req, res, next) => {
             privateInterest,
             privateAbout,
             privateGitUri,
-            privateBlogUri
+            privateBlogUri,
+            tag
         } = req.body;
 
         // 필드값 유무.
@@ -67,7 +69,7 @@ export const PostEditProfile = async (req, res, next) => {
             if (req.user.email !== email) {
                 return res.status(400).json({ editSuccess: false, reason: "already exist email" });
             }
-        } 
+        }
         if (exNickname) {
             if (req.user.nickname !== nickname) {
                 return res.status(400).json({ editSuccess: false, reason: "already exist nickname" });
@@ -97,7 +99,7 @@ export const PostEditProfile = async (req, res, next) => {
 
         // 학번 따라 권한 업데이트
         let role = req.user.role;
-        if (IsEmpty(studentId)) {
+        if (!IsEmpty(studentId)) {
             const exMember = await Inti.findOne({ studentId });
             if (exMember) {
                 role = 1;
@@ -105,6 +107,29 @@ export const PostEditProfile = async (req, res, next) => {
                 role = -1;
             }
         }
+
+        // 태그 처리
+        // 유저 관심 태그는 카운트 처리 안함.
+        const tagResult = await Promise.all(tag.map(async (arg) => {
+            let result = await Tag.findOne({ tagname: new RegExp(arg, 'i') });
+
+            if (result) {
+
+                // $push 사용하면 중복 값 올라감.
+                // $addToSet -> 중복 값 안올라감.
+                await Tag.updateOne({ tagname: new RegExp(arg, 'i') }, { $addToSet : { users: req.user } });
+                return result;
+            } else {
+
+                // 존재하지 않는 태그면 새로 만들어줌.
+                const result2 = await Tag.create({
+                    tagname: arg,
+                    count: 0,
+                    users: req.user
+                });
+                return result2;
+            }
+        }));
 
         // 프로필 변경
         const user = await User.findOneAndUpdate({ id: req.user.id }, {
@@ -118,7 +143,8 @@ export const PostEditProfile = async (req, res, next) => {
             privateGitUri,
             privateBlogUri,
             hash,
-            role
+            role,
+            tags: tagResult
         }, { new: true });
 
         return res.status(200).json({ editSuccess: true, user: user });

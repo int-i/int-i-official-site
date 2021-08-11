@@ -44,7 +44,6 @@ export const PostJoin = async (req, res, next) => {
             const exId = await User.findOne({ id });
             const exEmail = await User.findOne({ email });
             const exNickname = await User.findOne({ nickname });
-            console.log(exNickname);
 
             if (exId) {
                 return res.status(400).json({ joinSuccess: false, reason: "already exist id" });
