@@ -1,21 +1,29 @@
 // 헤더 상자 스타일
-.header {
-	z-index: 10; // 헤더는 항상 위에 있도록 z축을 10으로 설정
-	position: fixed;
+.headerContainer {
+	position: relative;
 	width: 100%;
-	height: 60px;
+	max-width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 60px;
+}
+.header {
+	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 10으로 설정
+	position: fixed;
+	top: 0;
+	width: 100%;
 	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1); // 상자 그림자
 	background-color: var(--white);
 }
 
 // 헤더 상자 안의 내용
 .contents {
+	height: 60px;
 	display: flex;
 	width: 90%;
 	max-width: 1450px;
-	height: 100%;
 	margin: 0 auto;
-	font-weight: 800;
+	font-weight: 700;
 	font-size: 17px;
 	color: var(--navy);
 	align-items: center;
@@ -29,11 +37,11 @@
 	}
 }
 
-
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
 	display: flex;
 	font-size: 26px;
+	font-weight: 900;
 	align-items: center;
 }
 

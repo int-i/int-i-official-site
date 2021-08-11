@@ -1,15 +1,56 @@
+:global(.registerCenter) {
+	position: relative;
+	padding-top: 100px;
+	height: 100%;
+	clear: both;
+	padding-bottom: 140px;
+}
+.registerPage {
+	clear: both;
+}
+.tablestyle {
+	border-collapse: collapse;
+}
+
+.headtr {
+	background-color: white;
+	border-bottom: 2px solid gray;
+}
+
+.headtd {
+	padding: 10px;
+	height: 50px;
+}
+
+.bodytr {
+	border-bottom: 1px solid lightgray;
+}
+
+.bodytr:nth-child(7) {
+	border-bottom: 2px solid gray;
+}
+
+.bodytd {
+	padding: 10px;
+	height: 50px;
+}
+
+.bodytd:nth-child(1) {
+	width: 130px;
+	background-color: #f5f5f5;
+}
+
 .inputstyle {
 	width: 400px;
 	height: 35px;
+	border: 1px solid var(--grey);
 }
 
 .inputstyle:focus {
 	outline: none;
 }
 
-.register {
-	position: absolute;
-	top: 10%;
-	left: 20%;
-	text-align: center;
+.checkText {
+	color: gray;
+	font-size: 14px;
 }

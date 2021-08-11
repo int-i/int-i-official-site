@@ -1,14 +1,16 @@
 .footer {
-	height: 98px;
-	margin-top: auto;
+	clear: both;
+	width: 100%;
 	background-color: var(--navy);
+	position: absolute;
+	bottom: 0;
 }
 
 .contents {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 100%;
 	color: var(--white);
 	align-items: center;
 	justify-content: center;

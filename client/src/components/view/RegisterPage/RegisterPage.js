@@ -1,11 +1,10 @@
 //회원가입 페이지
 
 import React, { useState, useRef } from "react";
-import { Table, Button } from "antd";
 import styles from "./RegisterPage.module.css";
-import "antd/dist/antd.css";
+import FormBtn from "../FormBtn/FormBtn";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
 	const [name, SetName] = useState("");
 	const [nickname, SetNickname] = useState("");
 	const [id, SetId] = useState("");
@@ -94,224 +93,213 @@ const RegisterPage = () => {
 	const OnSubmitHandler = (event) => {
 		event.preventDefault();
 
+		console.log(
+			CheckName.current.style.color,
+			CheckNickname.current.style.color,
+			CheckId.current.style.color,
+			CheckPassword.current.style.color
+		);
+
+		//유효성 체크 통과 못하면 submit 못함
+		if (
+			CheckName.current.style.color &&
+			CheckNickname.current.style.color &&
+			CheckId.current.style.color &&
+			CheckPassword.current.style.color !== "yellowgreen"
+		) {
+			return alert("입력 규칙을 확인해주세요!");
+		}
+
 		if (password !== confirmPassword) {
 			return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
-		} //여기서 걸리면 아래로 못감
+		}
 	};
 
-	const dataSource = [
-		{
-			key: "1",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;이름
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						value={name}
-						onChange={OnNameHandler}
-						required
-					/>
-					<span ref={CheckName} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 한글 또는 영문 최소 2자리 입력
-					</span>
-				</div>
-			),
-		},
-		{
-			key: "2",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;닉네임
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						value={nickname}
-						onChange={OnNicknameHandler}
-						required
-					/>
-					<span ref={CheckNickname} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 한글 또는 영문 최대 6자리 입력
-					</span>
-				</div>
-			),
-		},
-		{
-			key: "3",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;아이디
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						value={id}
-						onChange={OnIdHandler}
-						required
-					/>
-					<span ref={CheckId} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리 입력 (특수문자,
-						대문자 사용 불가)
-					</span>
-				</div>
-			),
-		},
-		{
-			key: "4",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;비밀번호
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						value={password}
-						onChange={OnPasswordHandler}
-						required
-					/>
-					<span ref={CheckPassword} style={{ color: "gray" }}>
-						&nbsp;&nbsp; 영문, 숫자, 특수문자 필수 최소 7자리 입력
-						(대문자 사용 불가)
-					</span>
-				</div>
-			),
-		},
-		{
-			key: "5",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;비밀번호 확인&nbsp;&nbsp;&nbsp;
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						value={confirmPassword}
-						onChange={OnConfirmPasswordHandler}
-						required
-					/>
-				</div>
-			),
-		},
-		{
-			key: "6",
-			data: (
-				<div>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;이메일
-				</div>
-			),
-			dataInput: (
-				<div>
-					<input
-						className={styles.inputstyle}
-						type="email"
-						value={email}
-						onChange={OnEmailHandler}
-						required
-					/>
-					&nbsp;
-				</div>
-			),
-		},
-		{
-			key: "7",
-			data: "학번",
-			dataInput: (
-				<input
-					className={styles.inputstyle}
-					value={studentId}
-					onChange={OnStudentIdHandler}
-				/>
-			),
-		},
-	];
-
-	const columns = [
-		{
-			title: <div style={{ fontSize: "18px" }}>기본 정보</div>,
-			dataIndex: "data",
-			key: "data",
-			render(text, dataSource) {
-				return {
-					props: {
-						style: {
-							background: "#f5f5f5",
-							borderBottom:
-								dataSource.key === "7"
-									? "solid 2px gray"
-									: "solid 1px lightgray",
-							borderTop:
-								dataSource.key === "1"
-									? "solid 2px gray"
-									: "none",
-						},
-					},
-					children: <div>{text}</div>,
-				};
-			},
-		},
-		{
-			title: (
-				<span style={{ float: "right" }}>
-					<span style={{ color: "red" }}>*</span>
-					&nbsp;표시는 반드시 입력해야 하는 항목입니다.
-				</span>
-			),
-			dataIndex: "dataInput",
-			key: "dataInput",
-			render(text, dataSource) {
-				return {
-					props: {
-						style: {
-							borderBottom:
-								dataSource.key === "7"
-									? "solid 2px gray"
-									: "solid 1px lightgray",
-							borderTop:
-								dataSource.key === "1"
-									? "solid 2px gray"
-									: "none",
-						},
-					},
-					children: <div>{text}</div>,
-				};
-			},
-		},
-	];
-
 	return (
-		<div className={styles.register}>
-			<form onSubmit={OnSubmitHandler}>
-				<Table
-					dataSource={dataSource}
-					columns={columns}
-					pagination={false}
+		<center className="registerCenter">
+			<div className={[styles.registerPage, "NanumSquare"].join(" ")}>
+				<form id="register" onSubmit={OnSubmitHandler}>
+					<table className={styles.tablestyle}>
+						<thead className={styles.headtr}>
+							<tr>
+								<td
+									className={styles.headtd}
+									style={{
+										fontSize: "24px",
+										fontWeight: "700",
+									}}
+								>
+									회원가입
+								</td>
+								<td
+									className={styles.headtd}
+									style={{ textAlign: "right" }}
+								>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;표시는 반드시 입력해야 하는 항목입니다
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;이름
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										className={styles.inputstyle}
+										value={name}
+										onChange={OnNameHandler}
+										required
+									/>
+									<span
+										ref={CheckName}
+										className={styles.checkText}
+									>
+										&nbsp;&nbsp; 한글 또는 영문 최소 2자리
+										입력
+									</span>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;닉네임
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										className={styles.inputstyle}
+										value={nickname}
+										onChange={OnNicknameHandler}
+										required
+									/>
+									<span
+										ref={CheckNickname}
+										className={styles.checkText}
+									>
+										&nbsp;&nbsp; 한글 또는 영문 최대 6자리
+										입력
+									</span>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;아이디
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										className={styles.inputstyle}
+										value={id}
+										onChange={OnIdHandler}
+										required
+									/>
+									<span
+										ref={CheckId}
+										className={styles.checkText}
+									>
+										&nbsp;&nbsp; 영문, 숫자 필수 최소 6자리
+										입력 (특수문자, 대문자 사용 불가)
+									</span>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;비밀번호
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
+										value={password}
+										onChange={OnPasswordHandler}
+										required
+									/>
+									<span
+										ref={CheckPassword}
+										className={styles.checkText}
+									>
+										&nbsp;&nbsp; 영문, 숫자, 특수문자 필수
+										최소 7자리 입력 (대문자 사용 불가)
+									</span>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;비밀번호 확인
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
+										value={confirmPassword}
+										onChange={OnConfirmPasswordHandler}
+										required
+									/>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>
+									<span style={{ color: "red" }}>*</span>
+									&nbsp;이메일
+								</td>
+								<td className={styles.bodytd}>
+									<input
+										className={styles.inputstyle}
+										type="email"
+										value={email}
+										onChange={OnEmailHandler}
+										required
+									/>
+								</td>
+							</tr>
+							<tr className={styles.bodytr}>
+								<td className={styles.bodytd}>학번</td>
+								<td className={styles.bodytd}>
+									<input
+										className={styles.inputstyle}
+										value={studentId}
+										onChange={OnStudentIdHandler}
+									/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+				</form>
+				<FormBtn
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					onClick={() => {
+						props.history.push("/");
+					}}
+					text="취소"
 				/>
-				<br />
-				<Button type="primary" htmlType="submit">
-					회원가입
-				</Button>
-				&nbsp;&nbsp;
-				<Button htmlType="button">취소</Button>
-			</form>
-		</div>
+				<FormBtn
+					type="submit"
+					form="register"
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					kind="컬러"
+					text="회원가입"
+				/>
+			</div>
+		</center>
 	);
 };
 

@@ -1,15 +1,21 @@
+/* eslint-disable */
 //로그인 페이지
 
-import React, { useState } from "react";
-import styles from "./LoginPage.module.css";
-import { Form, Input, Button, Checkbox } from "antd";
-import { GoogleOutlined, GithubOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import styles from "./LoginPage.module.scss";
+import Google from "../../../assets/images/logo/Google.png";
+import KaKao from "../../../assets/images/logo/kakao.png";
+import Github from "../../../assets/images/logo/Github.png";
+import FormBtn from "../FormBtn/FormBtn";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 	const [id, SetId] = useState("");
 	const [password, SetPassword] = useState("");
+	const [isRemember, SetIsRemember] = useState(false);
+	const [cookies, SetCookie, RemoveCookie] = useCookies(["rememberId"]);
 
-	const OnIDHandler = (event) => {
+	const OnIdHandler = (event) => {
 		SetId(event.currentTarget.value);
 	};
 
@@ -24,147 +30,113 @@ const LoginPage = () => {
 		console.log("Password", password);
 	};
 
-	const OnFinish = (values) => {
-		console.log("Success:", values);
+	useEffect(() => {
+		if (cookies.rememberId !== undefined) {
+			SetId(cookies.rememberId);
+			SetIsRemember(true);
+		}
+	}, [cookies.rememberId]);
+
+	// checkbox 값을 변화시킬때
+	const OnChangeHandler = (e) => {
+		SetIsRemember(e.target.checked);
+		return isRemember;
 	};
 
-	const OnFinishFailed = (errorInfo) => {
-		console.log("Failed:", errorInfo);
+	// 로그인 button을 클릭할때
+	const OnClickHandler = (e) => {
+		if (isRemember) {
+			SetCookie("rememberId", id);
+		} else {
+			RemoveCookie("rememberId");
+		}
 	};
 
 	return (
-		<div className={styles.loginStyle}>
-			<h2>로그인</h2>
-			<br />
+		<center className="loginCenter">
+			<div className={[styles.loginPage, "NanumSquare"].join(" ")}>
+				<h2>로그인</h2>
+				<br />
 
-			<Form
-				name="basic"
-				initialValues={{
-					remember: true,
-				}}
-				onFinish={OnFinish}
-				onFinishFailed={OnFinishFailed}
-				onSubmit={OnSubmitHandler}
-			>
-				<Form.Item
-					name="id"
-					rules={[
-						{
-							required: true,
-							message: (
-								<div style={{ textAlign: "left" }}>
-									Please input your ID!
-								</div>
-							),
-						},
-					]}
-				>
-					<Input
+				<form onSubmit={OnSubmitHandler}>
+					<input
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={id}
 						placeholder="아이디"
-						onChange={OnIDHandler}
-						style={{ width: "400px", height: "40px" }}
+						onChange={OnIdHandler}
+						required
 					/>
-				</Form.Item>
+					<span>
+						<br />
+					</span>
 
-				<Form.Item
-					name="password"
-					rules={[
-						{
-							required: true,
-							message: (
-								<div style={{ textAlign: "left" }}>
-									Please input your password!
-								</div>
-							),
-						},
-					]}
-				>
-					<Input.Password
+					<input
+						type="password"
+						className={[
+							styles.inputStyle,
+							"Spoqa Han Sans Neo",
+						].join(" ")}
 						value={password}
 						placeholder="비밀번호"
 						onChange={OnPasswordHandler}
-						style={{ width: "400px", height: "40px" }}
+						required
 					/>
-				</Form.Item>
-
-				<Form.Item
-					name="remember"
-					valuePropName="checked"
-					style={{ textAlign: "left" }}
-				>
-					<Checkbox>아이디 기억하기</Checkbox>
-				</Form.Item>
-
-				<Form.Item>
-					<div style={{ lineHeight: "50%" }}>
-						<Button
-							style={{ width: "400px" }}
-							type="primary"
-							htmlType="submit"
-						>
-							로그인
-						</Button>
+					<span>
 						<br />
-						<br />
+					</span>
 
-						<Button
-							style={{ width: "400px", borderColor: "#1890ff" }}
-							htmlType="button"
-						>
-							회원가입
-						</Button>
-					</div>
-				</Form.Item>
+					<label>
+						<input
+							type="checkbox"
+							onChange={OnChangeHandler}
+							checked={isRemember}
+						/>
+						&nbsp;아이디 기억하기
+					</label>
+					<br />
+
+					<FormBtn
+						borderRadius="10px"
+						height="42px"
+						text="로그인"
+						margin="0 0 15px 0px"
+						fontSize="18px"
+						kind="컬러"
+					/>
+				</form>
+				<FormBtn
+					borderRadius="10px"
+					width="450px"
+					height="42px"
+					text="회원가입"
+					margin="0 0 15px 0px"
+					fontSize="18px"
+					onClick={() => {
+						props.history.push("/RegisterPage");
+					}}
+				/>
 
 				<div className={styles.hrSect}>SNS 로그인</div>
 
-				<Form.Item>
-					<div style={{ lineHeight: "50%" }}>
-						<Button
-							icon={<GoogleOutlined />}
-							style={{ width: "400px" }}
-						>
-							구글 로그인
-						</Button>
-						<br />
-						<br />
+				<button type="button" className={styles.google}>
+					<img alt="Google로고" src={Google} />
+					구글 로그인
+				</button>
 
-						<Button
-							style={{
-								background: "Gold",
-								borderColor: "Gold",
-								width: "400px",
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="30"
-								height="14"
-								viewBox="0 0 16 16"
-							>
-								<path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-							</svg>
-							카카오 로그인
-						</Button>
-						<br />
-						<br />
+				<button type="button" className={styles.kakao}>
+					<img alt="KaKao로고" src={KaKao} />
+					카카오 로그인
+				</button>
 
-						<Button
-							icon={<GithubOutlined />}
-							style={{
-								background: "#2C3E50",
-								bloderColor: "#2C3E50",
-								color: "white",
-								width: "400px",
-							}}
-						>
-							GitHub 로그인
-						</Button>
-					</div>
-				</Form.Item>
-			</Form>
-		</div>
+				<button type="button" className={styles.github}>
+					<img alt="Github로고" src={Github} />
+					GitHub 로그인
+				</button>
+			</div>
+		</center>
 	);
 };
 

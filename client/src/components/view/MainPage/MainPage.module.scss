@@ -13,17 +13,63 @@
 		left: 50%;
 		transform: translate(-50%);
 	}
+
+	// 전역 위치에 정의된 슬라이드 배너 화살표 스타일 재정의
+	// 왼쪽 화살표 스타일
+	:global(.slick-prev),
+	:global(.slick-prev:focus),
+	:global(.slick-prev::before) {
+		z-index: 9; // z축을 높여 슬라이드 배너보다 위에 표시
+		margin-left: 5% !important;
+		width: 100px !important;
+
+		font-size: calc(
+			min(5vw, 100px)
+		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		color: rgba(255, 255, 255, 0.6) !important;
+
+		// hover(마우스 올려놓는 동작)시 0.3초간 천천히 색상 변화
+		transition-property: color;
+		transition-duration: 0.3s;
+	}
+	:global(.slick-prev:hover) {
+		color: var(--white) !important;
+	}
+
+	// 오른쪽 화살표 스타일
+	:global(.slick-next),
+	:global(.slick-next:focus),
+	:global(.slick-next::before) {
+		z-index: 9;
+		margin-right: 5%;
+		width: 100px !important;
+
+		font-size: calc(
+			min(5vw, 100px)
+		) !important; // 최대 길이 도달시 폰트 크기 증가 중단
+		color: rgba(255, 255, 255, 0.6) !important;
+
+		transition-property: color;
+		transition-duration: 0.3s;
+	}
+	:global(.slick-next:hover) {
+		color: var(--white) !important;
+	}
 }
 
-.ant-carousel {
-	.slick-prev,
-	.slick-next,
-	.slick-prev:hover,
-	.slick-next:hover,
-	.slick-prev:focus,
-	.slick-next:focus,
-	.slick-prev::before,
-	.slick-next::before {
-		color: red;
-	}
+// 배너 슬라이더 최대 크기 지정 및 중앙 정렬
+// 전역 스타일 수정
+:global .slick-slider {
+	max-width: 1920px;
+	left: 50%;
+	transform: translate(-50%);
+}
+table {
+	border-collapse: collapse;
+}
+  
+th,
+td {
+	padding: 0.5rem;
+	border: 1px solid black;
 }
