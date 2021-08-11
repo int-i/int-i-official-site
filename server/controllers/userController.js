@@ -133,18 +133,20 @@ export const PostEditProfile = async (req, res, next) => {
 
         // 프로필 변경
         const user = await User.findOneAndUpdate({ id: req.user.id }, {
-            nickname,
-            email,
-            username,
-            studentId,
-            interest,
-            privateInterest,
-            privateAbout,
-            privateGitUri,
-            privateBlogUri,
-            hash,
-            role,
-            tags: tagResult
+            $set : {
+                nickname,
+                email,
+                username,
+                studentId,
+                interest,
+                privateInterest,
+                privateAbout,
+                privateGitUri,
+                privateBlogUri,
+                hash,
+                role,
+                tags: tagResult
+            }
         }, { new: true });
 
         return res.status(200).json({ editSuccess: true, user: user });
