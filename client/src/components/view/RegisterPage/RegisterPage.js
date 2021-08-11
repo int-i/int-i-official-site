@@ -2,8 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import styles from "./RegisterPage.module.css";
+import FormBtn from "../FormBtn/FormBtn";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
 	const [name, SetName] = useState("");
 	const [nickname, SetNickname] = useState("");
 	const [id, SetId] = useState("");
@@ -92,23 +93,43 @@ const RegisterPage = () => {
 	const OnSubmitHandler = (event) => {
 		event.preventDefault();
 
+		console.log(
+			CheckName.current.style.color,
+			CheckNickname.current.style.color,
+			CheckId.current.style.color,
+			CheckPassword.current.style.color
+		);
+
+		//유효성 체크 통과 못하면 submit 못함
+		if (
+			CheckName.current.style.color &&
+			CheckNickname.current.style.color &&
+			CheckId.current.style.color &&
+			CheckPassword.current.style.color !== "yellowgreen"
+		) {
+			return alert("입력 규칙을 확인해주세요!");
+		}
+
 		if (password !== confirmPassword) {
 			return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
-		} //여기서 걸리면 아래로 못감
+		}
 	};
 
 	return (
-		<center>
-			<div>
-				<form onSubmit={OnSubmitHandler}>
+		<center className="registerCenter">
+			<div className={[styles.registerPage, "NanumSquare"].join(" ")}>
+				<form id="register" onSubmit={OnSubmitHandler}>
 					<table className={styles.tablestyle}>
 						<thead className={styles.headtr}>
 							<tr>
 								<td
 									className={styles.headtd}
-									style={{ fontSize: "18px" }}
+									style={{
+										fontSize: "24px",
+										fontWeight: "700",
+									}}
 								>
-									기본 정보
+									회원가입
 								</td>
 								<td
 									className={styles.headtd}
@@ -190,7 +211,11 @@ const RegisterPage = () => {
 								</td>
 								<td className={styles.bodytd}>
 									<input
-										className={styles.inputstyle}
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
 										value={password}
 										onChange={OnPasswordHandler}
 										required
@@ -211,7 +236,11 @@ const RegisterPage = () => {
 								</td>
 								<td className={styles.bodytd}>
 									<input
-										className={styles.inputstyle}
+										type="password"
+										className={[
+											styles.inputstyle,
+											"Spoqa Han Sans Neo",
+										].join(" ")}
 										value={confirmPassword}
 										onChange={OnConfirmPasswordHandler}
 										required
@@ -246,10 +275,29 @@ const RegisterPage = () => {
 						</tbody>
 					</table>
 					<br />
-					<button type="submit">회원가입</button>
-					&nbsp;&nbsp;
-					<button type="button">취소</button>
 				</form>
+				<FormBtn
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					onClick={() => {
+						props.history.push("/");
+					}}
+					text="취소"
+				/>
+				<FormBtn
+					type="submit"
+					form="register"
+					width="120px"
+					height="45px"
+					borderRadius="10px"
+					fontSize="18px"
+					margin="5px"
+					kind="컬러"
+					text="회원가입"
+				/>
 			</div>
 		</center>
 	);

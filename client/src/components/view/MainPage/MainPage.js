@@ -12,44 +12,48 @@ const BannerImage = [
 	{
 		title: "배너1", // alt 텍스트
 		url: "/", // 이미지를 클릭하면 이동하는 url
-		imgUrl: "/" // 이미지 자체의 위치
+		imgUrl: "/", // 이미지 자체의 위치
 	},
 	{
 		title: "배너2",
 		url: "/",
-		imgUrl: "/"
+		imgUrl: "/",
 	},
 	{
 		title: "배너3",
 		url: "/",
-		imgUrl: "/"
-	}
-]
+		imgUrl: "/",
+	},
+];
 
 const MainPage = () => {
-	const columns = useMemo(() => [
-		{
-			accessor: "title",
-			Header: "Title",
-		},
-		{
-			accessor: "content",
-			Header: "Content",
-		},
-		{
-			accessor: "nickname",
-			Header: "Nickname",
-		},
-	],
+	const columns = useMemo(
+		() => [
+			{
+				accessor: "title",
+				Header: "Title",
+			},
+			{
+				accessor: "content",
+				Header: "Content",
+			},
+			{
+				accessor: "nickname",
+				Header: "Nickname",
+			},
+		],
 		[]
 	);
 
-	const data = useMemo(() =>
-		Array(3).fill().map(() => ({
-			title: "제목1",
-			content: "내용1",
-			nickname: "닉네임1",
-		})),
+	const data = useMemo(
+		() =>
+			Array(3)
+				.fill()
+				.map(() => ({
+					title: "제목1",
+					content: "내용1",
+					nickname: "닉네임1",
+				})),
 		[]
 	);
 
@@ -65,18 +69,25 @@ const MainPage = () => {
 				autoplaySpeed={10000} // 10초 뒤 다음 이미지로 넘어감 (ms 단위)
 			>
 				{/* 배너 이미지 동적으로 추가할 수 있도록 함수 컴포넌트 추가 */}
-				{BannerImage.map(image => {
+				{BannerImage.map((image) => {
 					return (
 						<div>
-							<a href={image.url} rel="noreferrer" target="_blank"> {/* 이미지 클릭시 이동할 링크 속성 */}
-								<img src={banner1} alt={image.title} /> {/* 배너에 들어갈 이미지 속성(추후 수정 요망) */}
+							<a
+								href={image.url}
+								rel="noreferrer"
+								target="_blank"
+							>
+								{" "}
+								{/* 이미지 클릭시 이동할 링크 속성 */}
+								<img src={banner1} alt={image.title} />{" "}
+								{/* 배너에 들어갈 이미지 속성(추후 수정 요망) */}
 							</a>
 						</div>
 					);
 				})}
 			</Carousel>
 			<div>
-				<Table columns={columns} data={data}/>
+				<Table columns={columns} data={data} />
 			</div>
 		</div>
 	);

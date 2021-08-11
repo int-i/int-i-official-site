@@ -3,7 +3,7 @@
 	padding-top: 100px;
 	height: 100%;
 	clear: both;
-	padding-bottom: 106px;
+	padding-bottom: 140px;
 }
 .loginPage {
 	clear: both;
@@ -36,6 +36,7 @@
 	border: 1px solid var(--grey);
 	padding-left: 10px;
 	font-size: 18px;
+	font-weight: 300;
 }
 
 .inputStyle:focus {
@@ -75,6 +76,7 @@
 .kakao,
 .google,
 .github {
+	width: 450px;
 	position: relative;
 	font-size: 18px;
 	font-weight: 600;
