@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 // 스키마는 웬만해서 수정 X. 특히 unique 건드리면 DB 날라가는 상황 발생할 수 있음.
 // 필드값 추가는 딱히 상관없음.
 const userSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
 
     // (인트아이) 비회원 = -1 회원 = 1, 어드민 = 2
     role: Number,
@@ -41,7 +42,18 @@ const userSchema = new mongoose.Schema({
     studentId: {
         type: Number,
         unique: true
-    }
+    },
+
+    // 리스트 형태로 추가하는 방법.
+    // [ { document } ]
+    tags: [
+        {
+            tag: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "tag"
+            }
+        }
+    ]
 })
 
 // 스키마 대문자 단수형으로 통일.
