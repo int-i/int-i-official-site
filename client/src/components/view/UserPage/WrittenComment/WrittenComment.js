@@ -1,4 +1,4 @@
-// 작성한 댓글 컴포넌트
+// 작성한 댓글 확인 컴포넌트
 
 import React from "react";
 

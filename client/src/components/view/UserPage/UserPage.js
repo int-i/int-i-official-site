@@ -27,10 +27,12 @@ const UserPage = () => {
 			<center>
 				<User />
 
+				{/* 프로필, 작성한 게시글, 작성한 댓글 선택하는 부분 */}
 				<div className={styles.stylee}>
 					<button
 						type="button"
 						onClick={OnClickProfile}
+						// 클릭한 버튼만 글씨, 아래 테두리 색 변함
 						className={(function () {
 							if (menu === 1) return styles.clickButton;
 							else return styles.button;
@@ -66,6 +68,7 @@ const UserPage = () => {
 					</button>
 				</div>
 
+				{/* button 클릭할 때 마다 달라지는 state(menu) 값에 따라서 컴포넌트 불러오기 */}
 				{(function () {
 					if (menu === 1) return <Profile />;
 					if (menu === 2) return <WrittenPost />;

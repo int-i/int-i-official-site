@@ -10,11 +10,13 @@ const User = () => {
 			<div className={styles.block}>
 				<span style={{ fontSize: "20px" }}>유저 닉네임</span>
 				<br />
+
 				<Link to="#" className={styles.changeProfile}>
 					프로필 정보 변경
 				</Link>
 				<br />
 				<br />
+
 				<button type="button" className={styles.pictureUpload}>
 					사진 업로드
 				</button>
