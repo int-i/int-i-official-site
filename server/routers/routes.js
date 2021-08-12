@@ -18,6 +18,7 @@ const ADMIN = "/admin";
 const INTI = "/inti";
 const QUESTION = "/question";
 const ANSWER = "/answer";
+const CODEQ = "/codeq";
 
 const GITHUB = "/github";
 const KAKAO = "/kakao";
@@ -36,6 +37,13 @@ const DELANS = "/delans";
 const EDITANS = "/editans";
 const ALLANS = "/allans";
 
+//코드저장소 문제올리기
+const CODEWRITEQ = "/codewriteq";
+const CODEDELQ = "/codedelq";
+const CODEEDITQ = "/codeeditq";
+const CODEALLQ = "/codeallq";
+const CODEONEQ = "/codeoneq";
+const CODELIKESQ = "/codelikesq";
 
 const routes = {
 	user: USER,
@@ -53,6 +61,7 @@ const routes = {
 	answer: ANSWER,
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
+	codeq: CODEQ,
 
 	github: GITHUB,
 	kakao: KAKAO,
@@ -68,8 +77,16 @@ const routes = {
 	writeans: WRITEANS,
 	delans: DELANS,
 	editans: EDITANS,
-	allans: ALLANS
+	allans: ALLANS,
 	
+	//코드저장소 문제
+	codewriteq: CODEWRITEQ,
+	codedelq: CODEDELQ,
+	codeeditq: CODEEDITQ,
+	codeallq: CODEALLQ,
+	codeoneq: CODEONEQ,
+	codelikesq: CODELIKESQ
+
 }
 
 export default routes;

@@ -8,8 +8,6 @@ import {
 	PostEditPost
 } from "../controllers/questionController";
 
-//getAllPost, getWrite, postWrite... 이것들 컨트롤러 구현 하고나서 다 바꿔줘야함.
-
 const questionRouter = express.Router();
 
 // 모든 게시글 조회, 특정 게시글 조회
