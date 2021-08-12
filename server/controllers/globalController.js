@@ -19,7 +19,6 @@ export const PostJoin = async (req, res, next) => {
 
     // 요청 정보 추출
     const { username, id, nickname, email, studentId, password, password2 } = req.body;
-    const fieldValue = [username, id, nickname, email, studentId, password, password2];
 
         try {
 
@@ -72,7 +71,7 @@ export const PostJoin = async (req, res, next) => {
             }
             next();
         } catch (err) {
-            console.log(err);
+            console.log("error at local join:", err);
             next(err)
         }
 };
@@ -81,7 +80,7 @@ export const PostJoin = async (req, res, next) => {
 export const PostLogin = (req, res, next) => {
     passport.authenticate("local-login", (authErr, user, info) => {
         if (authErr) {
-            console.log("authErr", authErr);
+            console.log("error at local login:", authErr);
             res.json({ loginSuccess: false, reason: "internal server error" });
             return next(authErr);
         }
@@ -93,7 +92,7 @@ export const PostLogin = (req, res, next) => {
         }
         req.login(user, (err) => {
             if (err) {
-                console.log("err", err);
+                console.log("error at local login:", err);
                 return res.json(500).json({ loginSuccess: false, reason: "correct id and password but internal server error"});
             }
 

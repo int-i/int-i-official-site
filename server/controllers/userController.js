@@ -110,6 +110,7 @@ export const PostEditProfile = async (req, res, next) => {
 
         // 태그 처리
         // 유저 관심 태그는 카운트 처리 안함.
+        // 모듈화 필요..
         const tagResult = await Promise.all(tag.map(async (arg) => {
             let result = await Tag.findOne({ tagname: new RegExp(arg, 'i') });
 
@@ -151,6 +152,7 @@ export const PostEditProfile = async (req, res, next) => {
 
         return res.status(200).json({ editSuccess: true, user: user });
     } catch (err) {
+        console.log("error at EditProfile:", err);
         next(err);
     }
 };

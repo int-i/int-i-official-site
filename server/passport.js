@@ -41,7 +41,6 @@ export default function() {
                 done(null, false, { message: "incorrect"});
             }
         } catch (err) {
-            console.log(err);
             done(err);
         }
     }

@@ -35,7 +35,7 @@ export const IsAdmin = async (req, res, next) => {
             return res.status(403).json({ isAdmin: false });
         }
     } catch (err) {
-        console.log(err);
+        console.log("error at middleware IsAdmin", err);
         next(err);
     }
 }
