@@ -40,8 +40,10 @@
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
 	display: flex;
-	font-size: 26px;
-	font-weight: 900;
+	div{
+		font-size: 26px;
+		font-weight: 900;
+	}
 	align-items: center;
 }
 
