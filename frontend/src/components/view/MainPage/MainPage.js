@@ -50,7 +50,7 @@ const MainPage = () => {
 			Array(3)
 				.fill()
 				.map(() => ({
-					title: "제목1",
+					title: "도커에서 실시간으로 수정한 텍스트",
 					content: "내용1",
 					nickname: "닉네임1",
 				})),
