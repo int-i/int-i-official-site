@@ -20,7 +20,7 @@ router.get('/write', function(req, res, next) {
 router.post('/question/write', function (req, res) {
     var board = new Question();
     board.title = req.body.title;
-    board.cotents = req.body.contents;
+    board.contents = req.body.contents;
     board.author = req.body.author; 
  
     board.save(function (err) {

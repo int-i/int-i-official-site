@@ -13,7 +13,7 @@ app.get('/', (req,res) => {
 if(process.env.NODE_ENV === "production") {
     // 빌드 배포 환경에서의 라우팅 설정
 
-    app.use(express.static("clicent/build"));
+    app.use(express.static("client/build"));
 
     app.get("*", (req, res) => { 
         // res.sendFile()
