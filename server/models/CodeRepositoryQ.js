@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-// 질문게시판의 질문 스키마
-const questionSchema = new mongoose.Schema({
+// 코드 저장소의 
+const codeRepositoryQSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     
-    //작성자, 질문제목, 질문내용, 질문올려진날짜
+    // 작성자, 제목, 내용, 질문올려진날짜, 추천수, 사람당 추천 여부
     author: String, 
 
     title: {
@@ -15,9 +15,9 @@ const questionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    anonymous: {
-        type: Boolean,
-        default: false
+    recommend: {
+        type: Number,
+        default: 0
     },
     createdAt: {
         type: Date,
@@ -31,7 +31,5 @@ const questionSchema = new mongoose.Schema({
     ]
 });
 
-// 콜렉션 네임 소문자로 통일해요.. Question -> question
-// 어짜피 자동변환이긴 하지만..
-const Question = mongoose.model('question', questionSchema);
-export default Question;
+const CodeRepositoryQ = mongoose.model('coderepositoryq', codeRepositoryQSchema);
+export default CodeRepositoryQ;

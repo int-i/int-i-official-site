@@ -15,17 +15,23 @@ const tagSchema = new mongoose.Schema({
                 unique: true
             }
         }
+    ],
+    posts: [
+        {
+            question: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "question",
+                unique: true
+            }
+        },
+        {
+            coderepositoryq: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "coderepositoryq",
+                unique: true
+            }
+        }
     ]
-
-    // 훗날에 추가..
-    // posts: [
-    //     {
-    //         post: {
-    //             type: mongoose.Schema.Types.ObjectId,
-    //             ref: "posts"
-    //         }
-    //     }
-    // ]
 });
 
 const Tag = mongoose.model("tag", tagSchema);
