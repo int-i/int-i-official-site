@@ -1,0 +1,31 @@
+version: "2.4"
+services:
+    frontend:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./frontend
+        volumes:
+            - /app/node_modules
+            - ./frontend:/app
+        container_name: app_frontend
+        stdin_open: true
+
+    nginx:
+        restart: always
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        container_name: app_nginx
+        ports:
+            - "3000:80"
+
+    backend:
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./
+        container_name: app_backend
+        volumes:
+            - /app/node_modules
+            - /app/frontend
+            - /app/nginx
+            - ./:/app
