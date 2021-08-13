@@ -1,4 +1,4 @@
-import { setState } from "react"
+import { setState, useMemo } from "react"
 import style from "./MainPage.module.scss";
 import Banner from "./Banner"
 
