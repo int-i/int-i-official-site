@@ -23,7 +23,6 @@
 	width: 90%;
 	max-width: 1450px;
 	margin: 0 auto;
-	font-weight: 700;
 	font-size: 17px;
 	color: var(--navy);
 	align-items: center;
@@ -56,10 +55,11 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		list-style: none; // ul의 불릿 안뜨게 하는 옵션
-		font-weight: 700;
 
 		justify-content: center;
-
+		li {
+			font-weight: 700;
+		}
 		// 각 텍스트끼리의 거리
 		li + li {
 			margin-left: 20px;
