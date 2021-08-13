@@ -8,7 +8,7 @@
 	padding-top: 60px;
 }
 .header {
-	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 10으로 설정
+	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 1000으로 설정
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -39,7 +39,8 @@
 // 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
 .logo {
 	display: flex;
-	div{
+	
+	div {
 		font-size: 26px;
 		font-weight: 900;
 	}
