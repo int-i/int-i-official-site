@@ -7,6 +7,7 @@ export const PostQuestion = async (req, res) => {
 	const { title, contents, anonymous, createdAt } = req.body;
 
     if (!title || !contents) {
+		console.log("400: title or contents is blank in question. (PostQuestion in questionController)");
         return res.status(400).json({ addQuestion: false, reason: "title and contents both are required" });
     }
 
@@ -23,6 +24,7 @@ export const PostQuestion = async (req, res) => {
 
 		res.status(200).json({ addQuestion: true });
 	} catch (error) {
+		console.log("400: error occurred while creating Question schema. (PostQuestion in questionController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 }
@@ -33,7 +35,8 @@ export const GetAllQuestions = async (req, res) => {
 		const questions = await Question.find({});
 		res.status(200).json({ questions: questions });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		console.log("404: Cannot get the page of showing all questions (GetAllQuestions in questionController) ", error);
+		res.status(404).send({ error: error.message });
 	}
 }
 
@@ -48,6 +51,7 @@ export const GetOneQuestion = async (req, res) => {
 		const question = await Question.findById({ _id });
         return res.status(200).json({ question: question });
     } catch (err) {
+		console.log("404: Cannot get page of showing specific one question (GetOneQuestion in questionController) ", err);
         next(err);
     }
 };
@@ -61,6 +65,7 @@ export const PostEditPost = async (req, res) => {
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
+		console.log("400: title or contents is blank in question. (PostEditPost in questionController) ");
         return res.status(400).json({ updateQuestion: false, reason: "title and contents both are required" });
     }
 
@@ -69,13 +74,15 @@ export const PostEditPost = async (req, res) => {
 		const checkauthor = Question.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to edit question. (PostEditPost in questionController) ");
+			return res.status(403).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
 		}
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
         await Question.findByIdAndUpdate(_id, { $set: { author: user.nickname, title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.status(200).json({ updateQuestion: true });
 	} catch (error) {
+		console.log("400: Failed in updating question. (PostEditPost in questionController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 };
@@ -92,13 +99,15 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		const checkauthor = Question.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to delete question. (PostDeleteQuestion in questionController) ");
+			return res.status(403).json({ deleteQuestion: false, reason: "only author of the post has authority to delete."});
 		}
 
 		await Answer.deleteMany({ question: _id });
         await Question.deleteOne({ _id });
         return res.status(200).json({ delQuestionSuccess: true });
     } catch (err) {
+		console.log("400: Failed in deleting question. (PostDeleteQuestion in questionController) ", err);
         next(err);
     }
 };
