@@ -13,7 +13,7 @@ script:
 after_success:
     - docker build -t sunwoo005/travs-inti-frontend ./frontend
     - docker build -t sunwoo005/travs-inti-backend ./
-    - docker build -t sunwoo005/travs-inti-frontend ./nginx
+    - docker build -t sunwoo005/travs-inti-nginx ./nginx
 
     - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
