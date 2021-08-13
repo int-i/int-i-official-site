@@ -11,9 +11,9 @@ before_install:
 script:
     - docker run -e CI=true sunwoo005/inti-react-test npm run test
 after_success:
-    - docker build -t sunwoo005/travs-inti-frontend ./frontend
-    - docker build -t sunwoo005/travs-inti-backend ./
-    - docker build -t sunwoo005/travs-inti-nginx ./nginx
+    - docker build -t sunwoo005/travis-inti-frontend ./frontend
+    - docker build -t sunwoo005/travis-inti-backend ./
+    - docker build -t sunwoo005/travis-inti-nginx ./nginx
 
     - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
