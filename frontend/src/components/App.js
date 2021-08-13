@@ -5,6 +5,7 @@ import Header from "./view/Header/Header";
 import Footer from "./view/Footer/Footer";
 import MainPage from "./view/MainPage/MainPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
+import QnAPage from "./view/QnAPage/QnAPage";
 import LoginPage from "./view/LoginPage/LoginPage";
 import UserPage from "./view/UserPage/UserPage";
 import style from "../assets/style/Layout.module.scss";
@@ -25,6 +26,7 @@ const App = () => {
 							/>
 							<Route path="/LoginPage" component={LoginPage} />
 							<Route path="/UserPage" component={UserPage} />
+							<Route path="/QnAPage" component={QnAPage} />
 							<Route path="/" component={MainPage} />
 						</Switch>
 					</div>

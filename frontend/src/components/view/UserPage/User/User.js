@@ -1,3 +1,4 @@
+/* eslint-disable */
 // 유저 페이지 중 안 바뀌는 윗부분!
 
 import React, { useState } from "react";

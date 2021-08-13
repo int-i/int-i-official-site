@@ -1,0 +1,17 @@
+.text {
+	width: 200px;
+	height: 35px;
+	font-size: 15px;
+	padding-left: 15px;
+	border-radius: 5px;
+	border: solid 1px var(--grey);
+}
+button {
+	border: none;
+	background: transparent;
+	img {
+		width: 25px;
+		vertical-align: middle;
+	}
+	cursor: pointer;
+}
