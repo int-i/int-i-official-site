@@ -63,7 +63,7 @@ app.use(routes.api + routes.user, IsLogged, userRouter);
 app.use(routes.api + routes.codeq, codeQRouter);
 
 app.get("/", (req, res) => {
-	res.send("First Routing");
+	res.send("다");
 });
 
 if (process.env.NODE_ENV === "production") {
