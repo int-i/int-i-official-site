@@ -38,7 +38,13 @@ function QnAPage(props) {
 				<p>리스트 대체용 더미데이터</p>
 				<p>리스트 대체용 더미데이터</p>
 				<div className={styles.buttonContainer}>
-					<button>새 글 작성</button>
+					<button
+						onClick={() => {
+							props.history.push("/WritePage");
+						}}
+					>
+						새 글 작성
+					</button>
 				</div>
 				<div className={styles.paginationContainer}>
 					<button>

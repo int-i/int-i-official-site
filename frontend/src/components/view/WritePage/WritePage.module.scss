@@ -1,3 +1,76 @@
 .WriteContainer {
+	padding-top: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-bottom: 140px;
+	max-width: 1150px;
+	margin: 0 auto;
+	input::placeholder {
+		color: var(--grey);
+		font-weight: 300;
+	}
+	input:focus {
+		outline: none;
+	}
+}
+
+// 입력창
+
+.tag,
+.title {
+	display: block;
+	border: none;
+	width: 100%;
+}
+.title {
+	font-size: 28px;
+	font-weight: 400;
+}
+.tag {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+.line {
+	background-color: var(--light-blue);
+	width: 60px;
+	height: 6px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+// 버튼
+
+.buttonContainer {
+	margin-top: 25px;
+	display: flex;
+	justify-content: space-between;
+	button {
+		border: none;
+		width: 115px;
+		height: 36px;
+		border-radius: 10px;
+		font-weight: 700;
+		cursor: pointer;
+	}
+}
+.exit {
+	background-color: var(--silver);
+	color: var(--navy);
+	img {
+		position: relative;
+		top: -1px;
+		right: 6px;
+		width: 15px;
+		vertical-align: middle;
+	}
+}
+.write {
+	background-color: var(--light-blue);
+	color: white;
+	img {
+		position: relative;
+		right: 5px;
+		width: 15px;
+		vertical-align: middle;
+	}
 }

@@ -8,6 +8,7 @@ import RegisterPage from "./view/RegisterPage/RegisterPage";
 import QnAPage from "./view/QnAPage/QnAPage";
 import LoginPage from "./view/LoginPage/LoginPage";
 import UserPage from "./view/UserPage/UserPage";
+import WritePage from "./view/WritePage/WritePage";
 import style from "../assets/style/Layout.module.scss";
 import "../assets/style/reset.css";
 import "../assets/style/global.scss";
@@ -26,6 +27,7 @@ const App = () => {
 							/>
 							<Route path="/LoginPage" component={LoginPage} />
 							<Route path="/UserPage" component={UserPage} />
+							<Route path="/WritePage" component={WritePage} />
 							<Route path="/QnAPage" component={QnAPage} />
 							<Route path="/" component={MainPage} />
 						</Switch>
