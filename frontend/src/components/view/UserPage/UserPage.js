@@ -23,7 +23,7 @@ const UserPage = () => {
 	};
 
 	return (
-		<div style={{ backgroundColor: "#FAFDFF" }}>
+		<div style={{ backgroundColor: "#FAFDFF", paddingBottom: "140px" }}>
 			<center>
 				<User />
 
