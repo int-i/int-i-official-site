@@ -3,20 +3,20 @@ language: generic
 sudo: required
 
 services:
-  - docker
+    - docker
 
 before_install:
-  - docker build -t sunwoo005/inti-react-test -f ./frontend/Dockerfile.dev ./frontend
+    - docker build -t sunwoo005/inti-react-test -f ./frontend/Dockerfile.dev ./frontend
 
 script:
-  - docker run -e CI=true sunwoo005/inti-react-test
+    - docker run -e CI=true sunwoo005/inti-react-test npm run test
 after_success:
-  - docker build -t sunwoo005/travs-inti-frontend ./frontend
-  - docker build -t sunwoo005/travs-inti-backend ./
-  - docker build -t sunwoo005/travs-inti-frontend ./nginx
+    - docker build -t sunwoo005/travs-inti-frontend ./frontend
+    - docker build -t sunwoo005/travs-inti-backend ./
+    - docker build -t sunwoo005/travs-inti-frontend ./nginx
 
-  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push sunwoo005/travis-inti-frontend
-  - docker push sunwoo005/travis-inti-backend
-  - docker push sunwoo005/travis-inti-nginx
+    - docker push sunwoo005/travis-inti-frontend
+    - docker push sunwoo005/travis-inti-backend
+    - docker push sunwoo005/travis-inti-nginx
