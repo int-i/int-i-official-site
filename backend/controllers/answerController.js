@@ -10,6 +10,7 @@ export const PostAnswer = async (req, res) => {
 	const { question, contents, anonymous, createdAt } = req.body;
 
     if (!contents) {
+		console.log("400: contents is blank in question. (PostAnswer in answerController)");
         return res.status(400).json({ addAnswer: false, reason: "contents is required" });
     }
 
@@ -26,6 +27,7 @@ export const PostAnswer = async (req, res) => {
 
 		res.status(200).json({ addAnswer: true });
 	} catch (error) {
+		console.log("400: error occurred while creating Answer schema. (PostAnswer in answerController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 }
@@ -37,7 +39,8 @@ export const GetAllAnswers = async (req, res) => {
 		const answers = await Answer.find({});
 		res.status(200).json({ answers: answers });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		console.log("404: Cannot get the page of showing all answers (GetAllAnswers in answerController) ", error);
+		res.status(404).send({ error: error.message });
 	}
 	
 }
@@ -51,6 +54,7 @@ export const PostEditAnswer = async (req, res) => {
 	const { _id, contents, anonymous, createdAt } = req.body;
 
 	if (!contents) {
+		console.log("400: contents is blank in question. (PostEditAnswer in answerController) ");
         return res.status(400).json({ updateAnswer: false, reason: "content is required" });
     }
 
@@ -59,13 +63,15 @@ export const PostEditAnswer = async (req, res) => {
 		const checkauthor = Answer.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to edit answer. (PostEditAnswer in answerController) ");
+			return res.status(403).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
 		}
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
         await Answer.findByIdAndUpdate(_id, { $set: { author: user.nickname, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.status(200).json({ updateAnswer: true });
 	} catch (error) {
+		console.log("400: Failed in updating answer. (PostEditPost in answerController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 };
@@ -82,12 +88,14 @@ export const PostDeleteAnswer = async (req, res, next) => {
 		const checkauthor = Answer.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to delete answer. (PostDeleteAnswer in answerController) ");
+			return res.status(403).json({ updateAnswer: false, reason: "only author of the post has authority to delete."});
 		}
 
         await Answer.deleteOne({ _id });
         return res.status(200).json({ delAnswerSuccess: true });
     } catch (err) {
+		console.log("400: Failed in deleting answer. (PostDeleteAnswer in answerController) ", err);
         next(err);
     }
 };
