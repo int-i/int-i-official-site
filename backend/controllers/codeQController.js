@@ -7,6 +7,7 @@ export const PostQuestion = async (req, res) => {
 	const user = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
 
+	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
     if (!title || !contents) {
         return res.status(400).json({ addQuestion: false, reason: "title and contents both are required" });
     }
@@ -58,7 +59,7 @@ export const GetAllQuestions = async (req, res) => {
 
 /*
  * update : 게시글 수정 완료 후 저장 버튼을 눌렀을 때.
- * 수정하기 버튼을 눌렀을 때 기존 데이터를 어떻게 불러올지는 구현을 더 해야함. (read와 관련돼있음)
+ * 변경사항 : 작성자 본인만 수정이 가능하도록 구현.
  */
 export const PostEditQuestion = async (req, res) => {
 	const user = req.user;
@@ -86,8 +87,7 @@ export const PostEditQuestion = async (req, res) => {
 
 /*
  * update : 추천수 올리기
- * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록
- * post방식으로 구현
+ * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록 post방식으로 구현
  */
 export const PostRecommend = async (req, res, next) => {
 	const user = req.user;
@@ -118,11 +118,21 @@ export const PostRecommend = async (req, res, next) => {
 };
 
 
-// delete: 하나의 코드저장소 문제를 삭제하는 것.
+/*
+ * delete : 하나의 코드저장소 질문을 삭제하는 것. 관련된 답변들도 다 삭제해야한다. 
+ * 변경사항 : 작성자 본인만 삭제가 가능하도록 구현
+ */
 export const PostDeleteQuestion = async (req, res, next) => {
+	const user = req.user;
 	const { _id } = req.body;
 
 	try {
+		const checkauthor = CodeRepositoryQ.findOne({ _id });
+		
+		if (checkauthor.author !== user.nickname) {
+			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});
+		}
+
 		await CodeRepositoryA.deleteMany({ codeq: _id });
         await CodeRepositoryQ.deleteOne({ _id });
         return res.status(200).json({ delQuestionSuccess: true });
