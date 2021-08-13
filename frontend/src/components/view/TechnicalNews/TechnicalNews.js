@@ -33,6 +33,12 @@ const TechnicalNews = () => {
 			<div className={[styles.banner, "NanumSquare"].join(" ")}>
 				<div>기술 뉴스 | 프로그래밍 관련 최신 기술 및 새로운 하드웨어 관련 뉴스를 업로드 하는 곳</div>
 			</div>
+			<div>
+				{
+					
+				}
+			</div>
+
 		</div>
 	);
 }
