@@ -7,6 +7,7 @@ import MainPage from "./view/MainPage/MainPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
 import LoginPage from "./view/LoginPage/LoginPage";
 import UserPage from "./view/UserPage/UserPage";
+import TechnicalNews from "./view/TechnicalNews/TechnicalNews";
 import style from "../assets/style/Layout.module.scss";
 import "../assets/style/reset.css";
 import "../assets/style/global.scss";
@@ -25,6 +26,7 @@ const App = () => {
 							/>
 							<Route path="/LoginPage" component={LoginPage} />
 							<Route path="/UserPage" component={UserPage} />
+							<Route path="/TechnicalNews" component={TechnicalNews} />
 							<Route path="/" component={MainPage} />
 						</Switch>
 					</div>
