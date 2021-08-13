@@ -1,4 +1,5 @@
 import Answer from "../models/Answer";
+
 /*
  * create : 답변 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
  * 지금은 하나의 답변에 연관된 question의 id를 req.body로 직접 받아오지만
@@ -64,7 +65,7 @@ export const PostEditAnswer = async (req, res) => {
 };
 
 
-// delete: 하나의 답변를 삭제하는 것.
+// delete: 하나의 답변을 삭제하는 것.
 export const PostDeleteAnswer = async (req, res, next) => {
 	const { _id } = req.body;
 

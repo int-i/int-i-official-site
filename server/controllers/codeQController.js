@@ -77,18 +77,30 @@ export const PostEditQuestion = async (req, res) => {
 
 /*
  * update : 추천수 올리기
- * 사용자로부터 따로 받아야하는 정보들은 없기 때문에 get방식 사용.
- * 추후에 프론트랑 연결시켜서 _id로 검색해 추천수를 올리는 방법은 다시 고려해봐야함.
+ * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록
+ * post방식으로 구현
  */
-//사람당 한 게시글에 하나인 추천수는 이따가 다시 구현 (LikeController 따로 만들기)
-export const GetRecommend = async (req, res, next) => {
+export const PostRecommend = async (req, res, next) => {
 	const user = req.user;
+	const { _id } = req.body;
 
 	try {
+		const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { codeqId: _id }] });
 
-		//아직 구현 전. 질문게시판과 답변게시판 연동시키고 다시 구현
-		const isLiked = await Like.findOne({$and: [{ nickname: user.nickname }, { codeqId: board }]});
-		await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend + 1 } });
+		if (isLiked) {
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend - 1 } });
+			await Like.deleteOne({ $and: [{ nickname: user.nickname }, { codeqId: _id }] });
+		}
+		else {
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend + 1 } });
+		
+			await Like.create({
+				nickname: user.nickname,
+				codeqId: _id
+			});
+
+		}
+		
         return res.status(200).json({ updateRecommendSuccess: true });
     } catch (err) {
         next(err);

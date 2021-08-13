@@ -6,7 +6,7 @@ import {
 	GetOneQuestion,
 	PostDeleteQuestion,
 	PostEditQuestion,
-	GetRecommend
+	PostRecommend
 } from "../controllers/codeQController";
 
 const codeqRouter = express.Router();
@@ -23,7 +23,7 @@ codeqRouter.post(routes.codedelq, PostDeleteQuestion);
 
 // 게시글 수정 POST / 추천수 업데이트 GET
 codeqRouter.post(routes.codeeditq, PostEditQuestion);
-codeqRouter.get(routes.codelikesq, GetRecommend);
+codeqRouter.get(routes.codelikesq, PostRecommend);
 
 
 export default codeqRouter;
