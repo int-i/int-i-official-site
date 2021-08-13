@@ -9,10 +9,12 @@ export const PostQuestion = async (req, res) => {
 
 	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
     if (!title || !contents) {
+		console.log("400: title or contents is blank in question of code repository. (PostQuestion in codeQController)");
         return res.status(400).json({ addQuestion: false, reason: "title and contents both are required" });
     }
 	else if (user.role !== 1) {
-		return res.status(400).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
+		console.log("403: uploader of code repository question must be the member of IntI (PostQuestion in codeQController)");
+		return res.status(403).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
 	}
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
@@ -28,6 +30,7 @@ export const PostQuestion = async (req, res) => {
 
 		res.status(200).json({ addQuestion: true });
 	} catch (error) {
+		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 }
@@ -38,7 +41,8 @@ export const GetAllQuestions = async (req, res) => {
 		const questions = await CodeRepositoryQ.find({});
 		res.status(200).json({ questions: questions });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		console.log("404: Cannot get the page of showing all questions of code repository (GetAllQuestions in codeQController) ", error);
+		res.status(404).send({ error: error.message });
 	}
 }
 
@@ -53,6 +57,7 @@ export const GetAllQuestions = async (req, res) => {
         const question = await CodeRepositoryQ.findById({ _id });
         return res.status(200).json({ question: question });
     } catch (err) {
+		console.log("404: Cannot get page of showing specific one question of code repository (GetOneQuestion in codeQController) ", err);
         next(err);
     }
 };
@@ -66,7 +71,7 @@ export const PostEditQuestion = async (req, res) => {
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
-		console.log( "400: title and contents both are required in code repository question" );
+		console.log( "400: title and contents both are required in code repository question (PostEditQuestion in codeQController) " );
         return res.status(400).json({ updateQuestion: false, reason: "title and contents both are required" });
     }
 
@@ -74,13 +79,14 @@ export const PostEditQuestion = async (req, res) => {
 		const checkauthor = CodeRepositoryQ.findOne({ _id });
 
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to edit question. (PostEditQuestion in codeQController) ");
+			return res.status(403).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
 		}
 
         await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
         res.status(200).json({ updateQuestion: true });
 	} catch (error) {
-		//console.log("error occured while updating a question of code repository (update): "+error);
+		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
 		res.status(400).send({ error: error.message });
 	}
 };
@@ -113,6 +119,7 @@ export const PostRecommend = async (req, res, next) => {
 		
         return res.status(200).json({ updateRecommendSuccess: true });
     } catch (err) {
+		console.log("400: Failed in updating number of likes in code repository question. (PostRecommendation in codeQController)");
         next(err);
     }
 };
@@ -137,6 +144,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
         await CodeRepositoryQ.deleteOne({ _id });
         return res.status(200).json({ delQuestionSuccess: true });
     } catch (err) {
+		console.log("400: Failed in deleting question. (PostDeleteQuestion in codeQController) ", err);
         next(err);
     }
 };
