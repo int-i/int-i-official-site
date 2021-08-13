@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Tag from "../models/Tag";
 import Question from "../models/Question";
 import CodeRepositoryQ from "../models/CodeRepositoryQ";
