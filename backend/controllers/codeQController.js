@@ -65,11 +65,17 @@ export const PostEditQuestion = async (req, res) => {
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
-		console.log("400: title and contents both are required in code repository question");
+		console.log( "400: title and contents both are required in code repository question" );
         return res.status(400).json({ updateQuestion: false, reason: "title and contents both are required" });
     }
 
 	try {
+		const checkauthor = CodeRepositoryQ.findOne({ _id });
+
+		if (checkauthor.author !== user.nickname) {
+			return res.status(400).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
+		}
+
         await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
         res.status(200).json({ updateQuestion: true });
 	} catch (error) {
