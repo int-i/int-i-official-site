@@ -1,10 +1,11 @@
 // 유저 페이지 중 안 바뀌는 윗부분!
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./User.module.scss";
+import FormBtn from "../../FormBtn/FormBtn";
 
-const User = () => {
+const User = (props) => {
 	return (
 		<div className={styles.user}>
 			<div className={styles.block}>
@@ -17,10 +18,16 @@ const User = () => {
 				<br />
 				<br />
 
-				<button type="button" className={styles.pictureUpload}>
-					사진 업로드
-				</button>
+				<FormBtn
+					text="사진 업로드"
+					width="120px"
+					height="30px"
+					kind="컬러"
+					borderRadius="5px"
+					textAlign="center"
+				/>
 			</div>
+
 			<div className={styles.verticalLine}></div>
 			<div className={styles.block}>
 				<table>
