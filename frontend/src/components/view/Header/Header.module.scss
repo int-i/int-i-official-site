@@ -1,0 +1,76 @@
+// 헤더 상자 스타일
+.headerContainer {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 60px;
+}
+.header {
+	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 10으로 설정
+	position: fixed;
+	top: 0;
+	width: 100%;
+	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1); // 상자 그림자
+	background-color: var(--white);
+}
+
+// 헤더 상자 안의 내용
+.contents {
+	height: 60px;
+	display: flex;
+	width: 90%;
+	max-width: 1450px;
+	margin: 0 auto;
+	font-size: 17px;
+	color: var(--navy);
+	align-items: center;
+	justify-content: space-between;
+
+	a {
+		color: var(--navy);
+	}
+	a:hover {
+		color: var(--mint);
+	}
+}
+
+// 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
+.logo {
+	display: flex;
+	div{
+		font-size: 26px;
+		font-weight: 900;
+	}
+	align-items: center;
+}
+
+// 네비게이션 텍스트(각 게시판 링크) 스타일
+.navigation {
+	ul {
+		display: flex;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		list-style: none; // ul의 불릿 안뜨게 하는 옵션
+
+		justify-content: center;
+		li {
+			font-weight: 700;
+		}
+		// 각 텍스트끼리의 거리
+		li + li {
+			margin-left: 20px;
+		}
+	}
+}
+.loginUI {
+	display: flex;
+	li {
+		font-size: 14px;
+		font-weight: 400;
+		margin-left: 10px;
+	}
+}
