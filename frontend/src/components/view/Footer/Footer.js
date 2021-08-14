@@ -1,19 +1,19 @@
 /* eslint-disable */
-import style from "./Footer.module.scss"
+import styles from "./Footer.module.scss"
 import Github from "../../../assets/images/icon/Github_Link.png"
 import Inha from "../../../assets/images/icon/INHA.png"
 import Blog from "../../../assets/images/icon/Blog.png"
 
 const Footer = () => {
 	return (
-		<footer className={style.footer}>
-			<div className={style.contents}>
-				<div className={style.shortcut}>
-					<a href="https://int-i.github.io/" target="_blank"><img src ={Blog} width='134'alt='blog'/></a>
-					<a href="https://github.com/int-i" target="_blank"><img src ={Github} width='80'alt='github'/></a>
-					<a href="https://ice.inha.ac.kr/ice/index.do" target="_blank"><img src ={Inha} width='120'alt='inha'/></a>
+		<footer className={styles.footer}>
+			<div className={styles.contents}>
+				<div className={styles.shortcut}>
+					<a href="https://int-i.github.io/" target="_blank"><img src={Blog} width="134" alt="blog" /></a>
+					<a href="https://github.com/int-i" target="_blank"><img src={Github} width="80" alt="github" /></a>
+					<a href="https://ice.inha.ac.kr/ice/index.do" target="_blank"><img src={Inha} width="120" alt="inha" /></a>
 				</div>
-				<div className={[style.copyright, "Spoqa"].join(' ')}>
+				<div className={[styles.copyright, "Spoqa"].join(" ")}>
 					Copyright © Inha University int i All Rights Reserved
 				</div>
 			</div>

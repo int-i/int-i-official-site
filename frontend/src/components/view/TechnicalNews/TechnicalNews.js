@@ -1,6 +1,10 @@
-import React from "react"
-import { Fragment } from "react";
-import styles from "./TechnicalNews.module.scss"
+import React from "react";
+import styles from "./TechnicalNews.module.scss";
+import { Link } from "react-router-dom";
+import userIcon from "../../../assets/images/icon/회색 유저.png";
+import 왼쪽화살표 from "../../../assets/images/icon/왼쪽화살표.png";
+import 오른쪽화살표 from "../../../assets/images/icon/오른쪽화살표.png";
+import 돋보기 from "../../../assets/images/icon/돋보기.png";
 
 const posts = [
 	{
@@ -10,7 +14,7 @@ const posts = [
 		tags: [{ __tagId: 1, tagName: "JavaScript" }, { __tagId: 2, tagName: "ECMAScript" }, { __tagId: 3, tagName: "React.js" },],
 		date: "2021.08.14",
 		author: "김인하",
-
+		like: "♥ 5",
 	},
 	{
 		_id: 2,
@@ -19,6 +23,7 @@ const posts = [
 		tags: [{ __tagId: 1, tagName: "JavaScript" }, { __tagId: 2, tagName: "ECMAScript" }, { __tagId: 3, tagName: "React.js" },],
 		date: "2021.08.14",
 		author: "박인트",
+		like: "♥ 32",
 	},
 	{
 		_id: 3,
@@ -27,6 +32,7 @@ const posts = [
 		tags: [{ __tagId: 1, tagName: "JavaScript" }, { __tagId: 2, tagName: "ECMAScript" }, { __tagId: 3, tagName: "React.js" },],
 		date: "2021.08.14",
 		author: "최아이",
+		like: "♥ 14",
 	},
 ];
 
@@ -35,25 +41,60 @@ const Post = ({ post }) => {
 		<div className={[styles.postList, "Spoqa"].join(" ")}>
 			<div className={styles.title}>{post.title}</div>
 			<div className={styles.content}>{post.content}</div>
-			<div style={{marginTop: "30px", marginLeft: "20px"}}>{post.tags.map(tag => (
+			<div style={{ marginTop: "50px", marginLeft: "20px" }}>{post.tags.map(tag => (
 				<span className={styles.tag}>{tag.tagName}</span>
 			))}</div>
 			<div className={styles.date}>{post.date}</div>
-			<div className={styles.author}>{post.author}</div>
+			<div className={styles.author}><img src={userIcon} alt="유저이미지" width="20" />{post.author}</div>
+			<div className={styles.like}>{post.like}</div>
 		</div>
 	);
 }
 
 const TechnicalNews = () => {
 	return (
-		<div style={{ paddingBottom: "106px" }}>
+		<div style={{ paddingBottom: "200px" }}>
+			{/* 상단 배너 */}
 			<div className={[styles.banner, "NanumSquare"].join(" ")}>
 				<div>기술 뉴스 | 프로그래밍 관련 최신 기술 및 새로운 하드웨어 관련 뉴스를 업로드 하는 곳</div>
 			</div>
+
+			{/* 게시글 리스트 */}
 			<div>
 				{posts.map(post => (
 					<Post post={post} key={posts._id} />
 				))}
+			</div>
+
+			{/* 새 글 작성 버튼 */}
+			<div style={{ marginTop: "30px", marginBottom: "100px" }}>
+				<Link to={"/"}>
+					<div className={[styles.newArticle, "NanumSquare"].join(" ")}>
+						새 글 작성
+					</div>
+				</Link>
+			</div>
+
+			{/* 페이지네이션 */}
+			<div style={{ marginTop: "30px", marginBottom: "180px" }}>
+				<div className={[styles.pagination, "Spoqa"].join(" ")}>
+					<span><img src={왼쪽화살표} width={20} /></span>
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span><img src={오른쪽화살표} width={20} /></span>
+				</div>
+			</div>
+
+			{/* 검색창 */}
+			<div className={[styles.search, "Spoqa"].join(" ")}>
+				<input
+					className={styles.inputStyle}
+					placeholder={"기술 뉴스에서 검색"}
+				/>
+				<Link to={"/"}><img src={돋보기} width={30} height={25} style={{ marginLeft: "10px" }} /></Link>
 			</div>
 		</div>
 	);

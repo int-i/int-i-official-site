@@ -8,7 +8,7 @@ import RegisterPage from "./view/RegisterPage/RegisterPage";
 import LoginPage from "./view/LoginPage/LoginPage";
 import UserPage from "./view/UserPage/UserPage";
 import TechnicalNews from "./view/TechnicalNews/TechnicalNews";
-import style from "../assets/style/Layout.module.scss";
+import styles from "../assets/style/Layout.module.scss";
 import "../assets/style/reset.css";
 import "../assets/style/global.scss";
 
@@ -18,7 +18,7 @@ const App = () => {
 			<Router>
 				<div>
 					<Header />
-					<div className={style.layout}>
+					<div className={styles.layout}>
 						<Switch>
 							<Route
 								path="/RegisterPage"
