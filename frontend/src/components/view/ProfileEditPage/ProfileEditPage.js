@@ -130,7 +130,7 @@ const ProfileEditPage = (props) => {
 		if (
 			CheckName.current.style.color &&
 			CheckNickname.current.style.color &&
-			CheckPassword.current.style.color == !"yellowgreen"
+			CheckPassword.current.style.color !== "yellowgreen"
 		) {
 			return alert("입력 규칙을 확인해주세요!");
 		}
