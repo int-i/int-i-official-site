@@ -9,7 +9,7 @@ const answerSchema = new mongoose.Schema({
 
     question: {
         type: mongoose.Types.ObjectId,
-        ref: 'Question', //개인적 주석: question인지 Question인지 확인해봐야함.
+        ref: 'question'
     },
     contents: {
         type: String,
