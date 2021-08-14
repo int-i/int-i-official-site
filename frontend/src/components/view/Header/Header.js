@@ -60,7 +60,7 @@ const Header = () => {
 							<Link to="QnAPage">
 								<li>질문방</li>
 							</Link>
-							<Link to="#">
+							<Link to="TechnicalNews">
 								<li>기술 뉴스</li>
 							</Link>
 							<Link to="#">

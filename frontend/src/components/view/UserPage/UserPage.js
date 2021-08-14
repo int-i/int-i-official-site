@@ -23,7 +23,6 @@ const UserPage = () => {
 	};
 
 	return (
-<<<<<<< HEAD
 		<div
 			style={{
 				paddingTop: "50px",
@@ -31,9 +30,6 @@ const UserPage = () => {
 				backgroundColor: "#FAFDFF",
 			}}
 		>
-=======
-		<div style={{ backgroundColor: "#FAFDFF", paddingBottom: "140px" }}>
->>>>>>> e60df6ee58c124e8f4775bbe529dfd9323e4a470
 			<center>
 				<User />
 

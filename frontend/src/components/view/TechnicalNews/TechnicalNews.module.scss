@@ -17,6 +17,16 @@
 	}
 }
 
+.listContainer {
+	position: relative;
+	max-width: 1100px;
+	margin: 0 auto;
+	p {
+		font-size: 20px;
+	}
+}
+
+
 .postList {
 	position: relative;
 	width: 60%;
@@ -97,58 +107,64 @@
 	}
 }
 
-.newArticle {
-	position: absolute;
-	font-size: 20px;
-	font-weight: 800;
-	right: 20%;
-	padding: 5px 15px;
-	color: var(--navy);
-	background-color: var(--white);
-	border: 2px solid var(--navy);
-	border-radius: 20px;
+.listContainer {
+	position: relative;
+	max-width: 1100px;
+	margin: 0 auto;
+	p {
+		font-size: 20px;
+	}
 }
-
-.pagination {
-	position: absolute;
+.buttonContainer {
+	padding: 30px;
 	display: flex;
-	font-size: 24px;
-	color: var(--light-blue);
-
-	// 중앙 정렬
-	left: 50%;
-	transform: translate(-50%);
-
-	span {
-		display: inline-block;
-		text-align: center;
-		width: 35px;
+	flex-direction: row-reverse;
+	button {
+		background-color: transparent;
+		border: 2px solid black;
+		width: 100px;
 		height: 35px;
-		margin-left: 10px;
-
+		font-size: 16px;
+		font-weight: 900;
+		border-radius: 20px;
+		cursor: pointer;
+		transition: all 0.1s;
+	}
+	button:hover {
+		background: rgb(59, 59, 59);
+		border: 1px solid rgb(59, 59, 59);
+		color: white;
+	}
+}
+.paginationContainer {
+	display: flex;
+	justify-content: center;
+	padding: 40px;
+	button {
+		background: transparent;
+		margin: 5px;
+		color: var(--light-blue);
 		border: 2px solid var(--light-blue);
-		border-radius: 50%;
+		font-weight: 700;
+		font-size: 20px;
+		border-radius: 100px;
+		text-align: center;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		img {
+			position: relative;
+			right: 3px;
+			display: inline-block;
+			width: 20px;
+			vertical-align: middle;
+		}
+	}
+	button:hover {
+		opacity: 0.7;
 	}
 }
-
-.search {
-	position: absolute;
+.searchContainer {
 	display: flex;
-	align-items: center;
-	font-size: 16px;
-
-	// 중앙 정렬
-	left: 50%;
-	transform: translate(-50%);
-	
-	// 입력창 스타일
-	.inputStyle {
-		width: 300px;
-		height: 35px;
-		border: 1px solid var(--grey);
-		border-radius: 5px;
-		padding-left: 10px;
-		font-size: 18px;
-		font-weight: 300;
-	}
+	justify-content: center;
 }
