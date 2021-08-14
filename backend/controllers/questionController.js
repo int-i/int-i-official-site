@@ -62,12 +62,7 @@ export const GetOneQuestion = async (req, res) => {
  * update : 게시글 수정 완료 후 저장 버튼을 눌렀을 때.
  * 변경사항 : 작성자 본인만 수정이 가능하도록 구현.
  */
-<<<<<<< HEAD
 export const PostEditPost = async (req, res, next) => {
-=======
-export const PostEditPost = async (req, res) => {
-	const user = req.user;
->>>>>>> 6580f166ab1116e49f730b8eeab21a76a0a5be75
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
@@ -85,17 +80,12 @@ export const PostEditPost = async (req, res) => {
 		}
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
-<<<<<<< HEAD
         const rawData = await Question.findByIdAndUpdate(_id, { $set: { title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.locals.schema = Question;
 		res.locals.rawData = rawData;
 
 		// res.status(200).json({ updateQuestion: true });
 		next();
-=======
-        await Question.findByIdAndUpdate(_id, { $set: { author: user.nickname, title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
-        res.status(200).json({ updateQuestion: true });
->>>>>>> 6580f166ab1116e49f730b8eeab21a76a0a5be75
 	} catch (error) {
 		console.log("400: Failed in updating question. (PostEditPost in questionController) ", error);
 		res.status(400).send({ error: error.message })

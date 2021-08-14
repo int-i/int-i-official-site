@@ -17,11 +17,7 @@ codeQRouter.get('/', GetAllQuestions);
 codeQRouter.post(routes.codeoneq, GetOneQuestion);
 
 // 게시글 작성 POST
-<<<<<<< HEAD
 codeqRouter.post(routes.codewriteq, PostQuestion, PostCreateTag);
-=======
-codeQRouter.post(routes.codewriteq, PostQuestion);
->>>>>>> 6580f166ab1116e49f730b8eeab21a76a0a5be75
 
 // 특정 게시글 DELETE
 codeQRouter.post(routes.codedelq, PostDeleteQuestion);

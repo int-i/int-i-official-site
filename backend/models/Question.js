@@ -30,10 +30,7 @@ const questionSchema = new mongoose.Schema({
     ]
 });
 
-<<<<<<< HEAD
 // 콜렉션 네임 소문자로 통일해요.. Question -> questions
 // 어짜피 자동변환이긴 하지만..
-=======
->>>>>>> 6580f166ab1116e49f730b8eeab21a76a0a5be75
 const Question = mongoose.model('question', questionSchema);
 export default Question;
