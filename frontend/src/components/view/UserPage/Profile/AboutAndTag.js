@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 
-function Tags({ tag }) {
+function Tags({ tags }) {
 	return (
 		<span>
 			<span
@@ -12,7 +12,7 @@ function Tags({ tag }) {
 					padding: "5px 20px 5px 20px",
 				}}
 			>
-				{tag.tags}
+				{tags.tag}
 			</span>
 			&nbsp;&nbsp;
 		</span>
@@ -21,9 +21,9 @@ function Tags({ tag }) {
 
 const AboutAndTag = () => {
 	const [about, SetAbout] = useState("자기소개가 없습니다."); // 자기소개
-	const [tag, SetTag] = useState([
-		{ tags: "JavaScript" },
-		{ tags: "React.js" },
+	const [tags, SetTags] = useState([
+		{ tag: "JavaScript" },
+		{ tag: "React.js" },
 	]);
 	/* 지금 배열에 있는 값들은 예시고 실제로는 비워놓고 서버에서 받아와서 빈 배열에 추가할 예정 */
 
@@ -48,8 +48,8 @@ const AboutAndTag = () => {
 
 			<span style={title}>관심 태그</span>
 			<div style={{ margin: "25px 0px 20px 0px" }}>
-				{tag.map((tag, index) => (
-					<Tags tag={tag} key={index} />
+				{tags.map((tag, index) => (
+					<Tags tags={tag} key={index} />
 				))}
 			</div>
 		</div>
