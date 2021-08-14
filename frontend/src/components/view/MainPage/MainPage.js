@@ -1,6 +1,7 @@
-import { setState, useMemo } from "react"
+/* eslint-disable */
+import { setState, useMemo } from "react";
 import style from "./MainPage.module.scss";
-import Banner from "./Banner"
+import Banner from "./Banner";
 
 // 임시 json 추후 DB에 올릴 예정
 const BannerImage = [

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -53,13 +54,21 @@ const Header = () => {
 
 					<nav className={styles.navigation}>
 						<ul>
-							<li>코드 저장소</li>
-							<li>질문</li>
-							<li>
-								<Link to="TechnicalNews">기술 뉴스</Link>
-							</li>
-							<li>정보 및 홍보</li>
-							<li>공지사항</li>
+							<Link to="#">
+								<li>코드 저장소</li>
+							</Link>
+							<Link to="QnAPage">
+								<li>질문방</li>
+							</Link>
+							<Link to="#">
+								<li>기술 뉴스</li>
+							</Link>
+							<Link to="#">
+								<li>정보 및 홍보</li>
+							</Link>
+							<Link to="#">
+								<li>공지사항</li>
+							</Link>
 						</ul>
 					</nav>
 					{

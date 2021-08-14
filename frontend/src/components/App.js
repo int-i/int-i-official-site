@@ -5,9 +5,11 @@ import Header from "./view/Header/Header";
 import Footer from "./view/Footer/Footer";
 import MainPage from "./view/MainPage/MainPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
+import QnAPage from "./view/QnAPage/QnAPage";
 import LoginPage from "./view/LoginPage/LoginPage";
 import UserPage from "./view/UserPage/UserPage";
-import TechnicalNews from "./view/TechnicalNews/TechnicalNews";
+import WritePage from "./view/WritePage/WritePage";
+import ProfileEditPage from "./view/ProfileEditPage/ProfileEditPage";
 import style from "../assets/style/Layout.module.scss";
 import "../assets/style/reset.css";
 import "../assets/style/global.scss";
@@ -26,7 +28,12 @@ const App = () => {
 							/>
 							<Route path="/LoginPage" component={LoginPage} />
 							<Route path="/UserPage" component={UserPage} />
-							<Route path="/TechnicalNews" component={TechnicalNews} />
+							<Route path="/WritePage" component={WritePage} />
+							<Route path="/QnAPage" component={QnAPage} />
+							<Route
+								path="/ProfileEditPage"
+								component={ProfileEditPage}
+							/>
 							<Route path="/" component={MainPage} />
 						</Switch>
 					</div>

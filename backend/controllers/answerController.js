@@ -10,7 +10,8 @@ export const PostAnswer = async (req, res) => {
 	const { question, contents, anonymous, createdAt } = req.body;
 
     if (!contents) {
-        return res.status(400).json({ addAnswer: false, reason: "content is required" });
+		console.log("400: contents is blank in question. (PostAnswer in answerController)");
+        return res.status(400).json({ addAnswer: false, reason: "contents is required" });
     }
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
@@ -23,9 +24,10 @@ export const PostAnswer = async (req, res) => {
 			question,
 			createdAt
         });
-		console.log(question);
+
 		res.status(200).json({ addAnswer: true });
 	} catch (error) {
+		console.log("400: error occurred while creating Answer schema. (PostAnswer in answerController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 }
@@ -37,42 +39,63 @@ export const GetAllAnswers = async (req, res) => {
 		const answers = await Answer.find({});
 		res.status(200).json({ answers: answers });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		console.log("404: Cannot get the page of showing all answers (GetAllAnswers in answerController) ", error);
+		res.status(404).send({ error: error.message });
 	}
 	
 }
 
 /*
  * update : 답변 수정 완료 후 저장 버튼을 눌렀을 때.
- * 수정하기 버튼을 눌렀을 때 기존 데이터를 어떻게 불러올지는 구현을 더 해야함. (read와 관련돼있음)
+ * 변경사항 : 작성자 본인만 수정이 가능하도록 구현.
  */
 export const PostEditAnswer = async (req, res) => {
+	const user = req.user;
 	const { _id, contents, anonymous, createdAt } = req.body;
 
 	if (!contents) {
+		console.log("400: contents is blank in question. (PostEditAnswer in answerController) ");
         return res.status(400).json({ updateAnswer: false, reason: "content is required" });
     }
 
 	// 수정이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
+		const checkauthor = Answer.findOne({ _id });
+		
+		if (checkauthor.author !== user.nickname) {
+			console.log("403: This user does not have authority to edit answer. (PostEditAnswer in answerController) ");
+			return res.status(403).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
+		}
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
-        await Answer.findByIdAndUpdate(_id, { $set: { contents: contents, anonymous: anonymous, createdAt: createdAt }});
+        await Answer.findByIdAndUpdate(_id, { $set: { author: user.nickname, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.status(200).json({ updateAnswer: true });
 	} catch (error) {
+		console.log("400: Failed in updating answer. (PostEditPost in answerController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 };
 
-
-// delete: 하나의 답변를 삭제하는 것.
+/*
+ * delete : 하나의 답변을 삭제하는 것.
+ * 변경사항 : 작성자 본인만 삭제가 가능하도록 구현
+ */
 export const PostDeleteAnswer = async (req, res, next) => {
+	const user = req.user;
 	const { _id } = req.body;
 
 	try {
+		const checkauthor = Answer.findOne({ _id });
+		
+		if (checkauthor.author !== user.nickname) {
+			console.log("403: This user does not have authority to delete answer. (PostDeleteAnswer in answerController) ");
+			return res.status(403).json({ updateAnswer: false, reason: "only author of the post has authority to delete."});
+		}
+
         await Answer.deleteOne({ _id });
         return res.status(200).json({ delAnswerSuccess: true });
     } catch (err) {
+		console.log("400: Failed in deleting answer. (PostDeleteAnswer in answerController) ", err);
         next(err);
     }
 };

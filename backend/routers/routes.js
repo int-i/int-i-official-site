@@ -19,31 +19,39 @@ const INTI = "/inti";
 const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
+const CODEA = "/codea";
 
 const GITHUB = "/github";
 const KAKAO = "/kakao";
 const GOOGLE = "/google";
 // const GLOBAL_SEARCH = "";
 
-//질문게시판
+// 질문게시판
 const WRITEQUES = "/writeques";
 const DELQUES = "/delques";
 const EDITQUES = "/editques";
 const ONEQUES = "/oneques";
 
-//답변
+// 답변
 const WRITEANS = "/writeans";
 const DELANS = "/delans";
 const EDITANS = "/editans";
 const ALLANS = "/allans";
 
-//코드저장소 문제올리기
+// 코드저장소 문제올리기
 const CODEWRITEQ = "/codewriteq";
 const CODEDELQ = "/codedelq";
 const CODEEDITQ = "/codeeditq";
 const CODEALLQ = "/codeallq";
 const CODEONEQ = "/codeoneq";
 const CODELIKESQ = "/codelikesq";
+
+// 코드저장소 답변올리기
+const CODEWRITEA = "/codewritea";
+const CODEDELA = "/codedela";
+const CODEEDITA = "/codeedita";
+const CODEALLA = "/codealla";
+const CODELIKESA = "/codelikesa";
 
 const routes = {
 	user: USER,
@@ -62,6 +70,7 @@ const routes = {
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
 	codeq: CODEQ,
+	codea: CODEA,
 
 	github: GITHUB,
 	kakao: KAKAO,
@@ -85,8 +94,14 @@ const routes = {
 	codeeditq: CODEEDITQ,
 	codeallq: CODEALLQ,
 	codeoneq: CODEONEQ,
-	codelikesq: CODELIKESQ
+	codelikesq: CODELIKESQ,
 
+	//코드저장소 답변
+	codewritea: CODEWRITEA,
+	codedela: CODEDELA,
+	codeedita: CODEEDITA,
+	codealla: CODEALLA,
+	codelikesa: CODELIKESA
 }
 
 export default routes;
