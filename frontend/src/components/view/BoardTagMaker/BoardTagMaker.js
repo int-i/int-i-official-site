@@ -9,7 +9,7 @@ function BoardTagMaker(props) {
 	// 만들어진 태그 배열, SetWrittenTag를 쓸 때 부모에도 전달을 해줘야함
 	const [writtenTag, SetWrittenTag] = useState([]);
 
-	const onChangeTag = (event) => {
+	const OnChangeTag = (event) => {
 		SetTagValue(event.target.value);
 	};
 
@@ -45,7 +45,7 @@ function BoardTagMaker(props) {
 				type="text"
 				placeholder="태그를 입력하세요"
 				value={tagValue}
-				onChange={onChangeTag}
+				onChange={OnChangeTag}
 				onKeyPress={CreateTag}
 			/>
 		</div>
