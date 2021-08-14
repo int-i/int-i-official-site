@@ -11,10 +11,12 @@ export const PostAnswer = async (req, res) => {
 	const { codeq, contents, recommend, createdAt } = req.body;
 
     if (!contents) {
+		console.log("400: contents is blank in question. (PostAnswer in codeAController)");
         return res.status(400).json({ addAnswer: false, reason: "contents is required" });
     }
 	else if (user.role !== 1) {
-		return res.status(400).json({ addAnswer: false, reason: "uploader must be the member of IntI" })
+		console.log("403: uploader of code repository question must be the member of IntI (PostAnswer in codeAController)");
+		return res.status(403).json({ addAnswer: false, reason: "uploader must be the member of IntI" })
 	}
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
@@ -30,6 +32,7 @@ export const PostAnswer = async (req, res) => {
 		//console.log(codeq);
 		res.status(200).json({ addAnswer: true });
 	} catch (error) {
+		console.log("400: error occurred while creating CodeRepositoryA schema. (PostAnswer in codeAController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 }
@@ -41,7 +44,8 @@ export const GetAllAnswers = async (req, res) => {
 		const answers = await CodeRepositoryA.find({});
 		res.status(200).json({ answers: answers });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		console.log("404: Cannot get the page of showing all answers (GetAllAnswers in codeAController) ", error);
+		res.status(404).send({ error: error.message });
 	}
 	
 }
@@ -55,6 +59,7 @@ export const PostEditAnswer = async (req, res) => {
 	const { _id, contents, createdAt } = req.body;
 
 	if (!contents) {
+		console.log("400: contents is blank in question. (PostEditAnswer in codeAController) ");
         return res.status(400).json({ updateAnswer: false, reason: "contents is required" });
     }
 
@@ -63,13 +68,15 @@ export const PostEditAnswer = async (req, res) => {
 		const checkauthor = CodeRepositoryA.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
-			return res.status(400).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
+			console.log("403: This user does not have authority to edit answer. (PostEditAnswer in codeAController) ");
+			return res.status(403).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
 		}
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
         await CodeRepositoryA.findByIdAndUpdate(_id, { $set: { author: user.nickname, contents: contents, createdAt: createdAt }});
         res.status(200).json({ updateAnswer: true });
 	} catch (error) {
+		console.log("400: Failed in updating answer. (PostEditAnswer in codeAController) ", error);
 		res.status(400).send({ error: error.message })
 	}
 };
@@ -103,6 +110,7 @@ export const PostRecommend = async (req, res, next) => {
 		
         return res.status(200).json({ updateRecommendSuccess: true });
     } catch (err) {
+		console.log("400: Failed in updating number of likes in code repository question. (PostRecommend in codeAController)");
         next(err);
     }
 };
@@ -119,12 +127,14 @@ export const PostDeleteAnswer = async (req, res, next) => {
 		const checkauthor = CodeRepositoryA.findOne({ _id });
 		
 		if (checkauthor.author !== user.nickname) {
+			console.log("403: This user does not have authority to delete answer. (PostDeleteAnswer in codeAController) ");
 			return res.status(400).json({ updateAnswer: false, reason: "only author of the post has authority to edit."});
 		}
 
         await Answer.deleteOne({ _id });
         return res.status(200).json({ delAnswerSuccess: true });
     } catch (err) {
+		console.log("400: Failed in deleting answer. (PostDeleteAnswer in codeAController) ", err);
         next(err);
     }
 };

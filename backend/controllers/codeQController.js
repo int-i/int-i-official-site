@@ -119,7 +119,7 @@ export const PostRecommend = async (req, res, next) => {
 		
         return res.status(200).json({ updateRecommendSuccess: true });
     } catch (err) {
-		console.log("400: Failed in updating number of likes in code repository question. (PostRecommendation in codeQController)");
+		console.log("400: Failed in updating number of likes in code repository question. (PostRecommend in codeQController)");
         next(err);
     }
 };
