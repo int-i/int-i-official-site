@@ -1,13 +1,20 @@
 import Tag from "../models/Tag";
 import Question from "../models/Question";
 import CodeRepositoryQ from "../models/CodeRepositoryQ";
-import { json } from "express";
 
 export const PostCreateTag = async (req, res, next) => {
     try {
         const post = res.locals.post;
         const schema = res.locals.schema;
         const tag = req.body.tag;
+        
+        let schemaName;
+        if (schema === Question) {
+            schemaName = "Question";
+        } else if (schema === CodeRepositoryQ) {
+            schemaName = "CodeRepositoryQ";
+        }
+        
 
         // tag -> 태그들 (배열)
         const tagResult = await Promise.all(tag.map(async (arg) => {
@@ -35,7 +42,7 @@ export const PostCreateTag = async (req, res, next) => {
 
         // 각 포스트에 tag 업데이트
         await schema.findOneAndUpdate({ _id: post._id }, { $set: { tag: tagResult } });
-        res.status(200).json({ success: true });
+        return res.status(200).json({ CreateSuccess: true, type: schemaName });
     } catch (err) {
         console.log("error at middleware tag:", err);
     }
@@ -48,6 +55,13 @@ export const PostUpdateTag = async (req, res, next) => {
 
         // 원래 데이터
         const rawTag = res.locals.rawData.tag;
+        
+        let schemaName;
+        if (schema === Question) {
+            schemaName = "Question";
+        } else if (schema === CodeRepositoryQ) {
+            schemaName = "CodeRepositoryQ";
+        }
         
         // 이건 새로 넣을거
         const tag = req.body.tag;
@@ -88,7 +102,7 @@ export const PostUpdateTag = async (req, res, next) => {
 
         // 각 포스트에 tag 업데이트
         await schema.findOneAndUpdate({ _id: id }, { $set: { tag: tagResult } });
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ EditSuccess: true, type: schemaName });
     } catch (err) {
         console.log("error at middleware tag:", err);
     }
@@ -96,6 +110,15 @@ export const PostUpdateTag = async (req, res, next) => {
 
 export const PostDelTag = async (req, res, next) => {
     try {
+        let schemaName;
+        const schema = res.locals.schema;
+        
+        if (schema === Question) {
+            schemaName = "Question";
+        } else if (schema === CodeRepositoryQ) {
+            schemaName = "CodeRepositoryQ";
+        }
+
         // rawTag -> _id array
         const rawTag = res.locals.rawData.tag;
 
@@ -103,11 +126,11 @@ export const PostDelTag = async (req, res, next) => {
         const id = req.body._id;
 
         await Promise.all(rawTag.map(async (arg) => {
-            const reg = new RegExp(arg, 'i');
             await Tag.updateOne({ _id: arg }, { $inc: { count: -1 }, $pull: { posts: id } } );
         }));
         
-        return res.status(200).json({ success: true });
+        // schemaName 이 undefined 로 나옴. 나중에 해결.
+        return res.status(200).json({ DelSuccess: true, type: schemaName });
     } catch (err) {
         console.log(err);
         next(err);

@@ -23,7 +23,6 @@ export const PostQuestion = async (req, res, next) => {
         });
 		res.locals.post = question;
 		res.locals.schema = Question;
-		// res.status(200).json({ addQuestion: true });
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating Question schema. (PostQuestion in questionController) ", error);
@@ -86,8 +85,6 @@ export const PostEditPost = async (req, res, next) => {
         const rawData = await Question.findByIdAndUpdate(_id, { $set: { title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.locals.schema = Question;
 		res.locals.rawData = rawData;
-
-		// res.status(200).json({ updateQuestion: true });
 		next();
 	} catch (error) {
 		console.log("400: Failed in updating question. (PostEditPost in questionController) ", error);
@@ -108,6 +105,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		// await 안 붙어 있어서 수정
 		const checkauthor = await Question.findOne({ _id });
 		res.locals.rawData = checkauthor;
+		res.locals.schema = Question;
 		
 		if (checkauthor.author !== user.nickname) {
 			console.log("403: This user does not have authority to delete question. (PostDeleteQuestion in questionController) ");
@@ -116,7 +114,6 @@ export const PostDeleteQuestion = async (req, res, next) => {
 
 		await Answer.deleteMany({ question: _id });
         await Question.deleteOne({ _id });
-        // return res.status(200).json({ delQuestionSuccess: true });
 		next();
     } catch (err) {
 		console.log("400: Failed in deleting question. (PostDeleteQuestion in questionController) ", err);
