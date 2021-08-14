@@ -4,14 +4,25 @@ import React, { useState, useRef } from "react";
 import styles from "./ProfileEditPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
 
-function Tags({ tags }) {
-	return (
-		<span>
-			<span className={styles.tagstyle}>{tags.tag}</span>
-			&nbsp;&nbsp;
-		</span>
-	);
-}
+const Tags = (props) => {
+	const ClickTag = () => {
+		props.DeleteTag(props.text);
+	};
+
+	if (props.text !== "") {
+		return (
+			// 작성된 태그가 있을 때만 태그를 렌더링한다
+			<span>
+				<span onClick={ClickTag} className={styles.tagstyle}>
+					{props.text}
+				</span>
+				&nbsp;&nbsp;
+			</span>
+		);
+	} else {
+		return <span></span>;
+	}
+};
 
 const ProfileEditPage = (props) => {
 	const [nickname, SetNickname] = useState("닉네임");
@@ -21,7 +32,8 @@ const ProfileEditPage = (props) => {
 	const [studentId, SetStudentId] = useState("12345678");
 	const [interest, SetInterest] = useState(""); // 관심 분야
 
-	const [tags, SetTags] = useState([{ tag: "JavaScript" }]); // 관심 태그
+	const [inputTags, SetInputTags] = useState("");
+	const [userTags, SetUserTags] = useState(["java", "react"]); // 관심 태그
 
 	const [about, SetAbout] = useState(""); // 자기소개
 	const [github, SetGithub] = useState("");
@@ -90,7 +102,7 @@ const ProfileEditPage = (props) => {
 	};
 
 	const OnTagsHandler = (event) => {
-		SetTags(event.currentTarget.value);
+		SetInputTags(event.currentTarget.value);
 	};
 
 	const OnAboutHandler = (event) => {
@@ -118,9 +130,28 @@ const ProfileEditPage = (props) => {
 		if (
 			CheckName.current.style.color &&
 			CheckNickname.current.style.color &&
-			CheckPassword.current.style.color !== "yellowgreen"
+			CheckPassword.current.style.color == !"yellowgreen"
 		) {
 			return alert("입력 규칙을 확인해주세요!");
+		}
+	};
+
+	const CreateTag = (event) => {
+		if (event.key === "Enter") {
+			console.log("${event.key}가 입력되었습니다");
+			let tempArr = [...userTags];
+			tempArr.push(inputTags);
+			SetUserTags(tempArr);
+			SetInputTags("");
+		}
+	};
+
+	const DeleteTag = (clickedTag) => {
+		if (clickedTag !== "") {
+			let tempArr = [...userTags];
+			let tempIndex = tempArr.indexOf(clickedTag);
+			tempArr.splice(tempIndex, 1);
+			SetUserTags(tempArr);
 		}
 	};
 
@@ -247,32 +278,23 @@ const ProfileEditPage = (props) => {
 									<span
 										style={{ margin: "25px 0px 20px 0px" }}
 									>
-										{tags.map((tag, index) => (
-											<Tags tags={tag} key={index} />
-										))}
+										{userTags.map((a, i) => {
+											return (
+												<Tags
+													text={userTags[i]}
+													DeleteTag={DeleteTag}
+												/>
+											);
+										})}
 									</span>
 									<input
 										className={styles.tagstyle}
-										//value={tags}
+										value={inputTags}
+										type="text"
 										onChange={OnTagsHandler}
 										placeholder={"관심 태그를 등록해보세요"}
+										onKeyPress={CreateTag}
 									/>
-									&nbsp;&nbsp;
-									<button
-										type="button"
-										className={styles.tagbutton}
-										//onClick={onCreateTag}
-									>
-										추가
-									</button>
-									&nbsp;
-									<button
-										type="button"
-										className={styles.tagbutton}
-										//onClick={onDeleteTag}
-									>
-										삭제
-									</button>
 								</td>
 							</tr>
 
