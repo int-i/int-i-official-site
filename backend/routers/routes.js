@@ -1,29 +1,32 @@
 // 백엔드는 기본적으로 /api 라우팅 사용.
 
-
+// GLOBAL
 const USER = "/user";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 
-const USERINFO = "/userinfo";
-const DELUSER = "/deluser";
-
-const EDITPROFILE = "/editprofile";
-
+// FEATURE
 const API = "/api";
 const AUTH = "/auth";
-const CALLBACK = "/callback";
 const ADMIN = "/admin";
-const INTI = "/inti";
 const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
 
+
+// AUTH and ADMIN
+const USERINFO = "/userinfo";
+const DELUSER = "/deluser";
+const INTI = "/inti";
+const CALLBACK = "/callback";
 const GITHUB = "/github";
 const KAKAO = "/kakao";
 const GOOGLE = "/google";
-// const GLOBAL_SEARCH = "";
+
+// USER
+const EDITPROFILE = "/editprofile";
+
 
 //질문게시판
 const WRITEQUES = "/writeques";

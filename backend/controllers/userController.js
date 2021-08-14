@@ -62,7 +62,7 @@ export const PostEditProfile = async (req, res, next) => {
             exStudentId = await User.findOne({ studentId });
         }
 
-        // 중복성 체크
+        // 중복성 체크 -> 나중에 isModified 로 수정...?
         // 바뀐거 없으면 패스.
         // else 문 안먹혀서 그냥 if 문으로 바꿈
         if (exEmail) {

@@ -2,10 +2,12 @@ import User from "../models/User";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import Inti from "../models/Inti";
-import config from "../config/dev";
+import config from "../config/key";
+import dotenv from "dotenv";
+dotenv.config();
 
 // 해쉬 복잡도. 환경변수로 빼야함. 보안 떨어진다 싶으면 salt 사용.
-const hashSecret = config.hashSecret
+const hashSecret = config.hashSecret;
 
 // 공백확인 함수
 
@@ -57,7 +59,7 @@ export const PostJoin = async (req, res, next) => {
 
                 // 유효성 나중에 추가
                 // 해쉬 보안을 위해 salt 도입 필요하긴 함. 회의 후 결정.
-                const hash = await bcrypt.hash(password, hashSecret);
+                const hash = await bcrypt.hash(password, parseInt(hashSecret));
 
                 // 권한 부여
                 const isMember = await Inti.findOne({ studentId });
@@ -67,6 +69,7 @@ export const PostJoin = async (req, res, next) => {
                 } else {
                     role = -1;
                 }
+
                 await User.create({ username, id, nickname, email, studentId, hash, role });
             }
             next();

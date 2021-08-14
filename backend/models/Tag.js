@@ -18,18 +18,14 @@ const tagSchema = new mongoose.Schema({
     ],
     posts: [
         {
-            question: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "question",
-                unique: true
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "questions",
+            unique: true
         },
         {
-            coderepositoryq: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "coderepositoryq",
-                unique: true
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "coderepositoryqs",
+            unique: true
         }
     ]
 });

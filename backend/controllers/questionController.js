@@ -2,7 +2,7 @@ import Question from "../models/Question";
 import Answer from "../models/Answer";
 
 // create : 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
-export const PostQuestion = async (req, res) => {
+export const PostQuestion = async (req, res, next) => {
 	const user = req.user;
 	const { title, contents, anonymous, createdAt } = req.body;
 
@@ -13,15 +13,17 @@ export const PostQuestion = async (req, res) => {
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
 		
-		await Question.create({
+		const question = await Question.create({
             author: user.nickname,
 			title,
 			contents,
 			anonymous,
 			createdAt
         });
-
-		res.status(200).json({ addQuestion: true });
+		res.locals.post = question;
+		res.locals.schema = Question;
+		// res.status(200).json({ addQuestion: true });
+		next();
 	} catch (error) {
 		res.status(400).send({ error: error.message })
 	}
@@ -53,7 +55,7 @@ export const GetOneQuestion = async (req, res) => {
  * update : 게시글 수정 완료 후 저장 버튼을 눌렀을 때.
  * 수정하기 버튼을 눌렀을 때 기존 데이터를 어떻게 불러올지는 구현을 더 해야함. (read와 관련돼있음)
  */
-export const PostEditPost = async (req, res) => {
+export const PostEditPost = async (req, res, next) => {
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
@@ -64,8 +66,12 @@ export const PostEditPost = async (req, res) => {
 	try {
 
 		// 자동으로 생성된 아이디로 게시글을 찾고 업데이트 시켜준다.
-        await Question.findByIdAndUpdate(_id, { $set: { title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
-        res.status(200).json({ updateQuestion: true });
+        const rawData = await Question.findByIdAndUpdate(_id, { $set: { title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
+        res.locals.schema = Question;
+		res.locals.rawData = rawData;
+
+		// res.status(200).json({ updateQuestion: true });
+		next();
 	} catch (error) {
 		res.status(400).send({ error: error.message })
 	}

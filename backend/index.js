@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -22,7 +23,7 @@ const app = express();
 
 // 여기서 미들웨어 세팅
 // app.use(cors()); // CORS 도입 후 주석 해제
-
+dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //process.env.COOKIE_ID
@@ -62,7 +63,7 @@ app.use(routes.api + routes.user, IsLogged, userRouter);
 app.use(routes.api + routes.codeq, codeQRouter);
 
 app.get("/", (req, res) => {
-	res.send("First Routing");
+	res.send("hello node!");
 });
 
 if (process.env.NODE_ENV === "production") {

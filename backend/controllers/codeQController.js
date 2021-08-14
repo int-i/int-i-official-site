@@ -2,7 +2,7 @@ import CodeRepositoryQ from "../models/CodeRepositoryQ";
 import Like from "../models/Like";
 
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
-export const PostQuestion = async (req, res) => {
+export const PostQuestion = async (req, res, next) => {
 	const user = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
 
@@ -16,15 +16,18 @@ export const PostQuestion = async (req, res) => {
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
 		
-		await CodeRepositoryQ.create({
+		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
 			title,
 			contents,
 			recommend,
 			createdAt
         });
+		res.locals.post = codeQ;
+		res.locals.schema = CodeRepositoryQ;
 
-		res.status(200).json({ addQuestion: true });
+		// res.status(200).json({ addQuestion: true });
+		next();
 	} catch (error) {
 		res.status(400).send({ error: error.message })
 	}
