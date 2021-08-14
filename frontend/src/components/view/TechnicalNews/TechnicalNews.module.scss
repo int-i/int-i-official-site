@@ -2,6 +2,7 @@
 	width: 100%;
 	height: 150px;
 	background-color: var(--light-blue);
+	margin-bottom: 3%;
 
 	div { // 배너 내부 텍스트 속성
 		position: relative;
@@ -10,12 +11,73 @@
 		color: var(--white);
 		text-align: center;
 		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translate(0%, -50%);
 	}
 }
 
 .postList {
 	position: relative;
-	margin-top: 100px;
+	width: 60%;
+	height: 222px;
+	border-bottom: 1px solid var(--grey);
+	color: var(--navy);
+
+	// 박스 중앙 정렬
+	left: 50%;
+	transform: translate(-50%);
+	
+	// 텍스트 사이의 거리
+	div + div {
+		margin-top: 10px;
+	}
+
+	// 제목
+	.title {
+		font-size: 20px;
+		padding-top: 20px;
+		margin-left: 10px;
+		margin-right: 20px;
+	}
+
+	// 내용
+	.content {
+		font-size: 15px;
+		margin-left: 16px;
+		margin-right: 26px;
+	}
+
+	.tag {
+		background-color: var(--grey);
+		color: var(--light-blue);
+		
+		font-size: 15px;
+		border-radius: 28.5px;
+		background-color: var(--silver);
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
+		margin-right: 10px;
+	}
+
+	// 작성 일자
+	.date {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		margin-bottom: 20px;
+		margin-left: 30px;
+		color: var(--grey);
+	}
+
+	// 작성자
+	.author {
+		position: absolute;
+		font-size: 16px;
+		bottom: 0;
+		right: 0;
+		margin-bottom: 20px;
+		margin-right: 10px;
+	}
+
 }
