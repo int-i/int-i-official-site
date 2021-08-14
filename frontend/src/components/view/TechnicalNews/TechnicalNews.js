@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./TechnicalNews.module.scss";
-import userIcon from "../../../assets/images/icon/회색 유저.png";
 import BoardBanner from "../BoardBanner/BoardBanner";
+import PostList from "../PostList/PostList";
 import SearchBar from "../SearchBar/SearchBar";
 import Left from "../../../assets/images/icon/왼쪽화살표.png";
 import Right from "../../../assets/images/icon/오른쪽화살표.png";
@@ -37,21 +37,6 @@ const posts = [
 	},
 ];
 
-const Post = ({ post }) => {
-	return (
-		<div className={[styles.postList, "Spoqa"].join(" ")}>
-			<div className={styles.title}>{post.title}</div>
-			<div className={styles.content}>{post.content}</div>
-			<div style={{ marginTop: "50px", marginLeft: "20px" }}>{post.tags.map(tag => (
-				<span className={styles.tag}>{tag.tagName}</span>
-			))}</div>
-			<div className={styles.date}>{post.date}</div>
-			<div className={styles.author}><img src={userIcon} alt="유저이미지" width="20" />{post.author}</div>
-			<div className={styles.like}>{post.like}</div>
-		</div>
-	);
-}
-
 const TechnicalNews = (props) => {
 	return (
 		<div style={{ paddingBottom: "200px" }}>
@@ -63,7 +48,7 @@ const TechnicalNews = (props) => {
 			{/* 게시글 리스트 */}
 			<div>
 				{posts.map(post => (
-					<Post post={post} key={posts._id} />
+					<PostList post={post} key={posts._id} />
 				))}
 			</div>
 
