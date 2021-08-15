@@ -40,7 +40,7 @@ function QnAPage(props) {
 				<div className={styles.buttonContainer}>
 					<button
 						onClick={() => {
-							props.history.push("/WritePage");
+							props.history.push("/QnAPage/Write");
 						}}
 					>
 						새 글 작성

@@ -24,6 +24,7 @@ export const PostWriteNews = async(req, res, next) => {
         });
         res.locals.post = news;
         res.locals.schema = News;
+        res.locals.schemaName = "News";
         // 클라이언트로 변수 전송
         next(); 
 
@@ -40,8 +41,9 @@ export const PostDeleteNews = async(req,res, next) => {
 
     try {
         const findBody = await News.findOne({_id});
-        res.locals.rawData = checkAuthor;
+        res.locals.rawData = findBody;
         res.locals.schema = News;
+        res.locals.schemaName = "News";
 
         if(findBody.author !== user.nickname){
             return res.status(403).json({success:false, message : "You can only delete posts that you wrote"})
@@ -76,6 +78,7 @@ export const PostEditNews = async(req, res, next) => {
         const rawData  = await News.findByIdAndUpdate(_id, {$set : {title : title, contents : contents}}) // 수정 날짜는 업데이트 하지 않음
         res.locals.schema = News;
         res.locals.rawData= rawData;
+        res.locals.schemaName = "News";
         next();
     }catch (error) {
         console.log("게시글을 삭제하는 데 실패했습니다.", err);
