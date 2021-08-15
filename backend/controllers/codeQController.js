@@ -22,7 +22,6 @@ export const PostQuestion = async (req, res, next) => {
 		//CodeRepositoryQ.dropIndex({ users: users._id });
 		const codeQ = await CodeRepositoryQ.create({
             author: theuser.nickname,
-			user: [],
 			title,
 			contents,
 			recommend,
@@ -98,24 +97,30 @@ export const PostEditQuestion = async (req, res, next) => {
  */
 export const PostRecommend = async (req, res, next) => {
 	console.log("hello");
-	const user = req.user;
+	const theuser = req.user;
 	const { _id } = req.body;
 
 	try {
 		//const isLiked = await CodeRepositoryQ.findOne({ users: users });
-		console.log(user._id);
-		const question = await CodeRepositoryQ.findOne({ _id });
-		const isLiked = await CodeRepositoryQ.find({ $and : [{ _id : {$eq : _id }}, { user: user._id }] });////
-		
+		console.log(theuser._id);
+
+		// _id와 관련된 게시물 하나 찾기
+		const question = await CodeRepositoryQ.findOne({ _id: _id });
+
+		//여기가 문제. 게시물 아이디는 _id이고 user배열을 순회해야하는데, 거기서 아이디가 theuser._id인 사람을 찾아야한다.
+		//const isLiked = await CodeRepositoryQ.findOne({ $and : [{ _id : _id }, { user: { _id: theuser._id } }] });////
+		const isLiked = await CodeRepositoryQ.findOne( { $and: [{ _id: _id }, { user: theuser }]});////
+
+
 		console.log(isLiked);
 		if (isLiked) {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { user: user._id }, $set: { recommend: question.recommend - 1 } });
+			await CodeRepositoryQ.updateOne({'_id': _id }, { $pull: { "user": { _id: theuser._id }}}); //, $set: { recommend: question.recommend - 1 } 
 			console.log(question.users, "pull");
 			console.log(question.users);
 			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
 		}
 		else {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { user: user._id }, $set: { recommend: question.recommend + 1 } });
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { user: { _id: theuser._id } }, $set: { recommend: question.recommend + 1 } });
 			console.log(question.users, "added");
 			console.log(question.users);
 			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend + 1});

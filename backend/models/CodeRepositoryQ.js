@@ -23,13 +23,13 @@ const codeRepositoryQSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    user: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "users",
-            //default: []
-        }
-    ],
+    // user: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "users",
+    //         default: []
+    //     }
+    // ],
     tag: [
         {
             type: mongoose.Schema.Types.ObjectId,
