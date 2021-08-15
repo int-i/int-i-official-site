@@ -42,7 +42,7 @@
 	align-items: center;
 	font-size: 26px;
 	font-weight: 900;
-	
+
 	color: var(--navy);
 
 	// 로고 호버 효과 제거
@@ -85,5 +85,13 @@
 	}
 	a:hover {
 		color: rgba(44, 62, 80, 0.5); // 색상은 --navy 그대로 투명도만 변화
+	}
+	button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
+	button:hover {
+		opacity: 0.5;
 	}
 }

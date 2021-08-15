@@ -1,17 +1,43 @@
 import styles from "./QnAPage.module.scss";
 import BoardBanner from "../BoardBanner/BoardBanner";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import Left from "../../../assets/images/icon/왼쪽화살표.png";
 import Right from "../../../assets/images/icon/오른쪽화살표.png";
 import BoardListMaker from "../BoardListMaker/BoardListMaker";
+import axios from "axios";
 
 function QnAPage(props) {
+	useEffect(() => {
+		async function fetchData() {
+			await axios.get("/api/question/").then((response) => {
+				console.log("response", response.data.questions[0].title);
+				SetLists(response.data.questions);
+			});
+		}
+		fetchData();
+	}, []);
+	const [lists, SetLists] = useState([]);
+
+	console.log(lists);
 	return (
 		<div className={[styles.QnAPageContainer, "NanumSquare"].join(" ")}>
 			<BoardBanner text="질문방 | 궁금한 내용을 질문할 수 있는 게시판으로 익명 질문도 가능합니다" />
 			<div className={styles.listContainer}>
-				<BoardListMaker push={props.history.push} />
+				{lists.map((a, i) => {
+					return (
+						<BoardListMaker
+							page="QnAPage"
+							title={lists[i].title}
+							content={lists[i].contents}
+							author={lists[i].author}
+							date={lists[i].createdAt}
+							likes="5"
+							id={lists[i]._id}
+							push={props.history.push}
+						/>
+					);
+				})}
 
 				<div className={styles.buttonContainer}>
 					<button

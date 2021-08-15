@@ -44,13 +44,6 @@ const codeRepositoryQSchema = new mongoose.Schema({
             ref: "tags"
         }
     ],
-    user: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "users",
-            //unique: true
-        }
-    ]
 });
 
 codeRepositoryQSchema.plugin(autoIncrement.plugin, {

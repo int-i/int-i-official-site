@@ -17,7 +17,6 @@ const CODEA = "/codea";
 const SEARCHONE = "/searchone";
 const COMMENT = "/comment";
 
-
 // AUTH and ADMIN
 const USERINFO = "/userinfo";
 const DELUSER = "/deluser";
@@ -30,7 +29,6 @@ const GOOGLE = "/google";
 // USER
 const EDITPROFILE = "/editprofile";
 const EDITAVATAR = "/editavatar";
-
 
 // 댓글
 const WRITECOMMENT = "/writecomment";
@@ -128,7 +126,7 @@ const routes = {
 	delans: DELANS,
 	editans: EDITANS,
 	allans: ALLANS,
-	
+
 	//코드저장소 문제
 	codewriteq: CODEWRITEQ,
 	codedelq: CODEDELQ,
@@ -151,7 +149,7 @@ const routes = {
 	allPromotion: ALLPROMOTION,
 	onePromotion: ONEPROMOTION,
 
-	// 공지 사항 
+	// 공지 사항
 	writeNotice: WRITENOTICE,
 	deleteNotice: DELETENOTICE,
 	editNotice: EDITNOTICE,
@@ -162,7 +160,7 @@ const routes = {
 	codedela: CODEDELA,
 	codeedita: CODEEDITA,
 	codealla: CODEALLA,
-	codelikesa: CODELIKESA
-}
+	codelikesa: CODELIKESA,
+};
 
 export default routes;

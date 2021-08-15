@@ -4,7 +4,7 @@ autoIncrement.initialize(mongoose.connection);
 
 // 질문게시판의 질문 스키마
 const questionSchema = new mongoose.Schema({
-    
+
     seq :{
         type : Number,
         default : 0
