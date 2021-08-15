@@ -40,7 +40,6 @@ export const PostEditNews = async(req, res) => {
     const {title, contents, createdAt } = req.body;
     const user = req.user;
 
-    if(user )
     
 }
 

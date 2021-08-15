@@ -16,7 +16,8 @@ import questionRouter from "./routers/questionRouter";
 import answerRouter from "./routers/answerRouter";
 import userRouter from "./routers/userRouter";
 import codeQRouter from "./routers/codeQRouter";
-import { IsAdmin, IsLogged } from "./middleware/auth";
+import codeARouter from "./routers/codeARouter";
+import { IsAdmin, IsLogged, IsMember } from "./middleware/auth";
 // 추가해야 할 모듈 및 미들웨어 : path, cors
 
 const app = express();
@@ -57,13 +58,14 @@ passportConfig();
 app.use(routes.api, globalRouter);
 app.use(routes.api + routes.auth, authRouter);
 app.use(routes.api + routes.admin, IsLogged, IsAdmin, adminRouter);
-app.use(routes.api + routes.question, questionRouter);
-app.use(routes.api + routes.answer, answerRouter);
+app.use(routes.api + routes.question, IsLogged, questionRouter);
+app.use(routes.api + routes.answer, IsLogged, answerRouter);
 app.use(routes.api + routes.user, IsLogged, userRouter);
-app.use(routes.api + routes.codeq, codeQRouter);
+app.use(routes.api + routes.codeq, IsLogged, IsMember, codeQRouter);
+app.use(routes.api + routes.codea, IsLogged, IsMember, codeARouter);
 
 app.get("/", (req, res) => {
-	res.send("First Routing");
+	res.send("hello node!");
 });
 
 if (process.env.NODE_ENV === "production") {

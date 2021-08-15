@@ -1,7 +1,7 @@
 //회원가입 페이지
 
 import React, { useState, useRef } from "react";
-import styles from "./RegisterPage.module.css";
+import styles from "./RegisterPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
 
 const RegisterPage = (props) => {
@@ -35,7 +35,7 @@ const RegisterPage = (props) => {
 	const OnNicknameHandler = (event) => {
 		SetNickname(event.currentTarget.value);
 
-		//유효성 체크 - (한/영) 최대 6자리
+		//유효성 체크 - 한/영 최대 6자리
 		var regExp = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{1,6}$/;
 		console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
 

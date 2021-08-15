@@ -1,12 +1,13 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../../assets/images/logo/logo.png";
-import style from "./Header.module.scss";
+import styles from "./Header.module.scss";
 
 const 로그인UI = {
 	guest: (
-		<ul className={style.loginUI}>
+		<ul className={styles.loginUI}>
 			<li>
 				<Link to="/RegisterPage">회원가입</Link>
 			</li>
@@ -16,16 +17,24 @@ const 로그인UI = {
 		</ul>
 	),
 	user: (
-		<ul className={style.loginUI}>
-			<li>마이 페이지</li>
-			<li>로그아웃</li>
+		<ul className={styles.loginUI}>
+			<li>
+				<Link to="/UserPage">마이 페이지</Link>
+			</li>
+			<li>
+				<Link to="/">로그아웃</Link>
+			</li>
 		</ul>
 	),
 	admin: (
-		<ul className={style.loginUI}>
+		<ul className={styles.loginUI}>
 			<li>관리자 페이지</li>
-			<li>마이 페이지</li>
-			<li>로그아웃</li>
+			<li>
+				<Link to="/UserPage">마이 페이지</Link>
+			</li>
+			<li>
+				<Link to="/">로그아웃</Link>
+			</li>
 		</ul>
 	),
 };
@@ -33,23 +42,33 @@ const 로그인UI = {
 const Header = () => {
 	const [로그인상태, 로그인상태변경] = useState("guest"); // 이 로그인 상태가 뭔지에 따라서 유저 UI가 변함
 	return (
-		<div className={style.headerContainer}>
-			<header className={[style.header, "NanumSquare"].join(" ")}>
-				<div className={style.contents}>
+		<div className={styles.headerContainer}>
+			<header className={[styles.header, "NanumSquare"].join(" ")}>
+				<div className={styles.contents}>
 					<Link to="/">
-						<div className={style.logo}>
+						<div className={styles.logo}>
 							<img src={logo} width="40" alt="인트아이 로고" />
 							<div>인트아이</div>
 						</div>
 					</Link>
 
-					<nav className={style.navigation}>
+					<nav className={styles.navigation}>
 						<ul>
-							<li>코드 저장소</li>
-							<li>질문</li>
-							<li>기술 뉴스</li>
-							<li>정보 및 홍보</li>
-							<li>공지사항</li>
+							<Link to="#">
+								<li>코드 저장소</li>
+							</Link>
+							<Link to="QnAPage">
+								<li>질문방</li>
+							</Link>
+							<Link to="TechnicalNews">
+								<li>기술 뉴스</li>
+							</Link>
+							<Link to="#">
+								<li>정보 및 홍보</li>
+							</Link>
+							<Link to="#">
+								<li>공지사항</li>
+							</Link>
 						</ul>
 					</nav>
 					{

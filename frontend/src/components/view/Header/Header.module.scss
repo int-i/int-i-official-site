@@ -8,11 +8,11 @@
 	padding-top: 60px;
 }
 .header {
-	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 10으로 설정
+	z-index: 1000; // 헤더는 항상 위에 있도록 z축을 1000으로 설정
 	position: fixed;
 	top: 0;
 	width: 100%;
-	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1); // 상자 그림자
+	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2); // 상자 그림자
 	background-color: var(--white);
 }
 
@@ -36,14 +36,22 @@
 	}
 }
 
-// 로고 정렬(로고 이미지와 로고 텍스트 사이의 정렬)
+// 로고 스타일
 .logo {
-	display: flex;
-	div{
+	display: flex; // 로고와 텍스트가 일직선이 되게 표시
+	
+	div {
 		font-size: 26px;
 		font-weight: 900;
 	}
 	align-items: center;
+	
+	a {
+		color: var(--navy);
+	}
+	a:hover {
+		color: var(--navy);
+	}
 }
 
 // 네비게이션 텍스트(각 게시판 링크) 스타일
@@ -61,8 +69,8 @@
 			font-weight: 700;
 		}
 		// 각 텍스트끼리의 거리
-		li + li {
-			margin-left: 20px;
+		a {
+			margin: 0 10px 0 10px;
 		}
 	}
 }
