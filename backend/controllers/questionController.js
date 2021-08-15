@@ -23,6 +23,7 @@ export const PostQuestion = async (req, res, next) => {
         });
 		res.locals.post = question;
 		res.locals.schema = Question;
+		res.locals.schemaName = "Question";
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating Question schema. (PostQuestion in questionController) ", error);
@@ -41,15 +42,11 @@ export const GetAllQuestions = async (req, res) => {
 	}
 }
 
-/*
- * read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
- * 변경사항 : post방식으로 사용자가 게시글을 클릭했을 때 해당 게시글의 _id를 찾아서 그 게시글의 정보를 다 보여주는 식으로 구현.
- */
+// read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
 export const GetOneQuestion = async (req, res) => {
-	const { _id } = req.body;
 
 	try {
-		const question = await Question.findById({ _id });
+		const question = await Question.findById({ _id: req.params.id });
         return res.status(200).json({ question: question });
     } catch (err) {
 		console.log("404: Cannot get page of showing specific one question (GetOneQuestion in questionController) ", err);
@@ -85,6 +82,7 @@ export const PostEditPost = async (req, res, next) => {
         const rawData = await Question.findByIdAndUpdate(_id, { $set: { title: title, contents: contents, anonymous: anonymous, createdAt: createdAt }});
         res.locals.schema = Question;
 		res.locals.rawData = rawData;
+		res.locals.schemaName = "Question";
 		next();
 	} catch (error) {
 		console.log("400: Failed in updating question. (PostEditPost in questionController) ", error);
@@ -106,6 +104,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		const checkauthor = await Question.findOne({ _id });
 		res.locals.rawData = checkauthor;
 		res.locals.schema = Question;
+		res.locals.schemaName = "Question";
 		
 		if (checkauthor.author !== user.nickname) {
 			console.log("403: This user does not have authority to delete question. (PostDeleteQuestion in questionController) ");
@@ -121,3 +120,37 @@ export const PostDeleteQuestion = async (req, res, next) => {
     }
 };
 
+// 검색 기능은 추후에 구현
+// export const GetSearchQuestion = async (ctx) => {
+// 	try{
+// 		if (ctx.query.option == 'title') {
+// 			options = [{ title: new RegExp(ctx.query.content) }];
+// 		}
+// 		else if (ctx.query.option == 'body') {
+// 			options = [{ body: new RegExp(ctx.query.content) }];
+// 		}
+// 		else if(ctx.query.option == 'title_body'){
+// 			options = [{ title: new RegExp(ctx.query.content) }, { body: new RegExp(ctx.query.content) }];
+// 		}
+// 		else {
+// 			return res.status(400).send({ searchQuestion: false, reason: "No searching result" });
+// 		}
+	   
+// 		const posts = await Question.find({ $or: options })
+// 			.sort({ _id: -1 })
+// 			.limit(10)
+// 			.skip((page - 1) * 10)
+// 			.lean()
+// 			.exec();
+
+// 		const postCount = await Post.countDocuments(posts).exec();
+// 		ctx.set('Last-Page', Math.ceil(postCount / 10));
+// 		ctx.body = posts.map((post) => ({
+// 		  ...post,
+// 		  body: removeHtmlAndShorten(post.body),
+// 		}));
+	
+// 	  } catch (e) {
+// 		ctx.throw(500, e);
+// 	  }
+// }

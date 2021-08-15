@@ -1,0 +1,42 @@
+.AnswerContaienr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	h2 {
+		font-size: 23px;
+		margin-bottom: 15px;
+	}
+	h3 {
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+}
+
+.DefaultAnswerImageBackground {
+	width: 40px;
+	height: 40px;
+	background: var(--grey);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+}
+.DefaultAnswerImage {
+	width: 30px;
+}
+
+.AnswerInfo {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.AnswerInfoRight {
+	margin-left: 5px;
+	p {
+		font-size: 14px;
+	}
+	span {
+		font-size: 12px;
+		color: var(--grey);
+		font-weight: 300;
+	}
+}

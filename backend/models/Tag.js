@@ -26,6 +26,21 @@ const tagSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "coderepositoryqs",
             unique: true
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "notices",
+            unique: true
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "news",
+            unique: true
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "promotions",
+            unique: true
         }
     ]
 });

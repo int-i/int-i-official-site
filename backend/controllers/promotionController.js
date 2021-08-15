@@ -18,6 +18,7 @@ export const postWritePromotion = async(req, res) => {
         });
         res.locals.post = promotion;
         res.locals.schema = Promotion;
+        res.locals.schemaName = "Promotion";
         // 클라이언트로 변수 전송
 
         return res.status(200).json({success : true})
@@ -40,6 +41,7 @@ export const postDeletePromotion = async(req,res) => {
         const rawData = await Promotion.findByIdAndDelete({seq : req.params.id});
         res.locals.rawData = rawData;
         res.locals.schema = Promotion;
+        res.locals.schemaName = "Promotion";
         return res.status(200).json({success : true})
 
     }  catch (err) {
@@ -66,8 +68,9 @@ export const postEditPromotion = async(req, res, next) => {
         }
         const rawData = await Promotion.findByIdAndUpdate({seq : req.params.id},
             { $set : {title : title, contents  : contents}});
-        res.locals.schema = News;
+        res.locals.schema = Promotion;
         res.locals.rawData= rawData;
+        res.locals.schemaName = "Promotion";
         return res.status(200).json({success : true})
 
     } catch (error) {

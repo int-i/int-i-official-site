@@ -1,0 +1,115 @@
+.PostViewContainer {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 60px 20px 160px 20px;
+	h1 {
+		font-size: 32px;
+		margin-bottom: 20px;
+	}
+}
+
+.postInfo {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	padding-right: 5px;
+	padding-bottom: 20px;
+}
+// 작성자, 작성시간
+.infoLeft {
+	display: flex;
+	align-items: center;
+}
+.verticalLine {
+	margin: 0 10px 0 10px;
+	width: 1px;
+	height: 14px;
+	background: var(--grey);
+}
+.date {
+	color: var(--grey);
+	font-weight: 300;
+}
+// 수정 삭제 버튼
+.infoRight {
+	display: flex;
+	align-items: center;
+	button {
+		font-weight: 400;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+	}
+}
+// 태그
+.Tags {
+	display: flex;
+	margin-bottom: 15px;
+}
+.Tag {
+	background: var(--silver);
+	color: var(--light-blue);
+	margin: 0 5px 0 5px;
+	font-size: 12px;
+	padding: 3px 10px 3px 10px;
+	min-width: fit-content;
+	min-height: max-content;
+	border-radius: 20px;
+}
+
+// 좋아요 라인
+.likeContaienr {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 25px 0 25px 0;
+}
+.likeButton {
+	font-size: 24px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid var(--grey);
+	color: var(--navy);
+	background-color: var(--silver);
+	border-radius: 100px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+.likeNumber {
+	// 클릭된 상태에만 색주면되는데 이건 style 속성으로 할까봐
+}
+// 하단 유저 프로필
+.defaultProfileContainer {
+}
+
+.defaultProfileContainer,
+.profileContainer {
+	padding-top: 25px;
+	padding-bottom: 25px;
+	display: flex;
+	align-items: center;
+}
+.imageBackground {
+	background-color: var(--grey);
+	width: 38px;
+	height: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+}
+.defaultImage {
+	position: relative;
+	width: 30px;
+}
+
+.profileContainer {
+}
+.profileImage {
+}
+.profileName {
+	font-size: 20px;
+	margin-left: 10px;
+}

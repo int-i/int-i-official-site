@@ -16,6 +16,10 @@ const devkey = {
 	googleClientId: process.env.GOOGLE_CLIENT_ID,
 	googleSecret: process.env.GOOGLE_SECRET,
 	googleCallbackUri: process.env.GOOGLE_CALLBACK_URI,
+
+	awsS3ClientId: process.env.AWS_S3_CLIENT_ID,
+	awsS3Secret: process.env.AWS_S3_SECRET,
+	awsS3Region: process.env.AWS_S3_REGION
 };
 export default devkey;
 

@@ -4,43 +4,19 @@ import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import Left from "../../../assets/images/icon/왼쪽화살표.png";
 import Right from "../../../assets/images/icon/오른쪽화살표.png";
+import BoardListMaker from "../BoardListMaker/BoardListMaker";
 
 function QnAPage(props) {
 	return (
 		<div className={[styles.QnAPageContainer, "NanumSquare"].join(" ")}>
 			<BoardBanner text="질문방 | 궁금한 내용을 질문할 수 있는 게시판으로 익명 질문도 가능합니다" />
 			<div className={styles.listContainer}>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
-				<p>리스트 대체용 더미데이터</p>
+				<BoardListMaker push={props.history.push} />
+
 				<div className={styles.buttonContainer}>
 					<button
 						onClick={() => {
-							props.history.push("/WritePage");
+							props.history.push("/QnAPage/Write");
 						}}
 					>
 						새 글 작성

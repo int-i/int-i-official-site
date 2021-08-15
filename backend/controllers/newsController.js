@@ -18,6 +18,7 @@ export const postWriteNews = async(req, res) => {
         });
         res.locals.post = news;
         res.locals.schema = News;
+        res.locals.schemaName = "News";
         // 클라이언트로 변수 전송
         return res.status(200).json({success : true})
     } catch (error) {
@@ -31,13 +32,14 @@ export const postDeleteNews = async(req,res) => {
 
     try{
         const news = await News.findOne({seq : req.params.id});
-
+        
         if(news.author !== user.nickname){ // 글 작성자가 아닌 경우 예외처리
             return res.status(403).json({success : false, message : "You can only edit posts that you wrote "});
         }
         const rawData = await News.findByIdAndDelete({seq : req.params.id});
         res.locals.rawData = rawData;
         res.locals.schema = News;
+        res.locals.schemaName = "News";
         return res.status(200).json({success : true})
     }  catch (err) {
         console.log("게시글 삭제 실패");
@@ -65,6 +67,7 @@ export const postEditNews = async(req, res) => {
             { $set : {title : title, contents  : contents}});
         res.locals.schema = News;
         res.locals.rawData= rawData;
+        res.locals.schemaName = "News";
         return res.status(200).json({success : true})
 
     } catch (error) {

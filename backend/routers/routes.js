@@ -14,6 +14,7 @@ const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
+const SEARCHONE = "/searchone";
 
 
 // AUTH and ADMIN
@@ -27,6 +28,7 @@ const GOOGLE = "/google";
 
 // USER
 const EDITPROFILE = "/editprofile";
+const EDITAVATAR = "/editavatar";
 
 
 // 질문게시판
@@ -93,8 +95,10 @@ const routes = {
 	answer: ANSWER,
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
+	editavatar: EDITAVATAR,
 	codeq: CODEQ,
 	codea: CODEA,
+	searchone: SEARCHONE,
 
 	github: GITHUB,
 	kakao: KAKAO,

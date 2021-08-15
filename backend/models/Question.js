@@ -30,6 +30,7 @@ const questionSchema = new mongoose.Schema({
     ]
 });
 
+//questionSchema.index({ title: 'text', body: 'text' });
 // 콜렉션 네임 소문자로 통일해요.. Question -> questions
 // 어짜피 자동변환이긴 하지만..
 const Question = mongoose.model('question', questionSchema);

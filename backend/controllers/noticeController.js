@@ -17,6 +17,7 @@ export const postWriteNotice = async(req, res) => {
         });
         res.locals.post = notice;
         res.locals.schema = Notice;
+        res.locals.schemaName = "Notice";
         // 클라이언트로 변수 전송
         return res.status(200).json({success : true})
     } catch (error) {
@@ -30,6 +31,7 @@ export const postDeleteNotice = async(req,res) => {
         const rawData = await Notice.findByIdAndDelete({seq : req.params.id});
         res.locals.rawData = rawData;
         res.locals.schema = Notice;
+        res.locals.schemaName = "Notice";
         return res.status(200).json({success : true})
 
     }  catch (err) {
@@ -52,8 +54,9 @@ export const postEditNotice = async(req, res) => {
             { $set : {title : title, contents  : contents}});
         res.locals.schema = Notice;
         res.locals.rawData= rawData;
+        res.locals.schemaName = "Notice";
         return res.status(200).json({success : true})
-        
+
     } catch (error) {
         console.log("게시글 수정 실패", err);
         return res.status(400).json({success: false, error : error.message});
