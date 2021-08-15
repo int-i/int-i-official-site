@@ -19,15 +19,16 @@ export const PostQuestion = async (req, res, next) => {
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
-		
+		CodeRepositoryQ.dropIndex({ users: users._id });
 		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
-			users,
+			users: [null],
 			title,
 			contents,
 			recommend,
 			createdAt
         });
+		//await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: user._id } });
 		res.locals.post = codeQ;
 		res.locals.schema = CodeRepositoryQ;
 		next();
@@ -100,30 +101,29 @@ export const PostEditQuestion = async (req, res, next) => {
  * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록 post방식으로 구현
  */
 export const PostRecommend = async (req, res, next) => {
+	console.log("hello");
 	const user = req.user;
-	const { _id, users } = req.body;
+	const { _id } = req.body;
 
 	try {
-		//const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
-		const isLiked = await CodeRepositoryQ.findOne({ users: users });
-		//const question = await CodeRepositoryQ.findOne({ _id });
+		//const isLiked = await CodeRepositoryQ.findOne({ users: users });
+		console.log(user._id);
+		const question = await CodeRepositoryQ.findOne({ _id });
+		const isLiked = await CodeRepositoryQ.find( { $and : [{ _id : {$eq : _id }} , { users: { user: user._id }} ] });////
 		
+		//console.log(isLiked);
 		if (isLiked) {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend - 1 } });
-			await Like.deleteOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: { user: user._id } }, $set: { recommend: question.recommend - 1 } });
+			console.log(question.users, "pull");
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
 		}
 		else {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend + 1 } });
-		
-			await Like.create({
-				nickname: user.nickname,
-				qoraId: _id
-			});
-
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { users: { user: user._id } }, $set: { recommend: question.recommend + 1 } });
+			console.log(question.users, "added");
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend + 1});
 		}
-		
-        return res.status(200).json({ updateRecommendSuccess: true });
-    } catch (err) {
+			
+	} catch (err) {
 		console.log("400: Failed in updating number of likes in code repository question. (PostRecommend in codeQController)");
         next(err);
     }

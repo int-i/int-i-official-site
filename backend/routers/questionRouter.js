@@ -5,8 +5,7 @@ import {
 	GetOneQuestion,
 	PostQuestion,
 	PostDeleteQuestion,
-	PostEditPost,
-	GetSearchQuestion
+	PostEditPost
 } from "../controllers/questionController";
 import { PostCreateTag, PostUpdateTag, PostDelTag } from "../middleware/tag";
 
@@ -25,7 +24,5 @@ questionRouter.post(routes.delques, PostDeleteQuestion, PostDelTag);
 // 게시글 수정 POST
 questionRouter.post(routes.editques, PostEditPost, PostUpdateTag);
 
-// 게시글 검색 GET
-questionRouter.get('/' + routes.searchone, GetSearchQuestion);
 
 export default questionRouter;

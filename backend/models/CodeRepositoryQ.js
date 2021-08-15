@@ -25,11 +25,9 @@ const codeRepositoryQSchema = new mongoose.Schema({
     },
     users: [
         {
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "users",
-                unique: true
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+            default: []
         }
     ],
     tag: [
