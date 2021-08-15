@@ -1,5 +1,6 @@
 import express from 'express';
 import routes from "./routes";
+import {IsMember} from "../middleware/auth.js"
 import {
     postWriteNews,
     postDeleteNews,
@@ -11,7 +12,7 @@ import {
 const newsRouter = express.Router();
 
 // 게시글 작성
-newsRouter.post(routes.writeNews, postWriteNews);
+newsRouter.post(routes.writeNews, IsMember, postWriteNews);
 
 // 게시글 삭제
 newsRouter.post(routes.deleteNews, postDeleteNews );

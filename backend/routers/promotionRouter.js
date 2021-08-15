@@ -1,5 +1,6 @@
 import express from 'express';
 import routes from './routes';
+import {IsMember} from '../middleware/auth.js'
 import {
     postWritePromotion,
     postDeletePromotion,
@@ -11,7 +12,7 @@ import {
 const promotionRouter = express.Router();
 
 // 게시글 작성
-promotionRouter.post(routes.writePromotion, postWritePromotion);
+promotionRouter.post(routes.writePromotion, IsMember, postWritePromotion);
 
 // 게시글 삭제
 promotionRouter.post(routes.deletePromotion, postDeletePromotion);
