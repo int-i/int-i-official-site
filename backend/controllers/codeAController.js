@@ -29,7 +29,7 @@ export const PostAnswer = async (req, res) => {
 			recommend,
 			createdAt
         });
-		//console.log(codeq);
+
 		res.status(200).json({ addAnswer: true });
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryA schema. (PostAnswer in codeAController) ", error);

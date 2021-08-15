@@ -1,16 +1,10 @@
 import Promotion from "../models/Promotion";
 
-
 // 글 등록(인트아이 회원 권한)
-export const PostWRitePromotion = async(req, res, next) => {
+export const postWritePromotion = async(req, res) => {
     const user = req.user;
     const { title, contents, createdAt} = req.body;
-    // author 관련 부분 수정?
     
-    // user가 인트아이 회원이 아닐 때 false
-    if(user.role !== 1){
-        return res.status(400).json({success: false, message : "Member of int-i can upload "});
-    } 
     if(!title || !contents){ // title나 contents가 비었을 때
         return res.status(400).json({success : false, message : "title and contents both are required"});
     }
@@ -26,34 +20,33 @@ export const PostWRitePromotion = async(req, res, next) => {
         res.locals.schema = Promotion;
         res.locals.schemaName = "Promotion";
         // 클라이언트로 변수 전송
-        next(); 
 
-        //return res.status(400).json({success : true})
+        return res.status(200).json({success : true})
+
     } catch (error) {
-        res.status(400).send({error : error.message});
+        return res.status(400).send({success : false, error : error.message});
     }
 }
 
 // 글 삭제
-export const postDeletePromotion = async(req,res, next) => {
+export const postDeletePromotion = async(req,res) => {
     const user = req.user;
-    const { _id } = req.body;
 
-    try {
-        const findBody = await Promotion.findOne({_id});
-        res.locals.rawData = findBody;
+    try{
+        const promotion = await Promotion.findOne({seq : req.params.id});
+
+        if(promotion.author !== user.nickname){ // 글 작성자가 아닌 경우 예외처리
+            return res.status(403).json({success : false, message : "You can only edit posts that you wrote "});
+        }
+        const rawData = await Promotion.findByIdAndDelete({seq : req.params.id});
+        res.locals.rawData = rawData;
         res.locals.schema = Promotion;
         res.locals.schemaName = "Promotion";
+        return res.status(200).json({success : true})
 
-        if(findBody.author !== user.nickname){
-            return res.status(403).json({success:false, message : "You can only delete posts that you wrote"})
-        }
-
-        await Promotion.remove({promotion : _id}) 
-        next();
-    } catch (err){
-        console.log("게시글을 삭제하는 데 실패했습니다.", err);
-        next(err);
+    }  catch (err) {
+        console.log("게시글 삭제 실패");
+        return res.status(400).json({success : false, error : error.message});
     }
 }
 
@@ -67,22 +60,23 @@ export const postEditPromotion = async(req, res, next) => {
         return res.status(400).json({success : false, message : "title and contents both are required"});
     }
 
-    try {
-        const findBody = await Promotion.findOne({_id});
-
-        if(findBody.author !== user.nickname){
+    try{
+        const promotion = await Promotion.findOne({seq: req.params.id});
+        // 작성자 본인이 아닐 경우
+        if(promotion.author !== user.nickname){
             return res.status(403).json({success : false, message : "You can only edit posts that you wrote "});
         }
-        // _id로 게시글 찾고 업데이트
-        const rawData  = await Promotion.findByIdAndUpdate(_id, {$set : {title : title, contents : contents, createdAt: createdAt}}) 
+        const rawData = await Promotion.findByIdAndUpdate({seq : req.params.id},
+            { $set : {title : title, contents  : contents}});
         res.locals.schema = Promotion;
         res.locals.rawData= rawData;
         res.locals.schemaName = "Promotion";
-        next();
-    }catch (error) {
-        console.log("게시글을 삭제하는 데 실패했습니다.", err);
-        next(err);
-    }   
+        return res.status(200).json({success : true})
+
+    } catch (error) {
+        console.log("게시글 수정 실패", err);
+        return res.status(400).json({success: false, error : error.message});
+    }
 };
 
 // 기술 뉴스 게시판에서 글 전체 조회
@@ -98,11 +92,9 @@ export const getAllPromotion = async (req, res) => {
 
 // 클릭한 게시글 하나만 조회
 export const getOnePromotion = async(req, res) => {
-    const { _id }= req.body;
-
     try{
-        const promotion = await Promotion.findById({_id});
-        return res.status(200).json({promotion : promotion});
+        const promotion = await Promotion.findById({seq : req.params.id});
+        return res.status(200).json({promotion:promotion});
     } catch(err){
         console.log("404 : Cannot get the page of showing the board", err);
         res.status(400).send({error : error.message});

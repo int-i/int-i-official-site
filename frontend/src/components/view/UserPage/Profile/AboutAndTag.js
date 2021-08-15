@@ -1,6 +1,7 @@
 // About, 관심 태그 컴포넌트
 
 import React, { useState } from "react";
+import axios from "axios";
 
 const Tags = ({ text }) => {
 	return (
@@ -20,9 +21,17 @@ const Tags = ({ text }) => {
 };
 
 const AboutAndTag = () => {
-	const [about, SetAbout] = useState("자기소개가 없습니다."); // 자기소개
-	const [tags, SetTags] = useState(["JavaScript", "react.js"]);
-	/* 지금 배열에 있는 값들은 예시고 실제로는 비워놓고 서버에서 받아와서 빈 배열에 추가할 예정 */
+	const [about, SetAbout] = useState(""); // 자기소개
+	const [tags, SetTags] = useState([]);
+
+	axios
+		.get("/api/auth/userinfo", {})
+		.then(function (response) {
+			console.log(response.request.response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 
 	const style = {
 		textAlign: "left",

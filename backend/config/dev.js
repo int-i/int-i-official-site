@@ -22,3 +22,5 @@ const devkey = {
 	awsS3Region: process.env.AWS_S3_REGION
 };
 export default devkey;
+
+
