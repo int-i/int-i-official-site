@@ -4,8 +4,11 @@ import mongoose from 'mongoose';
 const questionSchema = new mongoose.Schema({
     
     //작성자, 질문제목, 질문내용, 질문올려진날짜
-    author: String, 
-
+    author:{
+        type : mongoose.Schema.Types.ObjectId, 
+        ref : 'user', 
+        required: true
+    },
     title: {
         type: String,
         required: true

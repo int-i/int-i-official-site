@@ -1,9 +1,12 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
+autoIncrement.initialize(mongoose.connection);
 
-// 이미지 업로드 기능 추가하기 
-// 검색 기능, 정렬 기능 추가하기
-
-const promotionSchema = mongoose.Schema({
+const promotionSchema = new mongoose.Schema({
+    seq:{
+        type : Number,
+        default : 0
+    },
     title:{
         type : String,
         required : [true, 'Title is required!']
@@ -23,6 +26,14 @@ const promotionSchema = mongoose.Schema({
     }
 });
 
-const Promotion  = mongoose.model('promotion', newsSchema);
-module.exports = { Promotion };
-// 모듈의 사용성을 늘리기 위한 exports
+
+promotionSchema.plugin(autoIncrement.plugin, {
+    model: 'promotions',
+    field: 'seq',
+    startAt : 1,
+    increment : 1
+});
+
+
+const promotions  = mongoose.model('promotions', promotionSchema);
+export default promotions;

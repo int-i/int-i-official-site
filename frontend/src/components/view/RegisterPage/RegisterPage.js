@@ -33,16 +33,23 @@ const RegisterPage = (props) => {
 		return axios
 			.post("/api/join", RegisterData)
 			.then((response) => {
-				if (response.status >= 200 && response.status <= 204) {
-					alert("가입에 성공하셨습니다!");
-					this.props.history.push("/");
+				try {
+					if (response.status >= 200 && response.status <= 204) {
+						alert("가입에 성공하셨습니다!");
+						props.history.push("/");
+					}
+				} catch (error) {
+					console.log(response, error);
 				}
 			})
 			.catch((error) => {
-				if (error.response.data.reason === "exid") {
-					alert("사용중인 아이디입니다.");
-				} else if (error.response.data.reason === "exnickname") {
+				//console.log(error.response.data);
+				// console.log(error.response.status);
+				// console.log(error.response.headers);
+				if (error.response.data.reason === "exnickname") {
 					alert("사용중인 닉네임입니다.");
+				} else if (error.response.data.reason === "exid") {
+					alert("사용중인 아이디입니다.");
 				} else if (error.response.data.reason === "exemail") {
 					alert("사용중인 이메일입니다.");
 				} else if (error.response.data.reason === "chpw") {
@@ -60,9 +67,9 @@ const RegisterPage = (props) => {
 		//console.log("이름 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckName.current.style.color = "yellowgreen";
+			CheckName.current.style = "color:YellowGreen";
 		} else {
-			CheckName.current.style.color = "red";
+			CheckName.current.style = "color:red";
 		}
 	};
 
@@ -75,9 +82,9 @@ const RegisterPage = (props) => {
 		//console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckNickname.current.style.color = "yellowgreen";
+			CheckNickname.current.style = "color:YellowGreen";
 		} else {
-			CheckNickname.current.style.color = "red";
+			CheckNickname.current.style = "color:red";
 		}
 	};
 
@@ -90,9 +97,9 @@ const RegisterPage = (props) => {
 		//console.log("아이디 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckId.current.style.color = "yellowgreen";
+			CheckId.current.style = "color:YellowGreen";
 		} else {
-			CheckId.current.style.color = "red";
+			CheckId.current.style = "color:red";
 		}
 	};
 
@@ -110,9 +117,9 @@ const RegisterPage = (props) => {
 		); */
 
 		if (regExp.test(event.target.value)) {
-			CheckPassword.current.style.color = "yellowgreen";
+			CheckPassword.current.style = "color:YellowGreen";
 		} else {
-			CheckPassword.current.style.color = "red";
+			CheckPassword.current.style = "color:red";
 		}
 	};
 
@@ -140,12 +147,13 @@ const RegisterPage = (props) => {
 		); */
 
 		//유효성 체크 통과 못하면 submit 못함
-		if (
-			CheckName.current.style.color &&
-			CheckNickname.current.style.color &&
-			CheckId.current.style.color &&
-			CheckPassword.current.style.color !== "yellowgreen"
-		) {
+		if (CheckName.current.style.color !== "yellowgreen") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckNickname.current.style.color !== "yellowgreen") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckId.current.style.color !== "yellowgreen") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckPassword.current.style.color !== "yellowgreen") {
 			return alert("입력 형식을 확인해주세요!");
 		} else if (password !== confirmPassword) {
 			return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");

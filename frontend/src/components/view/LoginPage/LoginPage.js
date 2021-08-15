@@ -27,22 +27,20 @@ const LoginPage = (props) => {
 			.then((response) => {
 				if (response.status >= 200 && response.status <= 204) {
 					alert("로그인에 성공하셨습니다!");
+					props.history.push("/");
 				}
 			})
-			.then(() => {
-				this.props.history.push("/");
-			})
-			.catch(() => {
+			.catch((error) => {
+				console.log(error);
 				alert("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			});
 	};
 
-	/* 임시 로그아웃 기능 
 	const logout = () => {
 		axios.get("/api/logout").then((response) => {
 			console.log(response.data);
 		});
-	}; */
+	};
 
 	const OnIdHandler = (event) => {
 		SetId(event.currentTarget.value);
@@ -161,10 +159,9 @@ const LoginPage = (props) => {
 					GitHub 로그인
 				</button>
 
-				{/* 임시 로그아웃 버튼
 				<button type="button" onClick={logout}>
 					로그아웃
-				</button> */}
+				</button>
 			</div>
 		</center>
 	);

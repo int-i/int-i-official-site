@@ -1,6 +1,7 @@
 //프로필 정보 수정 페이지
 
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import styles from "./ProfileEditPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
 
@@ -25,15 +26,15 @@ const Tags = (props) => {
 };
 
 const ProfileEditPage = (props) => {
-	const [nickname, SetNickname] = useState("닉네임");
-	const [email, SetEmail] = useState("hello@gmail.com");
-	const [password, SetPassword] = useState("비밀번호");
-	const [name, SetName] = useState("이름");
-	const [studentId, SetStudentId] = useState("12345678");
+	const [nickname, SetNickname] = useState("");
+	const [email, SetEmail] = useState("");
+	const [password, SetPassword] = useState("");
+	const [name, SetName] = useState("");
+	const [studentId, SetStudentId] = useState("");
 	const [interest, SetInterest] = useState(""); // 관심 분야
 
 	const [inputTags, SetInputTags] = useState("");
-	const [userTags, SetUserTags] = useState(["java", "react"]); // 관심 태그
+	const [userTags, SetUserTags] = useState([]); // 관심 태그
 
 	const [about, SetAbout] = useState(""); // 자기소개
 	const [github, SetGithub] = useState("");
@@ -43,6 +44,27 @@ const ProfileEditPage = (props) => {
 	const CheckEmail = useRef();
 	const CheckPassword = useRef();
 	const CheckName = useRef();
+
+	axios
+		.get("/api/auth/userinfo", {})
+		.then(function (response) {
+			console.log(response.data.user);
+			SetNickname(response.data.user.nickname);
+			SetEmail(response.data.user.email);
+			SetPassword(response.data.user.password);
+			SetName(response.data.user.username);
+			SetStudentId(response.data.user.studentId);
+			SetInterest(response.data.user.interest);
+			if (response.data.user.tags) {
+				SetUserTags(response.data.user.tags);
+			}
+			SetAbout(response.data.user.privateAbout);
+			SetGithub(response.data.user.privateGitUri);
+			SetBlog(response.data.user.privateBlogUri);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 
 	const OnNicknameHandler = (event) => {
 		SetNickname(event.currentTarget.value);
@@ -134,36 +156,16 @@ const ProfileEditPage = (props) => {
 	const OnSubmitClick = (event) => {
 		event.preventDefault();
 
-		/*
-		console.log(
-			CheckEmail.current.style.color,
-			CheckName.current.style.color,
-			CheckNickname.current.style.color,
-			CheckPassword.current.style.color
-		); */
-
 		//유효성 체크 통과 못하면 submit 못함
-		if (
-			CheckEmail.current.style.color ||
-			CheckName.current.style.color ||
-			CheckNickname.current.style.color ||
-			CheckPassword.current.style.color === "red"
-		) {
+		if (CheckNickname.current.style.color === "red") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckEmail.current.style.color === "red") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckPassword.current.style.color === "red") {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (CheckName.current.style.color === "red") {
 			return alert("입력 형식을 확인해주세요!");
 		}
-
-		console.log(
-			nickname,
-			email,
-			password,
-			name,
-			studentId,
-			interest,
-			userTags,
-			about,
-			github,
-			blog
-		);
 	};
 
 	const CreateTag = (event) => {

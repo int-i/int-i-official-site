@@ -23,7 +23,7 @@ export const PostAnswer = async (req, res) => {
 	try {
 		
 		await CodeRepositoryA.create({
-            author: user.nickname,
+            author: req.user.id,
 			codeq,
 			contents,
 			recommend,

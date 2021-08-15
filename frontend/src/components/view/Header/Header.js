@@ -61,7 +61,7 @@ const Header = () => {
 							<Link to="#">
 								<li>코드 저장소</li>
 							</Link>
-							<Link to="QnAPage">
+							<Link to="/QnAPage">
 								<li>질문방</li>
 							</Link>
 							<Link to="TechnicalNews">
