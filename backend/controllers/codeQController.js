@@ -4,7 +4,7 @@ import Like from "../models/Like";
 
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
-	const theuser = req.user;
+	const user = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
 
 	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
