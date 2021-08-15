@@ -58,7 +58,7 @@ const MainPage = () => {
 	return (
 		<div style={{ paddingBottom: "106px" }}>
 
-			<TopButton></TopButton>
+			<TopButton />
 
 			{/* 슬라이드 배너 */}
 			<Banner BannerImage={BannerImage} />
