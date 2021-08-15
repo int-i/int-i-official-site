@@ -27,6 +27,7 @@ const GOOGLE = "/google";
 
 // USER
 const EDITPROFILE = "/editprofile";
+const EDITAVATAR = "/editavatar";
 
 
 // 질문게시판
@@ -93,6 +94,7 @@ const routes = {
 	answer: ANSWER,
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
+	editavatar: EDITAVATAR,
 	codeq: CODEQ,
 	codea: CODEA,
 

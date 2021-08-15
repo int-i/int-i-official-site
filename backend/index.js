@@ -61,8 +61,8 @@ app.use(routes.api + routes.admin, IsLogged, IsAdmin, adminRouter);
 app.use(routes.api + routes.question, IsLogged, questionRouter);
 app.use(routes.api + routes.answer, IsLogged, answerRouter);
 app.use(routes.api + routes.user, IsLogged, userRouter);
-app.use(routes.api + routes.codeq, IsLogged, IsMember, codeQRouter);
-app.use(routes.api + routes.codea, IsLogged, IsMember, codeARouter);
+app.use(routes.api + routes.codeq, IsLogged, codeQRouter);
+app.use(routes.api + routes.codea, IsLogged, codeARouter);
 
 app.get("/", (req, res) => {
 	res.send("hello node!");
