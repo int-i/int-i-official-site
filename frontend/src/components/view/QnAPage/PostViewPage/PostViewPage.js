@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "./PostViewPage.module.scss";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
-import DefaultProfile from "../../../assets/images/icon/하얀 유저.png";
-import test from "../../temp.json";
-import Comment from "../Comment/Comment";
-import Answer from "../Answer/Answer";
+import DefaultProfile from "../../../../assets/images/icon/하얀 유저.png";
+import test from "../../../temp.json";
+import Comment from "../../Comment/Comment";
+import Answer from "../../Answer/Answer";
 function PostViewPage() {
 	return (
 		<div className={[styles.PostViewContainer, "Spoqa"].join(" ")}>
