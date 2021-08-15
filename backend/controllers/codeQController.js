@@ -4,8 +4,13 @@ import Like from "../models/Like";
 
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
-	const user = req.user;
+<<<<<<< HEAD
+	const theuser = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
+=======
+	const user = req.user;
+	const { title, contents, recommend, createdAt, users } = req.body;
+>>>>>>> testbr
 
 	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
     if (!title || !contents) {
@@ -19,17 +24,26 @@ export const PostQuestion = async (req, res, next) => {
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
-		
+<<<<<<< HEAD
+		//CodeRepositoryQ.dropIndex({ users: users._id });
+		const codeQ = await CodeRepositoryQ.create({
+            author: theuser.nickname,
+			user: [],
+=======
+		//CodeRepositoryQ.dropIndex({ users: null });
+		//CodeRepositoryQ.collection.dropIndexes();
 		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
+			//user: users,
+>>>>>>> testbr
 			title,
 			contents,
 			recommend,
 			createdAt
         });
+		//await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: user._id } });
 		res.locals.post = codeQ;
 		res.locals.schema = CodeRepositoryQ;
-		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
@@ -48,15 +62,11 @@ export const GetAllQuestions = async (req, res) => {
 	}
 }
 
-/*
- * read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
- * 변경사항 : post방식으로 사용자가 게시글을 클릭했을 때 해당 게시글의 _id를 찾아서 그 게시글의 정보를 다 보여주는 식으로 구현.
- */
+// read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
  export const GetOneQuestion = async (req, res) => {
-	const { _id } = req.body;
 
 	try {
-        const question = await CodeRepositoryQ.findById({ _id });
+        const question = await Question.findById({ _id: req.params.id });
         return res.status(200).json({ question: question });
     } catch (err) {
 		console.log("404: Cannot get page of showing specific one question of code repository (GetOneQuestion in codeQController) ", err);
@@ -88,7 +98,6 @@ export const PostEditQuestion = async (req, res, next) => {
         const rawData = await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
 		res.locals.schema = CodeRepositoryQ;
 		res.locals.rawData = rawData;
-		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
@@ -101,29 +110,31 @@ export const PostEditQuestion = async (req, res, next) => {
  * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록 post방식으로 구현
  */
 export const PostRecommend = async (req, res, next) => {
+	console.log("hello");
 	const user = req.user;
 	const { _id } = req.body;
 
 	try {
-		const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+		//const isLiked = await CodeRepositoryQ.findOne({ users: users });
+		console.log(user._id);
 		const question = await CodeRepositoryQ.findOne({ _id });
-
+		const isLiked = await CodeRepositoryQ.find({ $and : [{ _id : {$eq : _id }}, { user: user._id }] });////
+		
+		console.log(isLiked);
 		if (isLiked) {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend - 1 } });
-			await Like.deleteOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { user: user._id }, $set: { recommend: question.recommend - 1 } });
+			console.log(question.users, "pull");
+			console.log(question.users);
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
 		}
 		else {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend + 1 } });
-		
-			await Like.create({
-				nickname: user.nickname,
-				qoraId: _id
-			});
-
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { user: user._id }, $set: { recommend: question.recommend + 1 } });
+			console.log(question.users, "added");
+			console.log(question.users);
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend + 1});
 		}
-		
-        return res.status(200).json({ updateRecommendSuccess: true });
-    } catch (err) {
+			
+	} catch (err) {
 		console.log("400: Failed in updating number of likes in code repository question. (PostRecommend in codeQController)");
         next(err);
     }
@@ -142,7 +153,6 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		const checkauthor = await CodeRepositoryQ.findOne({ _id });
 		res.locals.rawData = checkauthor;
 		res.locals.schema = CodeRepositoryQ;
-		res.locals.schemaName = "CodeRepositoryQ";
 		
 		if (checkauthor.author !== user.nickname) {
 			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});

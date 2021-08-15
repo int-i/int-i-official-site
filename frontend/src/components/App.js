@@ -8,8 +8,16 @@ import LoginPage from "./view/LoginPage/LoginPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
 // 게시글
 import QnAPage from "./view/QnAPage/QnAPage";
+<<<<<<< HEAD
+import LoginPage from "./view/LoginPage/LoginPage";
+import UserPage from "./view/UserPage/UserPage";
+import WritePage from "./view/WritePage/WritePage";
+import ProfileEditPage from "./view/ProfileEditPage/ProfileEditPage";
+import style from "../assets/style/Layout.module.scss";
+=======
 import QnAWritePage from "./view/QnAPage/WritePage/WritePage";
 import QnAPostViewPage from "./view/QnAPage/PostViewPage/PostViewPage";
+>>>>>>> 6d4bb51494e1b6f413f00e12524c1a447e3f3e87
 import TechnicalNews from "./view/TechnicalNews/TechnicalNews";
 // 유저
 import UserPage from "./view/UserPage/UserPage";
@@ -29,6 +37,34 @@ const App = () => {
 						<Switch>
 							<Route exact path="/" component={MainPage} />
 							<Route path="/LoginPage" component={LoginPage} />
+<<<<<<< HEAD
+							<Route
+								path="/RegisterPage"
+								component={RegisterPage}
+							/>
+							<Route path="/LoginPage" component={LoginPage} />
+							<Route path="/UserPage" component={UserPage} />
+							<Route path="/WritePage" component={WritePage} />
+							<Route path="/QnAPage" component={QnAPage} />
+
+							<Route path="/WritePage" component={WritePage} />
+							<Route path="/QnAPage" component={QnAPage} />
+							<Route
+								path="/PostViewPage"
+								component={PostViewPage}
+							/>
+							<Route
+								path="/TechnicalNews"
+								component={TechnicalNews}
+							/>
+
+							<Route path="/UserPage" component={UserPage} />
+							<Route
+								path="/ProfileEditPage"
+								component={ProfileEditPage}
+							/>
+							<Route path="/" component={MainPage} />
+=======
 							<Route path="/RegisterPage" component={RegisterPage} />
 							{/* Q&A 페이지 라우터 (업데이트 추가될거임) */}
 							<Route exact path="/QnAPage" component={QnAPage} />
@@ -39,6 +75,7 @@ const App = () => {
 
 							<Route path="/UserPage" component={UserPage} />
 							<Route path="/ProfileEditPage" component={ProfileEditPage} />
+>>>>>>> 6d4bb51494e1b6f413f00e12524c1a447e3f3e87
 						</Switch>
 					</div>
 					<Footer />

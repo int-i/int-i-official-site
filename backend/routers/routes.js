@@ -14,6 +14,7 @@ const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
+const SEARCHONE = "/searchone";
 
 
 // AUTH and ADMIN
@@ -97,6 +98,7 @@ const routes = {
 	editavatar: EDITAVATAR,
 	codeq: CODEQ,
 	codea: CODEA,
+	searchone: SEARCHONE,
 
 	github: GITHUB,
 	kakao: KAKAO,
