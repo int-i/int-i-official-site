@@ -23,6 +23,10 @@ const codeRepositoryASchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    // user: [{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'users'
+    // }]
 });
 
 const CodeRepositoryA = mongoose.model('coderepositorya', codeRepositoryASchema);
