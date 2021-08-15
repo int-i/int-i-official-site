@@ -61,14 +61,13 @@ export const PostJoin = async (req, res, next) => {
                 const hash = await bcrypt.hash(password, parseInt(hashSecret));
 
                 // 권한 부여
+                let role = -1;
+                if (studentId) {
                 const isMember = await Inti.findOne({ studentId });
-                let role;
-                if (isMember && studentId) {
-                    role = 1;
-                } else {
-                    role = -1;
+                    if (isMember) {
+                        role = 1;
+                    }
                 }
-
                 await User.create({ username, id, nickname, email, studentId, hash, role });
             }
             next();

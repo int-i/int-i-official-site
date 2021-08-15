@@ -1,22 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const tagSchema = new mongoose.Schema({
-    tagname: {
-        type: String,
-        required: true,
-        unique: true
+//질문 게시판에서 답변의 스키마
+const commentSchema = new mongoose.Schema({
+  
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
     },
-    count: Number,
-    users: [
-        {
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "users",
-                unique: true
-            }
-        }
-    ],
-    posts: [
+    post: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "questions",
@@ -42,8 +33,22 @@ const tagSchema = new mongoose.Schema({
             ref: "promotions",
             unique: true
         }
-    ]
+    ],
+    board: String,
+    comment: {
+        type: String,
+        required: true
+    },
+    anonymous: {
+        type: Boolean,
+        default: false
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-const Tag = mongoose.model("tag", tagSchema);
-export default Tag;
+const Comment = mongoose.model('comment', commentSchema);
+export default Comment;
+
