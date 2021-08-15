@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styles from "./PostViewPage.module.scss";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
-import DefaultProfile from "../../../assets/images/icon/하얀 유저.png";
-import test from "../../temp.json";
-import Comment from "../Comment/Comment";
+import DefaultProfile from "../../../../assets/images/icon/하얀 유저.png";
+import test from "../../../temp.json";
+import Comment from "../../Comment/Comment";
+import Answer from "../../Answer/Answer";
 function PostViewPage() {
 	return (
 		<div className={[styles.PostViewContainer, "Spoqa"].join(" ")}>
@@ -21,7 +22,13 @@ function PostViewPage() {
 					<button>삭제</button>
 				</div>
 			</div>
-
+			{/* 태그 */}
+			<div className={styles.Tags}>
+				{test.tags.map((a, i) => {
+					return <div className={styles.Tag}>{test.tags[i]}</div>;
+				})}
+			</div>
+			{/* 내용 */}
 			<Viewer initialValue={test.content} />
 
 			{/* 좋아요를 누르기 전과 누른 상태에서 컬러가 달라야함 */}
@@ -46,6 +53,7 @@ function PostViewPage() {
 			)}
 
 			<Comment />
+			<Answer />
 		</div>
 	);
 }

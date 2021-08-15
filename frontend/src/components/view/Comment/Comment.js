@@ -91,7 +91,7 @@ function Comment() {
 													<span>{tempCommentArr[i].date}</span>
 												</div>
 											</div>
-											<div className>{tempCommentArr[i].content}</div>
+											<div className={styles.commentContent}>{tempCommentArr[i].content}</div>
 										</div>
 									);
 								})

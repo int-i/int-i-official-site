@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import styles from "./WritePage.module.scss";
-import Write from "../../../assets/images/icon/연필.png";
-import Exit from "../../../assets/images/icon/나가기.png";
+import Write from "../../../../assets/images/icon/연필.png";
+import Exit from "../../../../assets/images/icon/나가기.png";
 // 토스트 UI
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
-import BoardTagMaker from "../BoardTagMaker/BoardTagMaker";
+import BoardTagMaker from "../../BoardTagMaker/BoardTagMaker";
 
 function WritePage(props) {
 	// 태그메이커로부터 태그값 리턴 받는 함수

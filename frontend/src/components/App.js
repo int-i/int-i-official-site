@@ -8,9 +8,9 @@ import LoginPage from "./view/LoginPage/LoginPage";
 import RegisterPage from "./view/RegisterPage/RegisterPage";
 // 게시글
 import QnAPage from "./view/QnAPage/QnAPage";
-import WritePage from "./view/WritePage/WritePage";
+import QnAWritePage from "./view/QnAPage/WritePage/WritePage";
+import QnAPostViewPage from "./view/QnAPage/PostViewPage/PostViewPage";
 import TechnicalNews from "./view/TechnicalNews/TechnicalNews";
-import PostViewPage from "./view/PostViewPage/PostViewPage";
 // 유저
 import UserPage from "./view/UserPage/UserPage";
 import ProfileEditPage from "./view/ProfileEditPage/ProfileEditPage";
@@ -29,27 +29,16 @@ const App = () => {
 						<Switch>
 							<Route exact path="/" component={MainPage} />
 							<Route path="/LoginPage" component={LoginPage} />
-							<Route
-								path="/RegisterPage"
-								component={RegisterPage}
-							/>
-
-							<Route path="/WritePage" component={WritePage} />
-							<Route path="/QnAPage" component={QnAPage} />
-							<Route
-								path="/PostViewPage"
-								component={PostViewPage}
-							/>
-							<Route
-								path="/TechnicalNews"
-								component={TechnicalNews}
-							/>
+							<Route path="/RegisterPage" component={RegisterPage} />
+							{/* Q&A 페이지 라우터 (업데이트 추가될거임) */}
+							<Route exact path="/QnAPage" component={QnAPage} />
+							<Route path="/QnAPage/Write" component={QnAWritePage} />
+							<Route path="/QnAPage/PostView/:id" component={QnAPostViewPage} />
+							{/* 기술 페이지 라우터 */}
+							<Route path="/TechnicalNews" component={TechnicalNews} />
 
 							<Route path="/UserPage" component={UserPage} />
-							<Route
-								path="/ProfileEditPage"
-								component={ProfileEditPage}
-							/>
+							<Route path="/ProfileEditPage" component={ProfileEditPage} />
 						</Switch>
 					</div>
 					<Footer />
