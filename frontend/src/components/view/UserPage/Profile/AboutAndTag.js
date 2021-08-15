@@ -1,6 +1,6 @@
 // About, 관심 태그 컴포넌트
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Tags = ({ text }) => {
@@ -24,14 +24,18 @@ const AboutAndTag = () => {
 	const [about, SetAbout] = useState(""); // 자기소개
 	const [tags, SetTags] = useState([]);
 
-	axios
-		.get("/api/auth/userinfo", {})
-		.then(function (response) {
-			console.log(response.request.response);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+	useEffect(() => {
+		axios
+			.get("/api/auth/userinfo", {})
+			.then(function (response) {
+				//console.log(response.data.user);
+				SetAbout(response.data.user.privateAbout);
+				SetTags(response.data.user.tags);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
 
 	const style = {
 		textAlign: "left",

@@ -45,10 +45,6 @@ export const PostEditProfile = async (req, res, next) => {
 			return res
 				.status(400)
 				.json({ joinSuccess: false, reason: "username is required" });
-		} else if (IsEmpty(password)) {
-			return res
-				.status(400)
-				.json({ joinSuccess: false, reason: "password is required" });
 		}
 
 		// find 안에 빈값 들어가면 절대 안됨.
@@ -65,37 +61,31 @@ export const PostEditProfile = async (req, res, next) => {
 		// else 문 안먹혀서 그냥 if 문으로 바꿈
 		if (exEmail) {
 			if (req.user.email !== email) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist email",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist email",
+				});
 			}
 		}
 		if (exNickname) {
 			if (req.user.nickname !== nickname) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist nickname",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist nickname",
+				});
 			}
 		}
 		if (exStudentId) {
 			// body.studentId 는 String, user.studentId 는 Number.
 			if (req.user.studentId != studentId) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist studentId",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist studentId",
+				});
 			}
 		}
 
-		// 비번 변경 -> 바뀌나 안바뀌나 무조건 업데이트. 딱히 상관 없을 듯
+		// 비번 변경 -> 필드 값 비어있으면 수정X
 		let hash = req.user.hash;
 		if (!IsEmpty(password)) {
 			hash = await bcrypt.hash(password, hashSecret);

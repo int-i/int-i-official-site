@@ -1,12 +1,26 @@
 // 개인 작업 공간 컴포넌트
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import BlueGithub from "../../../../assets/images/icon/파란깃허브.png";
 import BlueBlog from "../../../../assets/images/icon/파란블로그.png";
 
 const PersonalWorkingSpace = () => {
-	const [blog, SetBlog] = useState("#"); // 블로그 주소
-	const [github, SetGithub] = useState("#"); // 깃허브 주소
+	const [blog, SetBlog] = useState(""); // 블로그 주소
+	const [github, SetGithub] = useState(""); // 깃허브 주소
+
+	useEffect(() => {
+		axios
+			.get("/api/auth/userinfo", {})
+			.then(function (response) {
+				//console.log(response.data.user);
+				SetGithub(response.data.user.privateGitUri);
+				SetBlog(response.data.user.privateBlogUri);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
 
 	const style = {
 		textAlign: "left",

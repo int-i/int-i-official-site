@@ -35,7 +35,7 @@ const RegisterPage = (props) => {
 			.then((response) => {
 				try {
 					if (response.status >= 200 && response.status <= 204) {
-						alert("가입에 성공하셨습니다!");
+						alert("회원가입에 성공했습니다!");
 						props.history.push("/");
 					}
 				} catch (error) {
