@@ -20,11 +20,8 @@
 	},
 	"homepage": "https://github.com/int-i/int-i-official-site#readme",
 	"dependencies": {
-<<<<<<< HEAD
 		"axios": "^0.21.1",
-=======
 		"aws-sdk": "^2.968.0",
->>>>>>> g1
 		"bcrypt": "^5.0.1",
 		"connect-mongo": "^4.4.1",
 		"cookie-parser": "^1.4.5",
@@ -45,5 +42,9 @@
 		"passport-local-mongoose": "^6.1.0",
 		"react-cookie": "^4.0.3"
 	},
-	"type": "module"
+	"type": "module",
+	"devDependencies": {
+		"node-sass": "^6.0.1",
+		"sass-loader": "^12.1.0"
+	}
 }

@@ -1,6 +1,7 @@
 //회원가입 페이지
 
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import styles from "./RegisterPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
 
@@ -18,17 +19,50 @@ const RegisterPage = (props) => {
 	const CheckId = useRef();
 	const CheckPassword = useRef();
 
+	const RegisterData = {
+		username: name,
+		nickname: nickname,
+		id: id,
+		password: password,
+		password2: confirmPassword,
+		email: email,
+		studentId: studentId,
+	};
+
+	const PostSignUpData = () => {
+		return axios
+			.post("/api/join", RegisterData)
+			.then((response) => {
+				if (response.status >= 200 && response.status <= 204) {
+					alert("가입에 성공하셨습니다!");
+					this.props.history.push("/");
+				}
+			})
+			.catch((error) => {
+				if (error.response.data.reason === "exid") {
+					alert("사용중인 아이디입니다.");
+				} else if (error.response.data.reason === "exnickname") {
+					alert("사용중인 닉네임입니다.");
+				} else if (error.response.data.reason === "exemail") {
+					alert("사용중인 이메일입니다.");
+				} else if (error.response.data.reason === "chpw") {
+					alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
+				}
+			});
+	};
+
 	const OnNameHandler = (event) => {
 		SetName(event.currentTarget.value);
 
 		//유효성 체크 - 한/영 최소 2자리
 		var regExp = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{2,}$/;
-		console.log("이름 유효성 검사 :: ", regExp.test(event.target.value));
+
+		//console.log("이름 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckName.current.style = "color:YellowGreen";
+			CheckName.current.style.color = "yellowgreen";
 		} else {
-			CheckName.current.style = "color:red";
+			CheckName.current.style.color = "red";
 		}
 	};
 
@@ -37,12 +71,13 @@ const RegisterPage = (props) => {
 
 		//유효성 체크 - 한/영 최대 6자리
 		var regExp = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{1,6}$/;
-		console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
+
+		//console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckNickname.current.style = "color:YellowGreen";
+			CheckNickname.current.style.color = "yellowgreen";
 		} else {
-			CheckNickname.current.style = "color:red";
+			CheckNickname.current.style.color = "red";
 		}
 	};
 
@@ -51,12 +86,13 @@ const RegisterPage = (props) => {
 
 		//유효성 체크 - 영/숫자 최소 6자리 (특수문자X 대문자X)
 		var regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,}$/;
-		console.log("아이디 유효성 검사 :: ", regExp.test(event.target.value));
+
+		//console.log("아이디 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckId.current.style = "color:YellowGreen";
+			CheckId.current.style.color = "yellowgreen";
 		} else {
-			CheckId.current.style = "color:red";
+			CheckId.current.style.color = "red";
 		}
 	};
 
@@ -66,15 +102,17 @@ const RegisterPage = (props) => {
 		//유효성 체크 - 영/숫자/특수문자 필수 최소 7자리 (대문자X)
 		var regExp =
 			/^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[a-z\d$@$!%*#?&]{7,}$/;
+
+		/* 
 		console.log(
 			"비밀번호 유효성 검사 :: ",
-			regExp.test(event.target.value)
-		);
+		 	regExp.test(event.target.value)
+		); */
 
 		if (regExp.test(event.target.value)) {
-			CheckPassword.current.style = "color:YellowGreen";
+			CheckPassword.current.style.color = "yellowgreen";
 		} else {
-			CheckPassword.current.style = "color:red";
+			CheckPassword.current.style.color = "red";
 		}
 	};
 
@@ -93,12 +131,13 @@ const RegisterPage = (props) => {
 	const OnSubmitHandler = (event) => {
 		event.preventDefault();
 
+		/*
 		console.log(
 			CheckName.current.style.color,
 			CheckNickname.current.style.color,
 			CheckId.current.style.color,
 			CheckPassword.current.style.color
-		);
+		); */
 
 		//유효성 체크 통과 못하면 submit 못함
 		if (
@@ -107,12 +146,13 @@ const RegisterPage = (props) => {
 			CheckId.current.style.color &&
 			CheckPassword.current.style.color !== "yellowgreen"
 		) {
-			return alert("입력 규칙을 확인해주세요!");
-		}
-
-		if (password !== confirmPassword) {
+			return alert("입력 형식을 확인해주세요!");
+		} else if (password !== confirmPassword) {
 			return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
 		}
+
+		console.log(RegisterData);
+		PostSignUpData(RegisterData);
 	};
 
 	return (

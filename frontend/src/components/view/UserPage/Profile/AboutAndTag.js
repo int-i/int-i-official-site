@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-function Tags({ text }) {
+const Tags = ({ text }) => {
 	return (
 		<span>
 			<span
@@ -17,7 +17,7 @@ function Tags({ text }) {
 			&nbsp;&nbsp;
 		</span>
 	);
-}
+};
 
 const AboutAndTag = () => {
 	const [about, SetAbout] = useState("자기소개가 없습니다."); // 자기소개
