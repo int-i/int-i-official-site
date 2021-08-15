@@ -105,11 +105,15 @@ export const PostRecommend = async (req, res, next) => {
 		//const isLiked = await CodeRepositoryQ.findOne({ users: users });
 		console.log(user._id);
 		const question = await CodeRepositoryQ.findOne({ _id });
+
+
 		const isLiked = await CodeRepositoryQ.find({ $and : [{ _id : {$eq : _id }}, { user: user._id }] });////
 		
 		console.log(isLiked);
+
+		// $pull 기능은 잘 안되는 상태
 		if (isLiked) {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { user: user._id }, $set: { recommend: question.recommend - 1 } });
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { user: user._id }}, {$set: { recommend: question.recommend - 1 }});
 			console.log(question.users, "pull");
 			console.log(question.users);
 			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
