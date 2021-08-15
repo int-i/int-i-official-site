@@ -3,12 +3,12 @@ import styles from "./TopButton.module.scss";
 import topBtn from "../../../assets/images/icon/TOP버튼.png";
 
 const TopButton = () => {
-	const [ScrollY, setScrollY] = useState(0);
-	const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
+	const [scrollY, setScrollY] = useState(0);
+	const [btnStatus, setBtnStatus] = useState(false); // 버튼 상태
 
 	const HandleFollow = () => {
 		setScrollY(window.pageYOffset);
-		if (ScrollY > 100) {
+		if (scrollY > 100) {
 			// 100 이상이면 버튼이 보이게
 			setBtnStatus(true);
 		}
@@ -38,10 +38,9 @@ const TopButton = () => {
 	})
 
 	return (
-		<div className="wrap">
+		<div>
 			<button
-				//className={BtnStatus ? "styles.topBtn.active" : "styles.topBtn"} // 버튼 노출 여부
-				className={styles.topBtn.active}
+				className={btnStatus ? [styles.topBtn, styles.active].join(" ") : styles.topBtn} // 버튼 노출 여부
 				onClick={HandleTop}  // 버튼 클릭시 함수 호출
 			><img src={topBtn} width={30} alt={"top 버튼"}/></button>
 		</div>
