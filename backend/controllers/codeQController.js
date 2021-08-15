@@ -4,7 +4,7 @@ import Like from "../models/Like";
 
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
-	const user = req.user;
+	//const user = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
 
 	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
@@ -21,7 +21,7 @@ export const PostQuestion = async (req, res, next) => {
 	try {
 		//CodeRepositoryQ.dropIndex({ users: users._id });
 		const codeQ = await CodeRepositoryQ.create({
-            author: theuser.nickname,
+            author: req.user.id,
 			title,
 			contents,
 			recommend,
@@ -109,7 +109,7 @@ export const PostRecommend = async (req, res, next) => {
 
 		//여기가 문제. 게시물 아이디는 _id이고 user배열을 순회해야하는데, 거기서 아이디가 theuser._id인 사람을 찾아야한다.
 		//const isLiked = await CodeRepositoryQ.findOne({ $and : [{ _id : _id }, { user: { _id: theuser._id } }] });////
-		const isLiked = await CodeRepositoryQ.findOne( { $and: [{ _id: _id }, { user: theuser }]});////
+		const isLiked = await CodeRepositoryQ.findOne( { $and: [{ _id: _id }, { user: theuser }]} );////
 
 
 		console.log(isLiked);

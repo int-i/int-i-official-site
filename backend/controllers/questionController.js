@@ -3,7 +3,6 @@ import Answer from "../models/Answer";
 
 // create : 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
-	const user = req.user;
 	const { title, contents, anonymous, createdAt } = req.body;
 
     if (!title || !contents) {
@@ -15,7 +14,7 @@ export const PostQuestion = async (req, res, next) => {
 	try {
 		 
 		const question = await Question.create({
-            author: user.nickname,
+            author: req.user.id,
 			title,
 			contents,
 			anonymous,

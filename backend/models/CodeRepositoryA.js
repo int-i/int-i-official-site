@@ -5,8 +5,11 @@ import "./CodeRepositoryQ";
 const codeRepositoryASchema = new mongoose.Schema({
     
     // 작성자, 제목, 내용, 답변올려진날짜, 추천수, 사람당 추천 여부
-    author: String, 
-
+    author:{
+        type : mongoose.Schema.Types.ObjectId, 
+        ref : 'user', 
+        required: true
+    },
     codeq: {
         type: mongoose.Types.ObjectId,
         ref: 'coderepositoryq'
