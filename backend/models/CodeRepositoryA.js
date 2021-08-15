@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 autoIncrement.initialize(mongoose.connection);
-import "./CodeRepositoryQ";
 
 // 코드 저장소의 답변 올릴 때 쓰는 스키마
 const codeRepositoryASchema = new mongoose.Schema({
@@ -39,7 +38,7 @@ const codeRepositoryASchema = new mongoose.Schema({
 });
 
 codeRepositoryASchema.plugin(autoIncrement.plugin, {
-    model: 'news',
+    model: 'coderepositorya',
     field: 'seq',
     startAt : 1,
     increment : 1

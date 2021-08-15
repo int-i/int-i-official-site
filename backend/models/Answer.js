@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 autoIncrement.initialize(mongoose.connection);
-import "./Question";
 
 //질문 게시판에서 답변의 스키마
 const answerSchema = new mongoose.Schema({

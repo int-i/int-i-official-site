@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 autoIncrement.initialize(mongoose.connection);
-
 // 코드 저장소의 문제 올릴 때 쓰는 스키마
 const codeRepositoryQSchema = new mongoose.Schema({
     
