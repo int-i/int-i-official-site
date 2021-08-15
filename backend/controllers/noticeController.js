@@ -23,6 +23,7 @@ export const postWriteNotice = async(req, res, next) => {
         });
         res.locals.post = notice;
         res.locals.schema = Notice;
+        res.locals.schemaName = "Notice";
         // 클라이언트로 변수 전송
         next(); 
         //return res.status(400).json({success : true})
@@ -37,12 +38,13 @@ export const postDeleteNotice = async(req,res, next) => {
     const { _id } = req.body;
 
     try {
-        res.locals.rawData = checkAuthor;
-        res.locals.schema = Notice;
-
         if(user.role !== 2){ // 사용자가 관리자가 아닐 때 
             return res.status(403).json({success:false, message : "Only Admin can delete this post."})
         }
+        const checkAuthor = await Notice.findOne({ _id });
+        res.locals.rawData = checkAuthor;
+        res.locals.schema = Notice;
+        res.locals.schemaName = "Notice";
 
         await Notice.remove({notice : _id}) 
         next();
@@ -70,6 +72,7 @@ export const postEditNotice = async(req, res, next) => {
         const rawData  = await Notice.findByIdAndUpdate(_id, {$set : {title : title, contents : contents}}) // 수정 날짜는 업데이트 하지 않음
         res.locals.schema = Notice;
         res.locals.rawData= rawData;
+        res.locals.schemaName = "Notice";
         next();
     }catch (error) {
         console.log("게시글을 삭제하는 데 실패했습니다.", err);

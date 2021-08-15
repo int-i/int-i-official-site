@@ -11,7 +11,7 @@ const AcessRights = () => {
 		textAlign: "left",
 		width: "270px",
 		padding: "30px 30px 30px 30px",
-		margin: "0px 200px 30px 10px",
+		margin: "0px 0px 30px 10px",
 		boxShadow: "0px 4px 10px 4px rgba(0, 0, 0, 0.03)",
 		borderRadius: "26px",
 	};
