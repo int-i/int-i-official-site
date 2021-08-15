@@ -4,7 +4,7 @@ import Tag from "../models/Tag";
 import bcrypt from "bcrypt";
 import config from "../config/key";
 
-const hashSecret = config.hashSecret;
+const hashSecret = parseInt(config.hashSecret);
 
 export const PostEditProfile = async (req, res, next) => {
     
@@ -21,10 +21,7 @@ export const PostEditProfile = async (req, res, next) => {
             email,
             username,
             studentId,
-            interest,
-            oldPassword,
-            newPassword,
-            newPassword2,
+            password,
             privateInterest,
             privateAbout,
             privateGitUri,
@@ -39,16 +36,8 @@ export const PostEditProfile = async (req, res, next) => {
             return res.status(400).json({ joinSuccess: false, reason: "email is required" });
         } else if (IsEmpty(username)) {
             return res.status(400).json({ joinSuccess: false, reason: "username is required" });
-        } else if (IsEmpty(oldPassword) && (!IsEmpty(newPassword) || !IsEmpty(newPassword2))) {
-
-            // 비번 비교하기 전에 newPassword 는 있는데 oldPassword 가 없는 경우
-            // 바꿀 의향이 있는데 old 가 없는 경우임.
-            return res.status(400).json({ editSuccess: false, reason: "oldPassword is required"});
-        } else if (!IsEmpty(oldPassword) && (IsEmpty(newPassword) || IsEmpty(newPassword2))) {
-
-            // 비번 비교하기 전에 old 는 있는데 new 가 없는 경우
-            // 바꿀 의향이 있는데 new 가 없는 경우임.
-            return res.status(400).json({ editSuccess: false, reason: "newPassword or 2 is required"});
+        } else if (IsEmpty(password)) {
+            return res.status(400).json({ joinSuccess: false, reason: "password is required" });
         }
 
         // find 안에 빈값 들어가면 절대 안됨.
@@ -82,18 +71,10 @@ export const PostEditProfile = async (req, res, next) => {
             }
         }
 
-        // 비번 변경
+        // 비번 변경 -> 바뀌나 안바뀌나 무조건 업데이트. 딱히 상관 없을 듯
         let hash = req.user.hash;
-        if (!IsEmpty(oldPassword) && !IsEmpty(newPassword) && !IsEmpty(newPassword2)) {
-            const result = await bcrypt.compare(oldPassword, hash);
-            if (result) {
-                if (newPassword !== newPassword2) {
-                    return res.status(400).json({ editSuccess: false, reason: "wrong newPassword or newPassword2"});
-                }
-            } else {
-                return res.status(400).json({ editSuccess: false, reason: "wrong oldPassword" });
-            }
-            hash = await bcrypt.hash(newPassword, hashSecret);
+        if (!IsEmpty(password)) {
+            hash = await bcrypt.hash(password, hashSecret);
         }
 
         // 학번 따라 권한 업데이트
@@ -110,27 +91,29 @@ export const PostEditProfile = async (req, res, next) => {
         // 태그 처리
         // 유저 관심 태그는 카운트 처리 안함.
         // 모듈화 필요..
-        const tagResult = await Promise.all(tag.map(async (arg) => {
-            let result = await Tag.findOne({ tagname: new RegExp(arg, 'i') });
+        let tagResult = [];
+        if (tag) {
+            tagResult = await Promise.all(tag.map(async (arg) => {
+                let result = await Tag.findOne({ tagname: new RegExp(arg, 'i') });
 
-            if (result) {
+                if (result) {
 
-                // $push 사용하면 중복 값 올라감.
-                // $addToSet -> 중복 값 안올라감.
-                await Tag.updateOne({ tagname: new RegExp(arg, 'i') }, { $addToSet : { users: req.user } });
-                return result;
-            } else {
+                    // $push 사용하면 중복 값 올라감.
+                    // $addToSet -> 중복 값 안올라감.
+                    await Tag.updateOne({ tagname: new RegExp(arg, 'i') }, { $addToSet : { users: req.user } });
+                    return result;
+                } else {
 
-                // 존재하지 않는 태그면 새로 만들어줌.
-                const result2 = await Tag.create({
-                    tagname: arg,
-                    count: 0,
-                    users: req.user
-                });
-                return result2;
-            }
-        }));
-
+                    // 존재하지 않는 태그면 새로 만들어줌.
+                    const result2 = await Tag.create({
+                        tagname: arg,
+                        count: 0,
+                        users: req.user
+                    });
+                    return result2;
+                }
+            }));
+        }
         // 프로필 변경
         const user = await User.findOneAndUpdate({ id: req.user.id }, {
             $set : {
@@ -138,7 +121,6 @@ export const PostEditProfile = async (req, res, next) => {
                 email,
                 username,
                 studentId,
-                interest,
                 privateInterest,
                 privateAbout,
                 privateGitUri,
