@@ -13,7 +13,7 @@ export const postWriteNews = async(req, res) => {
         const news = await News.create({
             title,
             contents,
-            author : user.nickname, // user의 nickname으로 author 값 지정 
+            author : req.user.id,
             createdAt
         });
         res.locals.post = news;

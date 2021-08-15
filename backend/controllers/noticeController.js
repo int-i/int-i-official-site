@@ -3,7 +3,7 @@ import Notice from "../models/Notice";
 // 글 등록(관리자 권한)
 export const postWriteNotice = async(req, res) => {
     const {title, contents, createdAt} = req.body;
-    
+
     if(!title || !contents){ // title나 contents가 비었을 때
         return res.status(400).json({success : false, message : "title and contents both are required"});
     }
@@ -12,7 +12,7 @@ export const postWriteNotice = async(req, res) => {
         const notice = await Notice.create({
             title,
             contents,
-            author : "Admin",
+            author : req.user.id,
             createdAt
         });
         res.locals.post = notice;

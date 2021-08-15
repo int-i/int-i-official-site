@@ -18,7 +18,7 @@ export const PostAnswer = async (req, res) => {
 	try {
 		
 		await Answer.create({
-            author: user.nickname,
+            author: req.user.id,
 			contents,
 			anonymous,
 			question,

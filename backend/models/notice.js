@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment')
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 autoIncrement.initialize(mongoose.connection);
 
 const noticeSchema = new mongoose.Schema({
@@ -12,8 +12,9 @@ const noticeSchema = new mongoose.Schema({
         required : [true, 'Title is required!']
     },
     author :{
-        type : String,
-        default : "Admin"
+        type : mongoose.Schema.Types.ObjectId, 
+        ref : 'user', 
+        required: true,
     },
     contents : {
         type : String,

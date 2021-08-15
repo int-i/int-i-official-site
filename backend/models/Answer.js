@@ -5,8 +5,11 @@ import "./Question";
 const answerSchema = new mongoose.Schema({
   
     //답변작성자, 답변 제목, 답변 내용, 답변 작성날짜
-    author: String, 
-
+    author:{
+        type : mongoose.Schema.Types.ObjectId, 
+        ref : 'user', 
+        required: true
+    },
     question: {
         type: mongoose.Types.ObjectId,
         ref: 'question'
