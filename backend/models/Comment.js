@@ -18,6 +18,10 @@ const commentSchema = new mongoose.Schema({
         },
         {
             type: mongoose.Schema.Types.ObjectId,
+            ref: "coderepositoryqa"
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
             ref: "notices"
         },
         {
@@ -27,6 +31,10 @@ const commentSchema = new mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "promotions"
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "answer"
         }
     ],
     board: String,
