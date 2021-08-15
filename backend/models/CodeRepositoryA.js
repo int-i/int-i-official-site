@@ -39,7 +39,7 @@ const codeRepositoryASchema = new mongoose.Schema({
 });
 
 codeRepositoryASchema.plugin(autoIncrement.plugin, {
-    model: 'news',
+    model: 'coderepositorya',
     field: 'seq',
     startAt : 1,
     increment : 1

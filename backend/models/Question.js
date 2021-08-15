@@ -36,6 +36,12 @@ const questionSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "tags"
         }
+    ],
+    comment: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "comment"
+        }
     ]
 });
 

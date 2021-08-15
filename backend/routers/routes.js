@@ -15,6 +15,7 @@ const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
 const SEARCHONE = "/searchone";
+const COMMENT = "/comment";
 
 
 // AUTH and ADMIN
@@ -30,6 +31,9 @@ const GOOGLE = "/google";
 const EDITPROFILE = "/editprofile";
 const EDITAVATAR = "/editavatar";
 
+
+// 댓글
+const WRITECOMMENT = "/writecomment";
 
 // 질문게시판
 const WRITEQUES = "/writeques";
@@ -99,10 +103,13 @@ const routes = {
 	codeq: CODEQ,
 	codea: CODEA,
 	searchone: SEARCHONE,
+	comment: COMMENT,
 
 	github: GITHUB,
 	kakao: KAKAO,
 	google: GOOGLE,
+
+	writecomment: WRITECOMMENT,
 
 	//질문게시판
 	writeques: WRITEQUES,

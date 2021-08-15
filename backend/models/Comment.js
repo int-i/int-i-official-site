@@ -10,28 +10,23 @@ const commentSchema = new mongoose.Schema({
     post: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "questions",
-            unique: true
+            ref: "questions"
         },
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "coderepositoryqs",
-            unique: true
+            ref: "coderepositoryqs"
         },
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "notices",
-            unique: true
+            ref: "notices"
         },
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "news",
-            unique: true
+            ref: "news"
         },
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "promotions",
-            unique: true
+            ref: "promotions"
         }
     ],
     board: String,
