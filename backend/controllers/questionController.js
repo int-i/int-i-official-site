@@ -41,15 +41,11 @@ export const GetAllQuestions = async (req, res) => {
 	}
 }
 
-/*
- * read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
- * 변경사항 : post방식으로 사용자가 게시글을 클릭했을 때 해당 게시글의 _id를 찾아서 그 게시글의 정보를 다 보여주는 식으로 구현.
- */
+// read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
 export const GetOneQuestion = async (req, res) => {
-	const { _id } = req.body;
 
 	try {
-		const question = await Question.findById({ _id });
+		const question = await Question.findById({ _id: req.params.id });
         return res.status(200).json({ question: question });
     } catch (err) {
 		console.log("404: Cannot get page of showing specific one question (GetOneQuestion in questionController) ", err);

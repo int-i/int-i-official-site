@@ -22,7 +22,7 @@ export const PostQuestion = async (req, res, next) => {
 		CodeRepositoryQ.dropIndex({ users: users._id });
 		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
-			users: [null],
+			users: [],
 			title,
 			contents,
 			recommend,
