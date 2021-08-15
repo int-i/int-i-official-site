@@ -58,7 +58,7 @@ passportConfig();
 app.use(routes.api, globalRouter);
 app.use(routes.api + routes.auth, authRouter);
 app.use(routes.api + routes.admin, IsLogged, IsAdmin, adminRouter);
-app.use(routes.api + routes.question, IsLogged, questionRouter);
+app.use(routes.api + routes.question, questionRouter);
 app.use(routes.api + routes.answer, IsLogged, answerRouter);
 app.use(routes.api + routes.user, IsLogged, userRouter);
 app.use(routes.api + routes.codeq, IsLogged, codeQRouter);
