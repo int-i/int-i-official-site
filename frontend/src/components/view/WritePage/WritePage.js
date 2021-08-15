@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./WritePage.module.scss";
 import Write from "../../../assets/images/icon/연필.png";
 import Exit from "../../../assets/images/icon/나가기.png";
+// 토스트 UI
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+import BoardTagMaker from "../BoardTagMaker/BoardTagMaker";
 
 function WritePage() {
+	// 만들어진 태그 배열
+	const ReturnTags = (Tags) => {
+		console.log(`현재 태그를 리턴하면 이 값을 갖습니다${Tags}`);
+	};
+
 	return (
 		<div className={[styles.WriteContainer, "Spoqa"].join(" ")}>
 			<form>
@@ -12,13 +21,18 @@ function WritePage() {
 					type="text"
 					placeholder="제목을 입력하세요"
 				/>
+
 				<div className={styles.line}></div>
-				<input
-					className={styles.tag}
-					type="text"
-					placeholder="태그를 입력하세요"
+
+				<BoardTagMaker ReturnTags={ReturnTags} />
+
+				<Editor
+					initialValue="질문을 입력하세요!"
+					previewStyle="vertical"
+					height="600px"
+					initialEditType="wysiwyg"
+					useCommandShortcut={true}
 				/>
-				<p>텍스트 편집기 들어올 자리</p>
 			</form>
 			<div className={[styles.buttonContainer, "NanumSquare"].join(" ")}>
 				<button className={styles.exit}>

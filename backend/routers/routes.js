@@ -1,31 +1,34 @@
 // 백엔드는 기본적으로 /api 라우팅 사용.
 
-
+// GLOBAL
 const USER = "/user";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 
-const USERINFO = "/userinfo";
-const DELUSER = "/deluser";
-
-const EDITPROFILE = "/editprofile";
-
+// FEATURE
 const API = "/api";
 const AUTH = "/auth";
-const CALLBACK = "/callback";
 const ADMIN = "/admin";
-const INTI = "/inti";
 const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
 const SEARCHONE = "/searchone";
 
+
+// AUTH and ADMIN
+const USERINFO = "/userinfo";
+const DELUSER = "/deluser";
+const INTI = "/inti";
+const CALLBACK = "/callback";
 const GITHUB = "/github";
 const KAKAO = "/kakao";
 const GOOGLE = "/google";
-// const GLOBAL_SEARCH = "";
+
+// USER
+const EDITPROFILE = "/editprofile";
+
 
 // 질문게시판
 const WRITEQUES = "/writeques";
@@ -46,6 +49,27 @@ const CODEEDITQ = "/codeeditq";
 const CODEALLQ = "/codeallq";
 const CODEONEQ = "/codeoneq";
 const CODELIKESQ = "/codelikesq";
+
+// 기술 뉴스 게시판
+const WRITENEWS = "/writeNews";
+const DELETENEWS = "/deleteNews";
+const EDITNEWS = "/editNews";
+const ALLNEWS = "/allNews";
+const ONENEWS = "/oneNews";
+
+// 정보 및 홍보 게시판
+const WRITEPROMOTION = "/writePromotion";
+const DELETEPROMOTION = "/deletePromotion";
+const EDITPROMOTION = "/editPromotion";
+const ALLPROMOTION = "/allPromotion";
+const ONEPROMOTION = "/onePromotion";
+
+// 공지사항
+const WRITENOTICE = "/writeNotice";
+const DELETENOTICE = "/deleteNotice";
+const EDITNOTICE = "/editNotice";
+const ALLNOTICE = "/allNotice";
+const ONENOTICE = "/oneNotice";
 
 // 코드저장소 답변올리기
 const CODEWRITEA = "/codewritea";
@@ -98,6 +122,27 @@ const routes = {
 	codeoneq: CODEONEQ,
 	codelikesq: CODELIKESQ,
 
+	// 기술 뉴스 게시판
+	writeNews: WRITENEWS,
+	deleteNews: DELETENEWS,
+	editNews: EDITNEWS,
+	allNews: ALLNEWS,
+	oneNews: ONENEWS,
+
+	// 정보 및 홍보 게시판
+	writePromotion: WRITEPROMOTION,
+	deletePromotion: DELETEPROMOTION,
+	editPromotion: EDITPROMOTION,
+	allPromotion: ALLPROMOTION,
+	onePromotion: ONEPROMOTION,
+
+	// 공지 사항 
+	writeNotice: WRITENOTICE,
+	deleteNotice: DELETENOTICE,
+	editNotice: EDITNOTICE,
+	allNotice: ALLNOTICE,
+	oneNotice: ONENOTICE,
+	
 	//코드저장소 답변
 	codewritea: CODEWRITEA,
 	codedela: CODEDELA,

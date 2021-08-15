@@ -35,7 +35,25 @@ export const IsAdmin = async (req, res, next) => {
             return res.status(403).json({ isAdmin: false });
         }
     } catch (err) {
-        console.log(err);
+        console.log("error at middleware IsAdmin", err);
+        next(err);
+    }
+}
+
+export const IsMember = async (req, res, next) => {
+
+    // 로그인 된 유저만 가능
+    const user = req.user;
+    try {
+        if (user.role === 1 || user.role === 2) {
+            // console.log("관리자 입니다");
+            next();
+        } else {
+            // console.log("관리자가 아닙니다");
+            return res.status(403).json({ IsMember: false });
+        }
+    } catch (err) {
+        console.log("error at middleware IsMember", err);
         next(err);
     }
 }

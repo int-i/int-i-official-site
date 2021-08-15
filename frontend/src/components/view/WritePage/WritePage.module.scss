@@ -1,8 +1,8 @@
 .WriteContainer {
-	padding-top: 30px;
+	padding-top: 50px;
 	padding-left: 10px;
 	padding-right: 10px;
-	padding-bottom: 140px;
+	padding-bottom: 180px;
 	max-width: 1150px;
 	margin: 0 auto;
 	input::placeholder {
@@ -16,7 +16,7 @@
 
 // 입력창
 
-.tag,
+.tagInput,
 .title {
 	display: block;
 	border: none;
@@ -25,10 +25,6 @@
 .title {
 	font-size: 28px;
 	font-weight: 400;
-}
-.tag {
-	font-size: 16px;
-	margin-bottom: 10px;
 }
 .line {
 	background-color: var(--light-blue);

@@ -31,6 +31,12 @@ const codeRepositoryQSchema = new mongoose.Schema({
                 unique: true
             }
         }
+    ],
+    tag: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "tags"
+        }
     ]
 });
 

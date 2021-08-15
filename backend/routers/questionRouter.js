@@ -8,6 +8,7 @@ import {
 	PostEditPost,
 	GetSearchQuestion
 } from "../controllers/questionController";
+import { PostCreateTag, PostUpdateTag, PostDelTag } from "../middleware/tag";
 
 const questionRouter = express.Router();
 
@@ -16,13 +17,13 @@ questionRouter.get('/', GetAllQuestions);
 questionRouter.post(routes.oneques, GetOneQuestion);
 
 // 게시글 작성 POST
-questionRouter.post(routes.writeques, PostQuestion);
+questionRouter.post(routes.writeques, PostQuestion, PostCreateTag);
 
 // 특정 게시글 DELETE
-questionRouter.post(routes.delques, PostDeleteQuestion);
+questionRouter.post(routes.delques, PostDeleteQuestion, PostDelTag);
 
 // 게시글 수정 POST
-questionRouter.post(routes.editques, PostEditPost);
+questionRouter.post(routes.editques, PostEditPost, PostUpdateTag);
 
 // 게시글 검색 GET
 questionRouter.get('/' + routes.searchone, GetSearchQuestion);
