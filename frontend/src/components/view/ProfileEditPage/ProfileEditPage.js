@@ -1,6 +1,6 @@
 //프로필 정보 수정 페이지
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import styles from "./ProfileEditPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
@@ -45,26 +45,24 @@ const ProfileEditPage = (props) => {
 	const CheckPassword = useRef();
 	const CheckName = useRef();
 
-	axios
-		.get("/api/auth/userinfo", {})
-		.then(function (response) {
-			console.log(response.data.user);
-			SetNickname(response.data.user.nickname);
-			SetEmail(response.data.user.email);
-			SetPassword(response.data.user.password);
-			SetName(response.data.user.username);
-			SetStudentId(response.data.user.studentId);
-			SetInterest(response.data.user.interest);
-			if (response.data.user.tags) {
+	useEffect(() => {
+		axios
+			.get("/api/auth/userinfo", {})
+			.then(function (response) {
+				SetNickname(response.data.user.nickname);
+				SetEmail(response.data.user.email);
+				SetName(response.data.user.username);
+				SetStudentId(response.data.user.studentId);
+				SetInterest(response.data.user.privateInterest);
 				SetUserTags(response.data.user.tags);
-			}
-			SetAbout(response.data.user.privateAbout);
-			SetGithub(response.data.user.privateGitUri);
-			SetBlog(response.data.user.privateBlogUri);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+				SetAbout(response.data.user.privateAbout);
+				SetGithub(response.data.user.privateGitUri);
+				SetBlog(response.data.user.privateBlogUri);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
 
 	const OnNicknameHandler = (event) => {
 		SetNickname(event.currentTarget.value);
@@ -153,6 +151,44 @@ const ProfileEditPage = (props) => {
 		SetBlog(event.currentTarget.value);
 	};
 
+	const PostProfileEdit = () => {
+		return axios
+			.post("/api/user/editprofile", {
+				nickname: nickname,
+				email: email,
+				password: password,
+				username: name,
+				studentId: studentId,
+				privateInterest: interest,
+				tag: userTags,
+				privateAbout: about,
+				privateBlogUri: blog,
+				privateGitUri: github,
+			})
+			.then((response) => {
+				try {
+					if (response.status >= 200 && response.status <= 204) {
+						alert("프로필 수정에 성공했습니다!");
+						props.history.push("/");
+					}
+				} catch (error) {
+					console.log(response, error);
+				}
+			})
+			.catch((error) => {
+				//console.log(error.response.data);
+				// console.log(error.response.status);
+				// console.log(error.response.headers);
+				if (error.response.data.reason === "exnickname") {
+					alert("사용중인 닉네임입니다.");
+				} else if (error.response.data.reason === "exid") {
+					alert("사용중인 아이디입니다.");
+				} else if (error.response.data.reason === "exemail") {
+					alert("사용중인 이메일입니다.");
+				}
+			});
+	};
+
 	const OnSubmitClick = (event) => {
 		event.preventDefault();
 
@@ -166,6 +202,8 @@ const ProfileEditPage = (props) => {
 		} else if (CheckName.current.style.color === "red") {
 			return alert("입력 형식을 확인해주세요!");
 		}
+
+		PostProfileEdit();
 	};
 
 	const CreateTag = (event) => {
@@ -240,17 +278,13 @@ const ProfileEditPage = (props) => {
 							</tr>
 
 							<tr>
-								<td className={styles.td}>
-									<span style={{ color: "red" }}>*</span>
-									&nbsp;비밀번호
-								</td>
+								<td className={styles.td}>비밀번호</td>
 								<td className={styles.td}>
 									<input
-										//type="password"
+										type="password"
 										className={styles.inputstyle}
 										value={password}
 										onChange={OnPasswordHandler}
-										required
 									/>
 									<br />
 									<span

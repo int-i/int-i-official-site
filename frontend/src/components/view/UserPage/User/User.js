@@ -1,17 +1,33 @@
 /* eslint-disable */
 // 유저 페이지 중 안 바뀌는 윗부분!
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./User.module.scss";
 import user from "../../../../assets/images/icon/하얀 유저.png";
 
 const User = () => {
-	const [nickname, SetNickname] = useState("유저 닉네임");
-	const [name, SetName] = useState("유저 이름");
-	const [studentId, SetStudentId] = useState("유저 학번");
-	const [interest, SetInterest] = useState("웹 개발");
-	const [contact, SetContact] = useState("abcde@abcde.com");
+	const [nickname, SetNickname] = useState("");
+	const [name, SetName] = useState("");
+	const [studentId, SetStudentId] = useState("");
+	const [interest, SetInterest] = useState("");
+	const [contact, SetContact] = useState("");
+
+	useEffect(() => {
+		axios
+			.get("/api/auth/userinfo", {})
+			.then(function (response) {
+				SetNickname(response.data.user.nickname);
+				SetName(response.data.user.username);
+				SetStudentId(response.data.user.studentId);
+				SetInterest(response.data.user.privateInterest);
+				SetContact(response.data.user.email);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
 
 	return (
 		<div className={styles.user}>

@@ -1,6 +1,6 @@
 // 권한 컴포넌트
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import green from "../../../../assets/images/icon/녹색자격증.png";
 import gray from "../../../../assets/images/icon/회색자격증.png";
@@ -8,15 +8,17 @@ import gray from "../../../../assets/images/icon/회색자격증.png";
 const AcessRights = () => {
 	const [auth, SetAuth] = useState(false); // 인증 상태에 따라 권한이 변함
 
-	axios
-		.get("/api/auth/userinfo", {})
-		.then(function (response) {
-			SetAuth(response.data.isMember);
-			console.log(auth);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+	useEffect(() => {
+		axios
+			.get("/api/auth/userinfo", {})
+			.then(function (response) {
+				SetAuth(response.data.isMember);
+				//console.log(auth);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
 
 	const style = {
 		textAlign: "left",
