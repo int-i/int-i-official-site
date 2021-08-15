@@ -1,0 +1,17 @@
+.topBtn {
+	position: fixed;
+	opacity: 0;
+	background: none;
+	border: none;
+	bottom: 60px;
+	right: 100px;
+	z-index: -10;
+
+	// 커서를 갖다 댔을 때 손가락 모양으로 바꿔주는 스타일
+	cursor: pointer;
+
+	&.active {
+		z-index: 10;
+		opacity: 1;
+	}
+}

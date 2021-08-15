@@ -1,6 +1,4 @@
 import Tag from "../models/Tag";
-import Question from "../models/Question";
-import CodeRepositoryQ from "../models/CodeRepositoryQ";
 
 export const PostCreateTag = async (req, res, next) => {
     try {
@@ -48,13 +46,7 @@ export const PostUpdateTag = async (req, res, next) => {
 
         // 원래 데이터
         const rawTag = res.locals.rawData.tag;
-        
-        let schemaName;
-        if (schema === Question) {
-            schemaName = "Question";
-        } else if (schema === CodeRepositoryQ) {
-            schemaName = "CodeRepositoryQ";
-        }
+        const schemaName = res.locals.schemaName;
         
         // 이건 새로 넣을거
         const tag = req.body.tag;
@@ -103,14 +95,8 @@ export const PostUpdateTag = async (req, res, next) => {
 
 export const PostDelTag = async (req, res, next) => {
     try {
-        let schemaName;
         const schema = res.locals.schema;
-        
-        if (schema === Question) {
-            schemaName = "Question";
-        } else if (schema === CodeRepositoryQ) {
-            schemaName = "CodeRepositoryQ";
-        }
+        const schemaName = res.locals.schemaName;
 
         // rawTag -> _id array
         const rawTag = res.locals.rawData.tag;
