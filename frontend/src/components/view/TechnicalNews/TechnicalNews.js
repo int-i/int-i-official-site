@@ -76,7 +76,7 @@ const TechnicalNews = (props) => {
 					</button>
 				</div>
 				<div className={styles.searchContainer}>
-					<SearchBar placeholder="질문방에서 검색" />
+					<SearchBar placeholder="기술 뉴스에서 검색" />
 				</div>
 			</div>
 		</div>
