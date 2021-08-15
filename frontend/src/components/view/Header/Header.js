@@ -48,7 +48,7 @@ const Header = () => {
 					<Link to="/">
 						<div className={styles.logo}>
 							<img src={logo} width="40" alt="인트아이 로고" />
-							<div>인트아이</div>
+							<span>인트아이</span>
 						</div>
 					</Link>
 
