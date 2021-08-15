@@ -1,15 +1,18 @@
 import React from "react";
 import styles from "./BoardListMaker.module.scss";
 
-function BoardListMaker() {
+function BoardListMaker(props) {
+	console.log(props.id);
+	// 할당값 props.tags로 변경
 	let tempArr = ["자바스크립트", "JavaScript", "파이썬"];
+	const MoveToView = () => {
+		props.push(`/${props.page}/PostViewPage/${props.id}`);
+	};
 	return (
-		<div className={[styles.BoardListMakerContainer, "Spoqa"].join(" ")}>
+		<div onClick={MoveToView} className={[styles.BoardListMakerContainer, "Spoqa"].join(" ")}>
 			<div className={styles.Post}>
-				<div className={styles.PostTitle}>제목</div>
-				<div className={styles.PostText}>
-					내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-				</div>
+				<div className={styles.PostTitle}>{props.text}</div>
+				<div className={styles.PostContent}>{props.content}</div>
 				<div className={styles.PostTags}>
 					{tempArr.map((a, i) => {
 						return <div>{tempArr[i]}</div>;
@@ -17,12 +20,13 @@ function BoardListMaker() {
 				</div>
 				<div className={styles.PostInfo}>
 					<div className={styles.PostInfoLeft}>
-						<p>2021.03.12</p>
-						<span>❤ 5</span>
+						<p>{props.date}</p>
+						<span>❤ {props.likes}</span>
 					</div>
 					<div className={styles.PostInfoRight}>
-						<div>작</div>
-						<p>작성자</p>
+						{/* 사진에 조건문 달아서 없을때만 기본 프로필로 뱉게 */}
+						<div>{props.profile}</div>
+						<p>{props.author}</p>
 					</div>
 				</div>
 			</div>

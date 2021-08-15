@@ -11,12 +11,12 @@ function QnAPage(props) {
 		<div className={[styles.QnAPageContainer, "NanumSquare"].join(" ")}>
 			<BoardBanner text="질문방 | 궁금한 내용을 질문할 수 있는 게시판으로 익명 질문도 가능합니다" />
 			<div className={styles.listContainer}>
-				<BoardListMaker />
+				<BoardListMaker push={props.history.push} />
 
 				<div className={styles.buttonContainer}>
 					<button
 						onClick={() => {
-							props.history.push("/WritePage");
+							props.history.push("/QnAPage/Write");
 						}}
 					>
 						새 글 작성
