@@ -20,7 +20,7 @@ export const PostQuestion = async (req, res, next) => {
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
 		//CodeRepositoryQ.dropIndex({ users: null });
-		CodeRepositoryQ.collection.dropIndexes();
+		//CodeRepositoryQ.collection.dropIndexes();
 		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
 			//user: users,
@@ -32,7 +32,6 @@ export const PostQuestion = async (req, res, next) => {
 		//await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: user._id } });
 		res.locals.post = codeQ;
 		res.locals.schema = CodeRepositoryQ;
-		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
@@ -88,7 +87,6 @@ export const PostEditQuestion = async (req, res, next) => {
         const rawData = await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
 		res.locals.schema = CodeRepositoryQ;
 		res.locals.rawData = rawData;
-		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
@@ -115,10 +113,12 @@ export const PostRecommend = async (req, res, next) => {
 		if (isLiked) {
 			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: { user: user._id } }, $set: { recommend: question.recommend - 1 } });
 			console.log(question.users, "pull");
+			console.log(question.users);
 			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
 		}
 		else {
 			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { users: { user: user._id } }, $set: { recommend: question.recommend + 1 } });
+			console.log(question.users);
 			console.log(question.users, "added");
 			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend + 1});
 		}
@@ -142,7 +142,6 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		const checkauthor = await CodeRepositoryQ.findOne({ _id });
 		res.locals.rawData = checkauthor;
 		res.locals.schema = CodeRepositoryQ;
-		res.locals.schemaName = "CodeRepositoryQ";
 		
 		if (checkauthor.author !== user.nickname) {
 			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});

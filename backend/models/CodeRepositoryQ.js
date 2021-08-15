@@ -28,14 +28,14 @@ const codeRepositoryQSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "tags"
         }
-    ]//,
-    // user: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: "users",
-    //         //unique: true
-    //     }
-    // ]
+    ],
+    user: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+            //unique: true
+        }
+    ]
 });
 
 const CodeRepositoryQ = mongoose.model('coderepositoryq', codeRepositoryQSchema);
