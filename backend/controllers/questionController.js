@@ -13,7 +13,7 @@ export const PostQuestion = async (req, res, next) => {
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
 		const question = await Question.create({
-			author: req.user.id,
+            author: req.user._id,
 			title,
 			contents,
 			anonymous,

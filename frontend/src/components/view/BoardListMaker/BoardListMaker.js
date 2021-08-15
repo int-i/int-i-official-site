@@ -9,10 +9,14 @@ function BoardListMaker(props) {
 		props.push(`/${props.page}/PostView/${props.id}`);
 	};
 	return (
-		<div onClick={MoveToView} className={[styles.BoardListMakerContainer, "Spoqa"].join(" ")}>
+		<div className={[styles.BoardListMakerContainer, "Spoqa"].join(" ")}>
 			<div className={styles.Post}>
-				<div className={styles.PostTitle}>{props.title}</div>
-				<div className={styles.PostContent}>{props.content}</div>
+				<div onClick={MoveToView} className={styles.PostTitle}>
+					{props.title}
+				</div>
+				<div onClick={MoveToView} className={styles.PostContent}>
+					{props.content}
+				</div>
 				<div className={styles.PostTags}>
 					{tempArr.map((a, i) => {
 						return <div>{tempArr[i]}</div>;
