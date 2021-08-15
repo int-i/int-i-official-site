@@ -39,8 +39,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     studentId: {
-        type: Number,
-        unique: true
+        type: Number
     },
 
     // 리스트 형태로 추가하는 방법.
