@@ -4,7 +4,6 @@ import Tag from "../models/Tag";
 import bcrypt from "bcrypt";
 import config from "../config/key";
 
-
 const hashSecret = config.hashSecret;
 
 export const PostEditProfile = async (req, res, next) => {
@@ -62,7 +61,7 @@ export const PostEditProfile = async (req, res, next) => {
             exStudentId = await User.findOne({ studentId });
         }
 
-        // 중복성 체크
+        // 중복성 체크 -> 나중에 isModified 로 수정...?
         // 바뀐거 없으면 패스.
         // else 문 안먹혀서 그냥 if 문으로 바꿈
         if (exEmail) {
@@ -110,6 +109,7 @@ export const PostEditProfile = async (req, res, next) => {
 
         // 태그 처리
         // 유저 관심 태그는 카운트 처리 안함.
+        // 모듈화 필요..
         const tagResult = await Promise.all(tag.map(async (arg) => {
             let result = await Tag.findOne({ tagname: new RegExp(arg, 'i') });
 
@@ -133,22 +133,35 @@ export const PostEditProfile = async (req, res, next) => {
 
         // 프로필 변경
         const user = await User.findOneAndUpdate({ id: req.user.id }, {
-            nickname,
-            email,
-            username,
-            studentId,
-            interest,
-            privateInterest,
-            privateAbout,
-            privateGitUri,
-            privateBlogUri,
-            hash,
-            role,
-            tags: tagResult
+            $set : {
+                nickname,
+                email,
+                username,
+                studentId,
+                interest,
+                privateInterest,
+                privateAbout,
+                privateGitUri,
+                privateBlogUri,
+                hash,
+                role,
+                tags: tagResult
+            }
         }, { new: true });
 
         return res.status(200).json({ editSuccess: true, user: user });
     } catch (err) {
+        console.log("error at EditProfile:", err);
         next(err);
     }
 };
+
+export const PostEditAvatar = async (req, res, next) => {
+    try {
+        const file = req.file;
+        await User.updateOne({ _id: req.user._id }, { $set: { avatarUri: file.location } });
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+    }
+}

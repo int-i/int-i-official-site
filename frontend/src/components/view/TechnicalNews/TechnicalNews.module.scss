@@ -1,0 +1,89 @@
+@import "../../../index";
+
+.banner {
+	width: 100%;
+	height: 150px;
+	background-color: var(--light-blue);
+	margin-bottom: 3%;
+
+	div { // 배너 내부 텍스트 속성
+		position: relative;
+		font-size: 24px;
+		font-weight: 800;
+		color: var(--white);
+		text-align: center;
+		top: 50%;
+		transform: translate(0%, -50%);
+	}
+}
+
+.listContainer {
+	position: relative;
+	max-width: 1100px;
+	margin: 0 auto;
+	p {
+		font-size: 20px;
+	}
+}
+
+.listContainer {
+	position: relative;
+	max-width: 1100px;
+	margin: 0 auto;
+	p {
+		font-size: 20px;
+	}
+}
+.buttonContainer {
+	padding: 30px;
+	display: flex;
+	flex-direction: row-reverse;
+	button {
+		background-color: transparent;
+		border: 2px solid black;
+		width: 100px;
+		height: 35px;
+		font-size: 16px;
+		font-weight: 900;
+		border-radius: 20px;
+		cursor: pointer;
+		transition: all 0.1s;
+	}
+	button:hover {
+		background: rgb(59, 59, 59);
+		border: 1px solid rgb(59, 59, 59);
+		color: white;
+	}
+}
+.paginationContainer {
+	display: flex;
+	justify-content: center;
+	padding: 40px;
+	button {
+		background: transparent;
+		margin: 5px;
+		color: var(--light-blue);
+		border: 2px solid var(--light-blue);
+		font-weight: 700;
+		font-size: 20px;
+		border-radius: 100px;
+		text-align: center;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		img {
+			position: relative;
+			right: 3px;
+			display: inline-block;
+			width: 20px;
+			vertical-align: middle;
+		}
+	}
+	button:hover {
+		opacity: 0.7;
+	}
+}
+.searchContainer {
+	display: flex;
+	justify-content: center;
+}

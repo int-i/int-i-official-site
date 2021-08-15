@@ -1,7 +1,6 @@
-/* eslint-disable */
-import { setState, useMemo } from "react";
-import style from "./MainPage.module.scss";
-import Banner from "./Banner";
+import { setState } from "react"
+import styles from "./MainPage.module.scss";
+import Banner from "./Banner"
 
 // 임시 json 추후 DB에 올릴 예정
 const BannerImage = [
@@ -23,36 +22,6 @@ const BannerImage = [
 ];
 
 const MainPage = () => {
-	const columns = useMemo(
-		() => [
-			{
-				accessor: "title",
-				Header: "Title",
-			},
-			{
-				accessor: "content",
-				Header: "Content",
-			},
-			{
-				accessor: "nickname",
-				Header: "Nickname",
-			},
-		],
-		[]
-	);
-
-	const data = useMemo(
-		() =>
-			Array(3)
-				.fill()
-				.map(() => ({
-					title: "도커에서 실시간으로 수정한 텍스트",
-					content: "내용1",
-					nickname: "닉네임1",
-				})),
-		[]
-	);
-
 	return (
 		<div style={{ paddingBottom: "106px" }}>
 			<Banner BannerImage={BannerImage} />

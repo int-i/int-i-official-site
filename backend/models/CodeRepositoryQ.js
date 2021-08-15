@@ -5,6 +5,7 @@ const codeRepositoryQSchema = new mongoose.Schema({
     
     // 작성자, 제목, 내용, 질문올려진날짜, 추천수, 사람당 추천 여부
     author: String, 
+    likecount: Number,
 
     title: {
         type: String,
@@ -22,6 +23,19 @@ const codeRepositoryQSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    users: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+            default: []
+        }
+    ],
+    tag: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "tags"
+        }
+    ]
 });
 
 const CodeRepositoryQ = mongoose.model('coderepositoryq', codeRepositoryQSchema);

@@ -23,7 +23,17 @@ const UserPage = () => {
 	};
 
 	return (
+<<<<<<< HEAD
 		<div style={{ backgroundColor: "#FAFDFF", paddingBottom: "140px" }}>
+=======
+		<div
+			style={{
+				paddingTop: "50px",
+				paddingBottom: "450px",
+				backgroundColor: "#FAFDFF",
+			}}
+		>
+>>>>>>> master
 			<center>
 				<User />
 

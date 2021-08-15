@@ -1,0 +1,81 @@
+@import "../../../index";
+
+.postList {
+	position: relative;
+	width: 60%;
+	height: 222px;
+	border-bottom: 1px solid var(--grey);
+	color: var(--navy);
+
+	// 박스 중앙 정렬
+	left: 50%;
+	transform: translate(-50%);
+	
+	// 텍스트 사이의 거리
+	div + div {
+		margin-top: 10px;
+	}
+
+	// 제목
+	.title {
+		font-size: 20px;
+		padding-top: 20px;
+		margin-left: 10px;
+		margin-right: 20px;
+	}
+
+	// 내용
+	.content {
+		display: block;
+		font-size: 15px;
+		margin-left: 16px;
+		margin-right: 26px;
+
+		// 텍스트 길이 2줄 제한
+		overflow: hidden;
+		width: 90%;
+		height: 36px;
+	}
+
+	// 태그
+	.tag {
+		background-color: $--grey;
+		color: var(--light-blue);
+		
+		font-size: 15px;
+		border-radius: 28.5px;
+		background-color: var(--silver);
+		padding: 5px 10px;
+		margin-right: 10px;
+	}
+
+	// 작성 일자
+	.date {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		margin-bottom: 20px;
+		margin-left: 30px;
+		color: var(--grey);
+	}
+
+	// 작성자
+	.author {
+		position: absolute;
+		font-size: 16px;
+		bottom: 0;
+		right: 0;
+		margin-bottom: 20px;
+		margin-right: 10px;
+	}
+
+	// 좋아요 수
+	.like {
+		position: absolute;
+		font-size: 14px;
+		bottom: 0;
+		margin-bottom: 20px;
+		margin-left: 120px;
+		color: var(--mint);
+	}
+}

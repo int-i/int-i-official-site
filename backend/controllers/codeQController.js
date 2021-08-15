@@ -3,7 +3,7 @@ import CodeRepositoryA from "../models/CodeRepositoryA";
 import Like from "../models/Like";
 
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
-export const PostQuestion = async (req, res) => {
+export const PostQuestion = async (req, res, next) => {
 	const user = req.user;
 	const { title, contents, recommend, createdAt } = req.body;
 
@@ -12,23 +12,26 @@ export const PostQuestion = async (req, res) => {
 		console.log("400: title or contents is blank in question of code repository. (PostQuestion in codeQController)");
         return res.status(400).json({ addQuestion: false, reason: "title and contents both are required" });
     }
-	else if (user.role !== 1) {
-		console.log("403: uploader of code repository question must be the member of IntI (PostQuestion in codeQController)");
-		return res.status(403).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
-	}
+	// else if (user.role !== 1) {
+	// 	console.log("403: uploader of code repository question must be the member of IntI (PostQuestion in codeQController)");
+	// 	return res.status(403).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
+	// }
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
-		
-		await CodeRepositoryQ.create({
+		CodeRepositoryQ.dropIndex({ users: users._id });
+		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
+			users: [null],
 			title,
 			contents,
 			recommend,
 			createdAt
         });
-
-		res.status(200).json({ addQuestion: true });
+		//await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: user._id } });
+		res.locals.post = codeQ;
+		res.locals.schema = CodeRepositoryQ;
+		next();
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
 		res.status(400).send({ error: error.message })
@@ -66,7 +69,7 @@ export const GetAllQuestions = async (req, res) => {
  * update : 게시글 수정 완료 후 저장 버튼을 눌렀을 때.
  * 변경사항 : 작성자 본인만 수정이 가능하도록 구현.
  */
-export const PostEditQuestion = async (req, res) => {
+export const PostEditQuestion = async (req, res, next) => {
 	const user = req.user;
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
@@ -76,15 +79,17 @@ export const PostEditQuestion = async (req, res) => {
     }
 
 	try {
-		const checkauthor = CodeRepositoryQ.findOne({ _id });
+		const checkauthor = await CodeRepositoryQ.findOne({ _id });
 
 		if (checkauthor.author !== user.nickname) {
 			console.log("403: This user does not have authority to edit question. (PostEditQuestion in codeQController) ");
 			return res.status(403).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
 		}
 
-        await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
-        res.status(200).json({ updateQuestion: true });
+        const rawData = await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
+		res.locals.schema = CodeRepositoryQ;
+		res.locals.rawData = rawData;
+		next();
 	} catch (error) {
 		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
 		res.status(400).send({ error: error.message });
@@ -96,29 +101,29 @@ export const PostEditQuestion = async (req, res) => {
  * delete와 똑같이 클릭을 하면 _id값을 전달해서 추천수를 올리는게 가능하도록 post방식으로 구현
  */
 export const PostRecommend = async (req, res, next) => {
+	console.log("hello");
 	const user = req.user;
 	const { _id } = req.body;
 
 	try {
-		const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+		//const isLiked = await CodeRepositoryQ.findOne({ users: users });
+		console.log(user._id);
 		const question = await CodeRepositoryQ.findOne({ _id });
-
+		const isLiked = await CodeRepositoryQ.find( { $and : [{ _id : {$eq : _id }} , { users: { user: user._id }} ] });////
+		
+		//console.log(isLiked);
 		if (isLiked) {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend - 1 } });
-			await Like.deleteOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: { user: user._id } }, $set: { recommend: question.recommend - 1 } });
+			console.log(question.users, "pull");
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend - 1});
 		}
 		else {
-			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend + 1 } });
-		
-			await Like.create({
-				nickname: user.nickname,
-				qoraId: _id
-			});
-
+			await CodeRepositoryQ.findByIdAndUpdate( _id, { $addToSet : { users: { user: user._id } }, $set: { recommend: question.recommend + 1 } });
+			console.log(question.users, "added");
+			return res.status(200).json({ recommendUpdate: true, recommendation: question.recommend + 1});
 		}
-		
-        return res.status(200).json({ updateRecommendSuccess: true });
-    } catch (err) {
+			
+	} catch (err) {
 		console.log("400: Failed in updating number of likes in code repository question. (PostRecommend in codeQController)");
         next(err);
     }
@@ -134,7 +139,9 @@ export const PostDeleteQuestion = async (req, res, next) => {
 	const { _id } = req.body;
 
 	try {
-		const checkauthor = CodeRepositoryQ.findOne({ _id });
+		const checkauthor = await CodeRepositoryQ.findOne({ _id });
+		res.locals.rawData = checkauthor;
+		res.locals.schema = CodeRepositoryQ;
 		
 		if (checkauthor.author !== user.nickname) {
 			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});
@@ -142,7 +149,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
 
 		await CodeRepositoryA.deleteMany({ codeq: _id });
         await CodeRepositoryQ.deleteOne({ _id });
-        return res.status(200).json({ delQuestionSuccess: true });
+		next();
     } catch (err) {
 		console.log("400: Failed in deleting question. (PostDeleteQuestion in codeQController) ", err);
         next(err);

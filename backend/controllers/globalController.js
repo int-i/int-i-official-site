@@ -2,10 +2,12 @@ import User from "../models/User";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import Inti from "../models/Inti";
-import config from "../config/dev";
+import config from "../config/key";
+import dotenv from "dotenv";
+dotenv.config();
 
 // 해쉬 복잡도. 환경변수로 빼야함. 보안 떨어진다 싶으면 salt 사용.
-const hashSecret = config.hashSecret
+const hashSecret = config.hashSecret;
 
 // 공백확인 함수
 
@@ -19,24 +21,23 @@ export const PostJoin = async (req, res, next) => {
 
     // 요청 정보 추출
     const { username, id, nickname, email, studentId, password, password2 } = req.body;
-    const fieldValue = [username, id, nickname, email, studentId, password, password2];
 
         try {
 
             // 필드값 유무 검사
             // 나중에 반복문으로 정리. 아님 or 로 아래랑 합쳐도 됨. 대신 상세한 reason 불가능.
             if (IsEmpty(username)) {
-                return res.status(400).json({ joinSuccess: false, reason:  "username is required" });
+                return res.status(400).json({ joinSuccess: false, reason:  "rqusername" });
             } else if (IsEmpty(nickname)) {
-                return res.status(400).json({ joinSuccess: false, reason: "nickname is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqnickname" });
             } else if (IsEmpty(id)) {
-                return res.status(400).json({ joinSuccess: false, reason: "id is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqid" });
             } else if (IsEmpty(email)) {
-                return res.status(400).json({ joinSuccess: false, reason: "email is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqemail" });
             } else if (IsEmpty(password)) {
-                return res.status(400).json({ joinSuccess: false, reason: "password is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqpassword" });
             } else if (IsEmpty(password2)) {
-                return res.status(400).json({ joinSuccess: false, reason: "password2 is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqpassword2" });
             }
 
             // 필드 값 중복성 검사
@@ -46,19 +47,18 @@ export const PostJoin = async (req, res, next) => {
             const exNickname = await User.findOne({ nickname });
 
             if (exId) {
-                return res.status(400).json({ joinSuccess: false, reason: "already exist id" });
+                return res.status(400).json({ joinSuccess: false, reason: "exid" });
             } else if (exEmail) {
-                return res.status(400).json({ joinSuccess: false, reason: "already exist email" });
+                return res.status(400).json({ joinSuccess: false, reason: "exemail" });
             } else if (exNickname) {
-                console.log(1);
-                return res.status(400).json({ joinSuccess: false, reason: "already exist nickname" });
+                return res.status(400).json({ joinSuccess: false, reason: "exnickname" });
             } else if (password !== password2) {
-                return res.status(400).json({ joinSuccess: false, reason: "wrong password or password2" });
+                return res.status(400).json({ joinSuccess: false, reason: "chpw" });
             } else {
 
                 // 유효성 나중에 추가
                 // 해쉬 보안을 위해 salt 도입 필요하긴 함. 회의 후 결정.
-                const hash = await bcrypt.hash(password, hashSecret);
+                const hash = await bcrypt.hash(password, parseInt(hashSecret));
 
                 // 권한 부여
                 const isMember = await Inti.findOne({ studentId });
@@ -68,11 +68,12 @@ export const PostJoin = async (req, res, next) => {
                 } else {
                     role = -1;
                 }
+
                 await User.create({ username, id, nickname, email, studentId, hash, role });
             }
             next();
         } catch (err) {
-            console.log(err);
+            console.log("error at local join:", err);
             next(err)
         }
 };
@@ -81,7 +82,7 @@ export const PostJoin = async (req, res, next) => {
 export const PostLogin = (req, res, next) => {
     passport.authenticate("local-login", (authErr, user, info) => {
         if (authErr) {
-            console.log("authErr", authErr);
+            console.log("error at local login:", authErr);
             res.json({ loginSuccess: false, reason: "internal server error" });
             return next(authErr);
         }
@@ -93,7 +94,7 @@ export const PostLogin = (req, res, next) => {
         }
         req.login(user, (err) => {
             if (err) {
-                console.log("err", err);
+                console.log("error at local login:", err);
                 return res.json(500).json({ loginSuccess: false, reason: "correct id and password but internal server error"});
             }
 

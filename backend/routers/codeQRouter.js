@@ -8,6 +8,8 @@ import {
 	PostEditQuestion,
 	PostRecommend
 } from "../controllers/codeQController";
+import { PostCreateTag, PostUpdateTag, PostDelTag } from "../middleware/tag";
+import { IsMember } from "../middleware/auth";
 
 const codeQRouter = express.Router();
 
@@ -16,13 +18,13 @@ codeQRouter.get('/', GetAllQuestions);
 codeQRouter.post(routes.codeoneq, GetOneQuestion);
 
 // 게시글 작성 POST
-codeQRouter.post(routes.codewriteq, PostQuestion);
+codeQRouter.post(routes.codewriteq, IsMember, PostQuestion, PostCreateTag);
 
 // 특정 게시글 DELETE
-codeQRouter.post(routes.codedelq, PostDeleteQuestion);
+codeQRouter.post(routes.codedelq, IsMember, PostDeleteQuestion, PostDelTag);
 
 // 게시글 수정 POST / 추천수 업데이트 GET
-codeQRouter.post(routes.codeeditq, PostEditQuestion);
+codeQRouter.post(routes.codeeditq, IsMember, PostEditQuestion, PostUpdateTag);
 codeQRouter.post(routes.codelikesq, PostRecommend);
 
 

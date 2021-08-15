@@ -16,8 +16,8 @@ const connectDB = function () {
 		.catch((err) => console.log(err));
 };
 
-mongoose.connection.on("error", (err) => {
-	console.log("mongoDB Error occurred");
+mongoose.connection.on('error', (err) => {
+    console.log('mongoDB Error occurred', err);
 });
 
 export default connectDB;

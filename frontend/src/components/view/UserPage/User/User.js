@@ -4,7 +4,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./User.module.scss";
-import FormBtn from "../../FormBtn/FormBtn";
 import user from "../../../../assets/images/icon/하얀 유저.png";
 
 const User = () => {
@@ -36,14 +35,10 @@ const User = () => {
 				<br />
 				<br />
 
-				<FormBtn
-					text="사진 업로드"
-					width="120px"
-					height="34px"
-					kind="컬러"
-					borderRadius="5px"
-					textAlign="center"
-				/>
+				<label className={styles.button} for="inputFile">
+					사진 업로드
+				</label>
+				<input type="file" id="inputFile" style={{ display: "none" }} />
 			</div>
 
 			<div className={styles.verticalLine}></div>

@@ -4,37 +4,72 @@ import React, { useState, useRef } from "react";
 import styles from "./ProfileEditPage.module.scss";
 import FormBtn from "../FormBtn/FormBtn";
 
+const Tags = (props) => {
+	const ClickTag = () => {
+		props.DeleteTag(props.text);
+	};
+
+	if (props.text !== "") {
+		return (
+			// 작성된 태그가 있을 때만 태그를 렌더링한다
+			<span>
+				<span onClick={ClickTag} className={styles.tagstyle}>
+					{props.text}
+				</span>
+				&nbsp;&nbsp;
+			</span>
+		);
+	} else {
+		return <span></span>;
+	}
+};
+
 const ProfileEditPage = (props) => {
-	const [nickname, SetNickname] = useState("");
-	const [email, SetEmail] = useState("");
-	const [password, SetPassword] = useState("");
-	const [name, SetName] = useState("");
-	const [studentId, SetStudentId] = useState("");
-	const [interest, SetInterest] = useState("");
+	const [nickname, SetNickname] = useState("닉네임");
+	const [email, SetEmail] = useState("hello@gmail.com");
+	const [password, SetPassword] = useState("비밀번호");
+	const [name, SetName] = useState("이름");
+	const [studentId, SetStudentId] = useState("12345678");
+	const [interest, SetInterest] = useState(""); // 관심 분야
+
+	const [inputTags, SetInputTags] = useState("");
+	const [userTags, SetUserTags] = useState(["java", "react"]); // 관심 태그
+
 	const [about, SetAbout] = useState(""); // 자기소개
 	const [github, SetGithub] = useState("");
 	const [blog, SetBlog] = useState("");
 
-	const CheckName = useRef();
 	const CheckNickname = useRef();
+	const CheckEmail = useRef();
 	const CheckPassword = useRef();
+	const CheckName = useRef();
 
 	const OnNicknameHandler = (event) => {
 		SetNickname(event.currentTarget.value);
 
 		//유효성 체크 - 한/영 최대 6자리
 		var regExp = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{1,6}$/;
-		console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
+
+		//console.log("닉네임 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckNickname.current.style = "color:YellowGreen";
+			CheckNickname.current.style.color = "yellowgreen";
 		} else {
-			CheckNickname.current.style = "color:red";
+			CheckNickname.current.style.color = "red";
 		}
 	};
 
 	const OnEmailHandler = (event) => {
 		SetEmail(event.currentTarget.value);
+
+		var regExp =
+			/^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{1,8}$/;
+
+		if (regExp.test(event.target.value)) {
+			CheckEmail.current.style.color = "yellowgreen";
+		} else {
+			CheckEmail.current.style.color = "red";
+		}
 	};
 
 	const OnPasswordHandler = (event) => {
@@ -43,15 +78,17 @@ const ProfileEditPage = (props) => {
 		//유효성 체크 - 영/숫자/특수문자 필수 최소 7자리 (대문자X)
 		var regExp =
 			/^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[a-z\d$@$!%*#?&]{7,}$/;
-		console.log(
+
+		/*
+			console.log(
 			"비밀번호 유효성 검사 :: ",
 			regExp.test(event.target.value)
-		);
+		); */
 
 		if (regExp.test(event.target.value)) {
-			CheckPassword.current.style = "color:YellowGreen";
+			CheckPassword.current.style.color = "yellowgreen";
 		} else {
-			CheckPassword.current.style = "color:red";
+			CheckPassword.current.style.color = "red";
 		}
 	};
 
@@ -60,12 +97,13 @@ const ProfileEditPage = (props) => {
 
 		//유효성 체크 - 한/영 최소 2자리
 		var regExp = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]{2,}$/;
-		console.log("이름 유효성 검사 :: ", regExp.test(event.target.value));
+
+		//console.log("이름 유효성 검사 :: ", regExp.test(event.target.value));
 
 		if (regExp.test(event.target.value)) {
-			CheckName.current.style = "color:YellowGreen";
+			CheckName.current.style.color = "yellowgreen";
 		} else {
-			CheckName.current.style = "color:red";
+			CheckName.current.style.color = "red";
 		}
 	};
 
@@ -75,6 +113,10 @@ const ProfileEditPage = (props) => {
 
 	const OnInterestHandler = (event) => {
 		SetInterest(event.currentTarget.value);
+	};
+
+	const OnTagsHandler = (event) => {
+		SetInputTags(event.currentTarget.value);
 	};
 
 	const OnAboutHandler = (event) => {
@@ -89,32 +131,68 @@ const ProfileEditPage = (props) => {
 		SetBlog(event.currentTarget.value);
 	};
 
-	const OnSubmitHandler = (event) => {
+	const OnSubmitClick = (event) => {
 		event.preventDefault();
 
+		/*
 		console.log(
+			CheckEmail.current.style.color,
 			CheckName.current.style.color,
 			CheckNickname.current.style.color,
 			CheckPassword.current.style.color
-		);
+		); */
 
 		//유효성 체크 통과 못하면 submit 못함
 		if (
-			CheckName.current.style.color &&
-			CheckNickname.current.style.color &&
-			CheckPassword.current.style.color !== "yellowgreen"
+			CheckEmail.current.style.color ||
+			CheckName.current.style.color ||
+			CheckNickname.current.style.color ||
+			CheckPassword.current.style.color === "red"
 		) {
-			return alert("입력 규칙을 확인해주세요!");
+			return alert("입력 형식을 확인해주세요!");
+		}
+
+		console.log(
+			nickname,
+			email,
+			password,
+			name,
+			studentId,
+			interest,
+			userTags,
+			about,
+			github,
+			blog
+		);
+	};
+
+	const CreateTag = (event) => {
+		if (event.key === "Enter") {
+			//console.log("${event.key}가 입력되었습니다");
+			let tempArr = [...userTags];
+			tempArr.push(inputTags);
+			SetUserTags(tempArr);
+			SetInputTags("");
+		}
+	};
+
+	const DeleteTag = (clickedTag) => {
+		if (clickedTag !== "") {
+			let tempArr = [...userTags];
+			let tempIndex = tempArr.indexOf(clickedTag);
+			tempArr.splice(tempIndex, 1);
+			SetUserTags(tempArr);
 		}
 	};
 
 	return (
 		<center className="profileEditCenter">
 			<div className={[styles.profileEditPage, "NanumSquare"].join(" ")}>
-				<form id="register" onSubmit={OnSubmitHandler}>
+				<div className={styles.title}>프로필 정보 수정</div>
+				<form>
 					<table className={styles.tablestyle}>
 						<tbody>
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>
 									<span style={{ color: "red" }}>*</span>
 									&nbsp;닉네임
@@ -137,7 +215,7 @@ const ProfileEditPage = (props) => {
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>
 									<span style={{ color: "red" }}>*</span>
 									&nbsp;이메일
@@ -145,15 +223,21 @@ const ProfileEditPage = (props) => {
 								<td className={styles.td}>
 									<input
 										className={styles.inputstyle}
-										type="email"
 										value={email}
 										onChange={OnEmailHandler}
 										required
 									/>
+									<br />
+									<span
+										ref={CheckEmail}
+										className={styles.checkText}
+									>
+										&nbsp;&nbsp; 이메일 형식을 지켜주세요!
+									</span>
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>
 									<span style={{ color: "red" }}>*</span>
 									&nbsp;비밀번호
@@ -177,7 +261,7 @@ const ProfileEditPage = (props) => {
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>
 									<span style={{ color: "red" }}>*</span>
 									&nbsp;이름
@@ -200,57 +284,95 @@ const ProfileEditPage = (props) => {
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>학번</td>
 								<td className={styles.td}>
 									<input
 										className={styles.inputstyle}
 										value={studentId}
 										onChange={OnStudentIdHandler}
+										placeholder={"학번을 등록해보세요"}
 									/>
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>관심분야</td>
 								<td className={styles.td}>
 									<input
 										className={styles.inputstyle}
 										value={interest}
 										onChange={OnInterestHandler}
+										placeholder={"관심 분야를 등록해보세요"}
 									/>
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
-								<td className={styles.td}>자기소개</td>
+							<tr>
+								<td className={styles.td}>관심태그</td>
 								<td className={styles.td}>
+									<span
+										style={{ margin: "25px 0px 20px 0px" }}
+									>
+										{userTags.map((a, i) => {
+											return (
+												<Tags
+													text={userTags[i]}
+													DeleteTag={DeleteTag}
+												/>
+											);
+										})}
+									</span>
 									<input
-										className={styles.inputstyle}
+										className={styles.tagstyle}
+										value={inputTags}
+										onChange={OnTagsHandler}
+										placeholder={"관심 태그를 등록해보세요"}
+										onKeyPress={CreateTag}
+									/>
+								</td>
+							</tr>
+
+							<tr>
+								<td className={styles.abouttd}>자기소개</td>
+								<td className={styles.abouttd}>
+									<textarea
+										className={styles.aboutinputstyle}
 										value={about}
 										onChange={OnAboutHandler}
+										placeholder={
+											"자신에 대한 간단한 소개를 등록해보세요"
+										}
 									/>
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>깃허브</td>
 								<td className={styles.td}>
 									<input
 										className={styles.inputstyle}
 										value={github}
+										type="text"
 										onChange={OnGithubHandler}
+										placeholder={
+											"깃허브 주소를 등록해보세요"
+										}
 									/>
 								</td>
 							</tr>
 
-							<tr className={styles.tr}>
+							<tr>
 								<td className={styles.td}>블로그</td>
 								<td className={styles.td}>
 									<input
 										className={styles.inputstyle}
 										value={blog}
+										type="text"
 										onChange={OnBlogHandler}
+										placeholder={
+											"블로그 주소를 등록해보세요"
+										}
 									/>
 								</td>
 							</tr>
@@ -270,15 +392,14 @@ const ProfileEditPage = (props) => {
 					text="취소"
 				/>
 				<FormBtn
-					type="submit"
-					form="register"
 					width="120px"
 					height="45px"
 					borderRadius="10px"
 					fontSize="18px"
 					margin="5px"
 					kind="컬러"
-					text="수정완료"
+					text="수정 완료"
+					onClick={OnSubmitClick}
 				/>
 			</div>
 		</center>
