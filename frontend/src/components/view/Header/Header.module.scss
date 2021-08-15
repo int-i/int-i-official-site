@@ -39,10 +39,9 @@
 // 로고 스타일
 .logo {
 	display: flex; // 로고와 텍스트가 일직선이 되게 표시
-
+	align-items: center;
 	font-size: 26px;
 	font-weight: 900;
-	align-items: center;
 	
 	color: var(--navy);
 
@@ -74,12 +73,16 @@
 }
 .loginUI {
 	display: flex;
+	align-items: center;
 	li {
 		font-size: 14px;
 		font-weight: 400;
 		margin-left: 10px;
 	}
 
+	img {
+		vertical-align: middle;
+	}
 	a:hover {
 		color: rgba(44, 62, 80, 0.5); // 색상은 --navy 그대로 투명도만 변화
 	}

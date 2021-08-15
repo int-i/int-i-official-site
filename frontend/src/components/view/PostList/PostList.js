@@ -10,7 +10,7 @@ const PostList = ({ post }) => {
 				<span className={styles.tag}>{tag.tagName}</span>
 			))}</div>
 			<div className={styles.date}>{post.date}</div>
-			<div className={styles.author}><img src={userIcon} alt="유저이미지" width="20" />{post.author}</div>
+			<div className={styles.author}><img src={userIcon} alt="유저이미지" width={"20"} />{post.author}</div>
 			<div className={styles.like}>{post.like}</div>
 		</div>
 	);
