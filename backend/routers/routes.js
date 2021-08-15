@@ -15,6 +15,7 @@ const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
 const SEARCHONE = "/searchone";
+const COMMENT = "/comment";
 
 // AUTH and ADMIN
 const USERINFO = "/userinfo";
@@ -29,6 +30,13 @@ const GOOGLE = "/google";
 const EDITPROFILE = "/editprofile";
 const EDITAVATAR = "/editavatar";
 
+<<<<<<< HEAD
+=======
+
+// 댓글
+const WRITECOMMENT = "/writecomment";
+
+>>>>>>> 55e5e02e20f5530a38d1d8d239a49c2a335eef37
 // 질문게시판
 const WRITEQUES = "/writeques";
 const DELQUES = "/delques";
@@ -97,10 +105,13 @@ const routes = {
 	codeq: CODEQ,
 	codea: CODEA,
 	searchone: SEARCHONE,
+	comment: COMMENT,
 
 	github: GITHUB,
 	kakao: KAKAO,
 	google: GOOGLE,
+
+	writecomment: WRITECOMMENT,
 
 	//질문게시판
 	writeques: WRITEQUES,

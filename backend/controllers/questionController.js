@@ -3,7 +3,6 @@ import Answer from "../models/Answer";
 import mongoose from "mongoose";
 // create : 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
-	const user = req.user;
 	const { title, contents, anonymous, createdAt } = req.body;
 
 	if (!title || !contents) {
@@ -14,7 +13,11 @@ export const PostQuestion = async (req, res, next) => {
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
 		const question = await Question.create({
+<<<<<<< HEAD
 			author: user.nickname,
+=======
+            author: req.user.id,
+>>>>>>> 55e5e02e20f5530a38d1d8d239a49c2a335eef37
 			title,
 			contents,
 			anonymous,

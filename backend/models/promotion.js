@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const autoIncrement = require('mongoose-auto-increment')
+import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 autoIncrement.initialize(mongoose.connection);
 
 const promotionSchema = new mongoose.Schema({

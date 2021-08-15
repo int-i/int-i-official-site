@@ -2,7 +2,6 @@ import Promotion from "../models/Promotion";
 
 // 글 등록(인트아이 회원 권한)
 export const postWritePromotion = async(req, res) => {
-    const user = req.user;
     const { title, contents, createdAt} = req.body;
     
     if(!title || !contents){ // title나 contents가 비었을 때
@@ -13,7 +12,7 @@ export const postWritePromotion = async(req, res) => {
         const promotion = await Promotion.create({
             title,
             contents,
-            author : user.nickname,
+            author : req.user.id,
             createdAt
         });
         res.locals.post = promotion;

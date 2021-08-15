@@ -45,10 +45,6 @@ export const PostEditProfile = async (req, res, next) => {
 			return res
 				.status(400)
 				.json({ joinSuccess: false, reason: "username is required" });
-		} else if (IsEmpty(password)) {
-			return res
-				.status(400)
-				.json({ joinSuccess: false, reason: "password is required" });
 		}
 
 		// find 안에 빈값 들어가면 절대 안됨.
@@ -95,7 +91,7 @@ export const PostEditProfile = async (req, res, next) => {
 			}
 		}
 
-		// 비번 변경 -> 바뀌나 안바뀌나 무조건 업데이트. 딱히 상관 없을 듯
+		// 비번 변경 ->  필드 값 비어있으면 수정X
 		let hash = req.user.hash;
 		if (!IsEmpty(password)) {
 			hash = await bcrypt.hash(password, hashSecret);

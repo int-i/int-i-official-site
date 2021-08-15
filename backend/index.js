@@ -17,6 +17,7 @@ import answerRouter from "./routers/answerRouter";
 import userRouter from "./routers/userRouter";
 import codeQRouter from "./routers/codeQRouter";
 import codeARouter from "./routers/codeARouter";
+import commentRouter from "./routers/commentRouter";
 import { IsAdmin, IsLogged, IsMember } from "./middleware/auth";
 // 추가해야 할 모듈 및 미들웨어 : path, cors
 
@@ -63,6 +64,7 @@ app.use(routes.api + routes.answer, IsLogged, answerRouter);
 app.use(routes.api + routes.user, IsLogged, userRouter);
 app.use(routes.api + routes.codeq, IsLogged, codeQRouter);
 app.use(routes.api + routes.codea, IsLogged, codeARouter);
+app.use(routes.api + routes.comment, IsLogged, commentRouter);
 
 app.get("/", (req, res) => {
 	res.send("hello node!");
