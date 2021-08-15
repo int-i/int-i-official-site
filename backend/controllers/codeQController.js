@@ -22,6 +22,7 @@ export const PostQuestion = async (req, res) => {
 		
 		await CodeRepositoryQ.create({
             author: user.nickname,
+			users,
 			title,
 			contents,
 			recommend,
@@ -97,12 +98,13 @@ export const PostEditQuestion = async (req, res) => {
  */
 export const PostRecommend = async (req, res, next) => {
 	const user = req.user;
-	const { _id } = req.body;
+	const { _id, users } = req.body;
 
 	try {
-		const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
-		const question = await CodeRepositoryQ.findOne({ _id });
-
+		//const isLiked = await Like.findOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
+		const isLiked = await CodeRepositoryQ.findOne({ users: users });
+		//const question = await CodeRepositoryQ.findOne({ _id });
+		
 		if (isLiked) {
 			await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { recommend: question.recommend - 1 } });
 			await Like.deleteOne({ $and: [{ nickname: user.nickname }, { qoraId: _id }] });
