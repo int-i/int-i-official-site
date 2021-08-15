@@ -12,10 +12,10 @@ export const PostQuestion = async (req, res, next) => {
 		console.log("400: title or contents is blank in question of code repository. (PostQuestion in codeQController)");
         return res.status(400).json({ addQuestion: false, reason: "title and contents both are required" });
     }
-	else if (user.role !== 1) {
-		console.log("403: uploader of code repository question must be the member of IntI (PostQuestion in codeQController)");
-		return res.status(403).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
-	}
+	// else if (user.role !== 1) {
+	// 	console.log("403: uploader of code repository question must be the member of IntI (PostQuestion in codeQController)");
+	// 	return res.status(403).json({ addQuestion: false, reason: "uploader must be the member of IntI" })
+	// }
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
@@ -29,8 +29,6 @@ export const PostQuestion = async (req, res, next) => {
         });
 		res.locals.post = codeQ;
 		res.locals.schema = CodeRepositoryQ;
-
-		// res.status(200).json({ addQuestion: true });
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
@@ -69,7 +67,7 @@ export const GetAllQuestions = async (req, res) => {
  * update : 게시글 수정 완료 후 저장 버튼을 눌렀을 때.
  * 변경사항 : 작성자 본인만 수정이 가능하도록 구현.
  */
-export const PostEditQuestion = async (req, res) => {
+export const PostEditQuestion = async (req, res, next) => {
 	const user = req.user;
 	const { _id, title, contents, anonymous, createdAt } = req.body;
 
@@ -79,15 +77,17 @@ export const PostEditQuestion = async (req, res) => {
     }
 
 	try {
-		const checkauthor = CodeRepositoryQ.findOne({ _id });
+		const checkauthor = await CodeRepositoryQ.findOne({ _id });
 
 		if (checkauthor.author !== user.nickname) {
 			console.log("403: This user does not have authority to edit question. (PostEditQuestion in codeQController) ");
 			return res.status(403).json({ updateQuestion: false, reason: "only author of the post has authority to edit."});
 		}
 
-        await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
-        res.status(200).json({ updateQuestion: true });
+        const rawData = await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
+		res.locals.schema = CodeRepositoryQ;
+		res.locals.rawData = rawData;
+		next();
 	} catch (error) {
 		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
 		res.status(400).send({ error: error.message });
@@ -137,7 +137,9 @@ export const PostDeleteQuestion = async (req, res, next) => {
 	const { _id } = req.body;
 
 	try {
-		const checkauthor = CodeRepositoryQ.findOne({ _id });
+		const checkauthor = await CodeRepositoryQ.findOne({ _id });
+		res.locals.rawData = checkauthor;
+		res.locals.schema = CodeRepositoryQ;
 		
 		if (checkauthor.author !== user.nickname) {
 			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});
@@ -145,7 +147,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
 
 		await CodeRepositoryA.deleteMany({ codeq: _id });
         await CodeRepositoryQ.deleteOne({ _id });
-        return res.status(200).json({ delQuestionSuccess: true });
+		next();
     } catch (err) {
 		console.log("400: Failed in deleting question. (PostDeleteQuestion in codeQController) ", err);
         next(err);
