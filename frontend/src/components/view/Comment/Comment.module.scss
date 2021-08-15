@@ -1,0 +1,89 @@
+// 댓글
+.commentContainer {
+	border-top: 1px solid var(--silver);
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.commentButton {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--light-blue);
+}
+
+.commentForm {
+	textarea {
+		margin-top: 10px;
+		width: 100%;
+		min-height: 80px;
+		padding: 10px;
+		font-size: 14px;
+		border: 1px solid var(--grey);
+		border-radius: 15px;
+	}
+	textarea::placeholder {
+		font-size: 14px;
+	}
+}
+
+.commentEndLine {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	button {
+		border: none;
+		border-radius: 5px;
+		padding: 5px 10px 5px 10px;
+		background-color: var(--light-blue);
+		color: white;
+		cursor: pointer;
+	}
+}
+.check {
+	display: flex;
+	align-items: center;
+	height: 12px;
+	input {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	p {
+		font-size: 12px;
+	}
+}
+
+// 댓글 리스트
+.commentCard {
+	border-bottom: 1px solid var(--silver);
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.commentInfo {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.defaultCommentImageBackground {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+	background: var(--grey);
+}
+.defaultCommentImage {
+	width: 40px;
+	position: relative;
+}
+.commentInfoRight {
+	margin-left: 5px;
+	p {
+		font-size: 16px;
+	}
+	span {
+		font-size: 12px;
+		color: var(--grey);
+		font-weight: 300;
+	}
+}

@@ -21,5 +21,5 @@ const newsSchema = mongoose.Schema({
 });
 
 const News = mongoose.model('News', newsSchema);
-module.exports = { News };
+export default News;
 // 모듈의 사용성을 늘리기 위한 exports

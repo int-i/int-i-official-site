@@ -7,6 +7,7 @@ import {
 	PostEditAnswer,
 	PostRecommend
 } from "../controllers/codeAController";
+import { IsMember } from "../middleware/auth";
 
 const codeARouter = express.Router();
 
@@ -14,13 +15,13 @@ const codeARouter = express.Router();
 codeARouter.get('/', GetAllAnswers);
 
 // 게시글 작성 POST
-codeARouter.post(routes.codewritea, PostAnswer);
+codeARouter.post(routes.codewritea, IsMember, PostAnswer);
 
 // 특정 게시글 DELETE
-codeARouter.post(routes.codedela, PostDeleteAnswer);
+codeARouter.post(routes.codedela, IsMember, PostDeleteAnswer);
 
 // 게시글 수정 POST / 추천수 업데이트 GET
-codeARouter.post(routes.codeedita, PostEditAnswer);
+codeARouter.post(routes.codeedita, IsMember, PostEditAnswer);
 codeARouter.post(routes.codelikesa, PostRecommend);
 
 

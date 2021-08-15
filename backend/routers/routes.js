@@ -28,6 +28,7 @@ const GOOGLE = "/google";
 
 // USER
 const EDITPROFILE = "/editprofile";
+const EDITAVATAR = "/editavatar";
 
 
 // 질문게시판
@@ -94,6 +95,7 @@ const routes = {
 	answer: ANSWER,
 	deluser: DELUSER,
 	editprofile: EDITPROFILE,
+	editavatar: EDITAVATAR,
 	codeq: CODEQ,
 	codea: CODEA,
 	searchone: SEARCHONE,
@@ -142,7 +144,6 @@ const routes = {
 	editNotice: EDITNOTICE,
 	allNotice: ALLNOTICE,
 	oneNotice: ONENOTICE,
-	
 	//코드저장소 답변
 	codewritea: CODEWRITEA,
 	codedela: CODEDELA,

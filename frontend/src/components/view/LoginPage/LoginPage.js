@@ -2,6 +2,7 @@
 //로그인 페이지
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useCookies } from "react-cookie";
 import styles from "./LoginPage.module.scss";
 import Google from "../../../assets/images/logo/Google.png";
@@ -15,6 +16,34 @@ const LoginPage = (props) => {
 	const [isRemember, SetIsRemember] = useState(false);
 	const [cookies, SetCookie, RemoveCookie] = useCookies(["rememberId"]);
 
+	const LoginData = {
+		id: id,
+		password: password,
+	};
+
+	const PostLoginData = () => {
+		return axios
+			.post("/api/login", LoginData)
+			.then((response) => {
+				if (response.status >= 200 && response.status <= 204) {
+					alert("로그인에 성공하셨습니다!");
+				}
+			})
+			.then(() => {
+				this.props.history.push("/");
+			})
+			.catch(() => {
+				alert("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+			});
+	};
+
+	/* 임시 로그아웃 기능 
+	const logout = () => {
+		axios.get("/api/logout").then((response) => {
+			console.log(response.data);
+		});
+	}; */
+
 	const OnIdHandler = (event) => {
 		SetId(event.currentTarget.value);
 	};
@@ -26,8 +55,8 @@ const LoginPage = (props) => {
 	const OnSubmitHandler = (event) => {
 		event.preventDefault();
 
-		console.log("ID", id);
-		console.log("Password", password);
+		console.log(LoginData);
+		PostLoginData(LoginData);
 	};
 
 	useEffect(() => {
@@ -57,7 +86,6 @@ const LoginPage = (props) => {
 			<div className={[styles.loginPage, "NanumSquare"].join(" ")}>
 				<h2>로그인</h2>
 				<br />
-
 				<form onSubmit={OnSubmitHandler}>
 					<input
 						className={[
@@ -105,6 +133,7 @@ const LoginPage = (props) => {
 						margin="0 0 15px 0px"
 						fontSize="18px"
 						kind="컬러"
+						onClick={OnClickHandler}
 					/>
 				</form>
 				<FormBtn
@@ -118,23 +147,24 @@ const LoginPage = (props) => {
 						props.history.push("/RegisterPage");
 					}}
 				/>
-
 				<div className={styles.hrSect}>SNS 로그인</div>
-
 				<button type="button" className={styles.google}>
 					<img alt="Google로고" src={Google} />
 					구글 로그인
 				</button>
-
 				<button type="button" className={styles.kakao}>
 					<img alt="KaKao로고" src={KaKao} />
 					카카오 로그인
 				</button>
-
 				<button type="button" className={styles.github}>
 					<img alt="Github로고" src={Github} />
 					GitHub 로그인
 				</button>
+
+				{/* 임시 로그아웃 버튼
+				<button type="button" onClick={logout}>
+					로그아웃
+				</button> */}
 			</div>
 		</center>
 	);

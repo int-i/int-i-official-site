@@ -6,13 +6,11 @@ import AcessRights from "./AcessRights";
 
 const Profile = () => {
 	return (
-		<center>
-			<div style={{ display: "flex" }}>
-				<PersonalWorkingSpace />
-				<AboutAndTag />
-				<AcessRights />
-			</div>
-		</center>
+		<div style={{ display: "flex", justifyContent: "center" }}>
+			<PersonalWorkingSpace />
+			<AboutAndTag />
+			<AcessRights />
+		</div>
 	);
 };
 

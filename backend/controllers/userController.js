@@ -4,7 +4,6 @@ import Tag from "../models/Tag";
 import bcrypt from "bcrypt";
 import config from "../config/key";
 
-
 const hashSecret = config.hashSecret;
 
 export const PostEditProfile = async (req, res, next) => {
@@ -156,3 +155,13 @@ export const PostEditProfile = async (req, res, next) => {
         next(err);
     }
 };
+
+export const PostEditAvatar = async (req, res, next) => {
+    try {
+        const file = req.file;
+        await User.updateOne({ _id: req.user._id }, { $set: { avatarUri: file.location } });
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+    }
+}

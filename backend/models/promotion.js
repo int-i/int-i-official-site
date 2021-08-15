@@ -8,9 +8,14 @@ const promotionSchema = mongoose.Schema({
         type : String,
         required : [true, 'Title is required!']
     },
-    body:{
+    contents:{
         type : String,
         required : [true, 'Content is Required!']
+    },
+    author : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'user',
+        required  : true
     },
     createdAt : {
         type : Date,

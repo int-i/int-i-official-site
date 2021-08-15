@@ -27,17 +27,17 @@ export const PostJoin = async (req, res, next) => {
             // 필드값 유무 검사
             // 나중에 반복문으로 정리. 아님 or 로 아래랑 합쳐도 됨. 대신 상세한 reason 불가능.
             if (IsEmpty(username)) {
-                return res.status(400).json({ joinSuccess: false, reason:  "username is required" });
+                return res.status(400).json({ joinSuccess: false, reason:  "rqusername" });
             } else if (IsEmpty(nickname)) {
-                return res.status(400).json({ joinSuccess: false, reason: "nickname is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqnickname" });
             } else if (IsEmpty(id)) {
-                return res.status(400).json({ joinSuccess: false, reason: "id is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqid" });
             } else if (IsEmpty(email)) {
-                return res.status(400).json({ joinSuccess: false, reason: "email is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqemail" });
             } else if (IsEmpty(password)) {
-                return res.status(400).json({ joinSuccess: false, reason: "password is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqpassword" });
             } else if (IsEmpty(password2)) {
-                return res.status(400).json({ joinSuccess: false, reason: "password2 is required" });
+                return res.status(400).json({ joinSuccess: false, reason: "rqpassword2" });
             }
 
             // 필드 값 중복성 검사
@@ -47,14 +47,13 @@ export const PostJoin = async (req, res, next) => {
             const exNickname = await User.findOne({ nickname });
 
             if (exId) {
-                return res.status(400).json({ joinSuccess: false, reason: "already exist id" });
+                return res.status(400).json({ joinSuccess: false, reason: "exid" });
             } else if (exEmail) {
-                return res.status(400).json({ joinSuccess: false, reason: "already exist email" });
+                return res.status(400).json({ joinSuccess: false, reason: "exemail" });
             } else if (exNickname) {
-                console.log(1);
-                return res.status(400).json({ joinSuccess: false, reason: "already exist nickname" });
+                return res.status(400).json({ joinSuccess: false, reason: "exnickname" });
             } else if (password !== password2) {
-                return res.status(400).json({ joinSuccess: false, reason: "wrong password or password2" });
+                return res.status(400).json({ joinSuccess: false, reason: "chpw" });
             } else {
 
                 // 유효성 나중에 추가

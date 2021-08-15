@@ -12,7 +12,7 @@ const PersonalWorkingSpace = () => {
 		textAlign: "left",
 		width: "270px",
 		padding: "30px 40px 30px 40px",
-		margin: "0px 10px 30px 220px",
+		margin: "0px 10px 30px 0px",
 		boxShadow: "0px 4px 10px 4px rgba(0, 0, 0, 0.03)",
 		borderRadius: "26px",
 	};

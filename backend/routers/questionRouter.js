@@ -8,6 +8,7 @@ import {
 	PostEditPost
 } from "../controllers/questionController";
 import { PostCreateTag, PostUpdateTag, PostDelTag } from "../middleware/tag";
+import { IsMember } from "../middleware/auth";
 
 const questionRouter = express.Router();
 
@@ -16,13 +17,13 @@ questionRouter.get('/', GetAllQuestions);
 questionRouter.post(routes.oneques, GetOneQuestion);
 
 // 게시글 작성 POST
-questionRouter.post(routes.writeques, PostQuestion, PostCreateTag);
+questionRouter.post(routes.writeques, IsMember, PostQuestion, PostCreateTag);
 
 // 특정 게시글 DELETE
-questionRouter.post(routes.delques, PostDeleteQuestion, PostDelTag);
+questionRouter.post(routes.delques, IsMember, PostDeleteQuestion, PostDelTag);
 
-// 게시글 수정 POST
-questionRouter.post(routes.editques, PostEditPost, PostUpdateTag);
+// 게시글 수정 EDIT
+questionRouter.post(routes.editques, IsMember, PostEditPost, PostUpdateTag);
 
 
 export default questionRouter;
