@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const noticeSchema = mongoose.Schema({
 
@@ -16,5 +16,5 @@ const noticeSchema = mongoose.Schema({
     }
 })
 
-const Notice = mongoose.model('notice', newSchema);
-module.exports = { Notice };
+const Notice = mongoose.model('notice', noticeSchema);
+export default Notice;

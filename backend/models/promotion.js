@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
 // 이미지 업로드 기능 추가하기 
 // 검색 기능, 정렬 기능 추가하기
@@ -23,6 +23,6 @@ const promotionSchema = mongoose.Schema({
     }
 });
 
-const Promotion  = mongoose.model('promotion', newsSchema);
-module.exports = { Promotion };
+const Promotion  = mongoose.model('promotion', promotionSchema);
+export default Promotion;
 // 모듈의 사용성을 늘리기 위한 exports
