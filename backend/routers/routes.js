@@ -49,7 +49,6 @@ const CODEALLQ = "/codeallq";
 const CODEONEQ = "/codeoneq";
 const CODELIKESQ = "/codelikesq";
 
-<<<<<<< HEAD
 // 기술 뉴스 게시판
 const WRITENEWS = "/writeNews";
 const DELETENEWS = "/deleteNews";
@@ -70,14 +69,13 @@ const DELETENOTICE = "/deleteNotice";
 const EDITNOTICE = "/editNotice";
 const ALLNOTICE = "/allNotice";
 const ONENOTICE = "/oneNotice";
-=======
+
 // 코드저장소 답변올리기
 const CODEWRITEA = "/codewritea";
 const CODEDELA = "/codedela";
 const CODEEDITA = "/codeedita";
 const CODEALLA = "/codealla";
 const CODELIKESA = "/codelikesa";
->>>>>>> 2c32070f0e15ba4fa35586669f9ca1c160357f83
 
 const routes = {
 	user: USER,
@@ -122,7 +120,6 @@ const routes = {
 	codeoneq: CODEONEQ,
 	codelikesq: CODELIKESQ,
 
-<<<<<<< HEAD
 	// 기술 뉴스 게시판
 	writeNews: WRITENEWS,
 	deleteNews: DELETENEWS,
@@ -142,15 +139,13 @@ const routes = {
 	deleteNotice: DELETENOTICE,
 	editNotice: EDITNOTICE,
 	allNotice: ALLNOTICE,
-	oneNotice: ONENOTICE
-=======
+	oneNotice: ONENOTICE,
 	//코드저장소 답변
 	codewritea: CODEWRITEA,
 	codedela: CODEDELA,
 	codeedita: CODEEDITA,
 	codealla: CODEALLA,
 	codelikesa: CODELIKESA
->>>>>>> 2c32070f0e15ba4fa35586669f9ca1c160357f83
 }
 
 export default routes;
