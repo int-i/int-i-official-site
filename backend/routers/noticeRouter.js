@@ -21,6 +21,6 @@ noticeRouter.post(routes.editNotice, postEditNotice );
 
 // 게시글 조회
 noticeRouter.get(routes.allNotice, getAllNotice);
-noticeRouter.get(routes.oneNotice, getOneNoticSe);
+noticeRouter.get(routes.oneNotice, getOneNotice);
 
 export default noticeRouter;
