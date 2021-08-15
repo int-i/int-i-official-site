@@ -14,7 +14,7 @@
 	justify-content: space-between;
 	font-size: 14px;
 	padding-right: 5px;
-	padding-bottom: 25px;
+	padding-bottom: 20px;
 }
 // 작성자, 작성시간
 .infoLeft {
@@ -42,6 +42,21 @@
 		cursor: pointer;
 	}
 }
+// 태그
+.Tags {
+	display: flex;
+	margin-bottom: 15px;
+}
+.Tag {
+	background: var(--silver);
+	color: var(--light-blue);
+	margin: 0 5px 0 5px;
+	font-size: 12px;
+	padding: 3px 10px 3px 10px;
+	min-width: fit-content;
+	min-height: max-content;
+	border-radius: 20px;
+}
 
 // 좋아요 라인
 .likeContaienr {
@@ -63,6 +78,7 @@
 	cursor: pointer;
 }
 .likeNumber {
+	// 클릭된 상태에만 색주면되는데 이건 style 속성으로 할까봐
 }
 // 하단 유저 프로필
 .defaultProfileContainer {
