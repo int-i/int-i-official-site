@@ -5,6 +5,10 @@ import "./CodeRepositoryQ";
 const codeRepositoryASchema = new mongoose.Schema({
     
     // 작성자, 제목, 내용, 답변올려진날짜, 추천수, 사람당 추천 여부
+    seq:{
+        type :Number,
+        default : 0
+    },
     author:{
         type : mongoose.Schema.Types.ObjectId, 
         ref : 'user', 
@@ -32,5 +36,13 @@ const codeRepositoryASchema = new mongoose.Schema({
     // }]
 });
 
-const CodeRepositoryA = mongoose.model('coderepositorya', codeRepositoryASchema);
-export default CodeRepositoryA;
+codeRepositoryASchema.plugin(autoIncrement.plugin, {
+    model: 'news',
+    field: 'seq',
+    startAt : 1,
+    increment : 1
+});
+
+
+const coderepositoryas = mongoose.model('coderepositorya', codeRepositoryASchema);
+export default coderepositoryas;
