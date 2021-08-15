@@ -7,7 +7,7 @@ import {
 	PostDeleteQuestion,
 	PostEditPost
 } from "../controllers/questionController";
-import { PostCreateTag, PostUpdateTag } from "../middleware/tag";
+import { PostCreateTag, PostUpdateTag, PostDelTag } from "../middleware/tag";
 
 const questionRouter = express.Router();
 
@@ -19,7 +19,7 @@ questionRouter.post(routes.oneques, GetOneQuestion);
 questionRouter.post(routes.writeques, PostQuestion, PostCreateTag);
 
 // 특정 게시글 DELETE
-questionRouter.post(routes.delques, PostDeleteQuestion);
+questionRouter.post(routes.delques, PostDeleteQuestion, PostDelTag);
 
 // 게시글 수정 POST
 questionRouter.post(routes.editques, PostEditPost, PostUpdateTag);
