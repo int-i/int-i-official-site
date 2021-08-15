@@ -5,7 +5,7 @@ import Like from "../models/Like";
 // create : 문제 작성이 끝나고 클라이언트가 등록 버튼을 눌렀을 때 데이터 전달
 export const PostQuestion = async (req, res, next) => {
 	const user = req.user;
-	const { title, contents, recommend, createdAt } = req.body;
+	const { title, contents, recommend, createdAt, users } = req.body;
 
 	// 제목, 내용이 없거나 유저가 인트아이 멤버가 아니면 에러호출.
     if (!title || !contents) {
@@ -19,10 +19,11 @@ export const PostQuestion = async (req, res, next) => {
 
 	// 등록이 잘 됐을 때 성공 메세지 보내고 안되면 에러 메세지 보내기.
 	try {
-		CodeRepositoryQ.dropIndex({ users: users._id });
+		//CodeRepositoryQ.dropIndex({ users: null });
+		CodeRepositoryQ.collection.dropIndexes();
 		const codeQ = await CodeRepositoryQ.create({
             author: user.nickname,
-			users: [],
+			//user: users,
 			title,
 			contents,
 			recommend,
@@ -49,15 +50,12 @@ export const GetAllQuestions = async (req, res) => {
 	}
 }
 
-/*
- * read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
- * 변경사항 : post방식으로 사용자가 게시글을 클릭했을 때 해당 게시글의 _id를 찾아서 그 게시글의 정보를 다 보여주는 식으로 구현.
- */
+
+ // read : 게시판에서 특정 게시글을 눌렀을 때 해당 게시글 정보 보여주기.
  export const GetOneQuestion = async (req, res) => {
-	const { _id } = req.body;
 
 	try {
-        const question = await CodeRepositoryQ.findById({ _id });
+        const question = await CodeRepositoryQ.findById({ _id: req.params.id });
         return res.status(200).json({ question: question });
     } catch (err) {
 		console.log("404: Cannot get page of showing specific one question of code repository (GetOneQuestion in codeQController) ", err);
