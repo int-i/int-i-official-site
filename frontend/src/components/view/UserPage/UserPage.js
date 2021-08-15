@@ -29,6 +29,7 @@ const UserPage = () => {
 				paddingBottom: "450px",
 				backgroundColor: "#FAFDFF",
 			}}
+			className="NanumSquare"
 		>
 			<center>
 				<User />

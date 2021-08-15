@@ -8,10 +8,15 @@ import adminIcon from "../../../assets/images/icon/관리자.png";
 import userIcon from "../../../assets/images/icon/검은 유저.png";
 import styles from "./Header.module.scss";
 
-
 const logout = () => {
-	axios.get("/api/logout");
-	alert("로그아웃 되었습니다.");
+	axios
+		.get("/api/logout")
+		.then(() => {
+			alert("로그아웃 되었습니다.");
+		})
+		.catch((err) => {
+			alert(err);
+		});
 };
 
 const 로그인UI = {
@@ -28,39 +33,46 @@ const 로그인UI = {
 	user: (
 		<ul className={styles.loginUI}>
 			<li>
-				<Link to="/UserPage"><img src={userIcon} width={20} alt={"유저 아이콘"} />마이 페이지</Link>
+				<Link to="/UserPage">
+					<img src={userIcon} width={20} alt={"유저 아이콘"} />
+					마이 페이지
+				</Link>
 			</li>
 			<li>
-				<Link to="/" onClick={logout}>로그아웃</Link>
+				<button onClick={logout}>로그아웃</button>
 			</li>
 		</ul>
 	),
 	admin: (
 		<ul className={styles.loginUI}>
 			<li>
-				<Link to="/"><img src={adminIcon} width={20} alt={"관리자 아이콘"} />관리자 페이지</Link>
+				<Link to="/">
+					<img src={adminIcon} width={20} alt={"관리자 아이콘"} />
+					관리자 페이지
+				</Link>
 			</li>
 			<li>
-				<Link to="/UserPage"><img src={userIcon} width={20} alt={"유저 아이콘"} />마이 페이지</Link>
+				<Link to="/UserPage">
+					<img src={userIcon} width={20} alt={"유저 아이콘"} />
+					마이 페이지
+				</Link>
 			</li>
 			<li>
-				<Link to="/" onClick={logout}>로그아웃</Link>
+				<button onClick={logout}>로그아웃</button>
 			</li>
 		</ul>
 	),
 };
 
-const Header = () => {
+const Header = (props) => {
 	useEffect(() => {
 		return () => {
-			axios.get("/api/login")
-				.then(res => console.log(res))
+			axios
+				.get("/api/login")
+				.then((res) => console.log(res))
 				.catch();
 		};
-	},
-		[]
-	);
-
+	}, []);
 
 	const [로그인상태, 로그인상태변경] = useState("user"); // 이 로그인 상태가 뭔지에 따라서 유저 UI가 변함
 	return (
