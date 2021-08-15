@@ -7,14 +7,7 @@ export const PostCreateTag = async (req, res, next) => {
         const post = res.locals.post;
         const schema = res.locals.schema;
         const tag = req.body.tag;
-        
-        let schemaName;
-        if (schema === Question) {
-            schemaName = "Question";
-        } else if (schema === CodeRepositoryQ) {
-            schemaName = "CodeRepositoryQ";
-        }
-        
+        const schemaName = res.locals.schemaName;
 
         // tag -> 태그들 (배열)
         const tagResult = await Promise.all(tag.map(async (arg) => {

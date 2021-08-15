@@ -31,6 +31,7 @@ export const PostQuestion = async (req, res, next) => {
 		//await CodeRepositoryQ.findByIdAndUpdate( _id, { $pull: { users: user._id } });
 		res.locals.post = codeQ;
 		res.locals.schema = CodeRepositoryQ;
+		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("400: error occurred while creating CodeRepositoryQ schema. (PostQuestion in codeQController) ", error);
@@ -89,6 +90,7 @@ export const PostEditQuestion = async (req, res, next) => {
         const rawData = await CodeRepositoryQ.findByIdAndUpdate( _id, { $set: { author: user.nickname, anonymous: anonymous, title: title, contents: contents, createdAt: createdAt }});
 		res.locals.schema = CodeRepositoryQ;
 		res.locals.rawData = rawData;
+		res.locals.schemaName = "CodeRepositoryQ";
 		next();
 	} catch (error) {
 		console.log("error occured while updating a question of code repository (PostEditQuestion in codeQController): "+error);
@@ -142,6 +144,7 @@ export const PostDeleteQuestion = async (req, res, next) => {
 		const checkauthor = await CodeRepositoryQ.findOne({ _id });
 		res.locals.rawData = checkauthor;
 		res.locals.schema = CodeRepositoryQ;
+		res.locals.schemaName = "CodeRepositoryQ";
 		
 		if (checkauthor.author !== user.nickname) {
 			return res.status(400).json({ deleteQuestion: false, reason: "only author of the post has authority to edit."});
