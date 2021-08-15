@@ -34,6 +34,9 @@ const EDITAVATAR = "/editavatar";
 
 // 댓글
 const WRITECOMMENT = "/writecomment";
+const DELCOMMENT = "/delcomment";
+const EDITCOMMENT = "/editcomment";
+const ALLCOMMENT = "/allcomment";
 
 // 질문게시판
 const WRITEQUES = "/writeques";
@@ -110,6 +113,9 @@ const routes = {
 	google: GOOGLE,
 
 	writecomment: WRITECOMMENT,
+	delcomment: DELCOMMENT,
+	editcomment: EDITCOMMENT,
+	allcomment: ALLCOMMENT,
 
 	//질문게시판
 	writeques: WRITEQUES,

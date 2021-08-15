@@ -14,7 +14,7 @@ export const PostQuestion = async (req, res, next) => {
 	try {
 		
 		const question = await Question.create({
-            author: req.user.id,
+            author: req.user._id,
 			title,
 			contents,
 			anonymous,
