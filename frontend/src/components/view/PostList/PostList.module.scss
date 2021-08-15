@@ -1,16 +1,19 @@
 @import "../../../index";
 
+$pageType: postPage;
 .postList {
 	position: relative;
+
+	// 박스 정렬
 	width: 60%;
+	left: 50%;
 	height: 222px;
+	transform: translate(-50%);
+
+	
 	border-bottom: 1px solid var(--grey);
 	color: var(--navy);
 
-	// 박스 중앙 정렬
-	left: 50%;
-	transform: translate(-50%);
-	
 	// 텍스트 사이의 거리
 	div + div {
 		margin-top: 10px;
