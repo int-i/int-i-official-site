@@ -30,13 +30,9 @@ const GOOGLE = "/google";
 const EDITPROFILE = "/editprofile";
 const EDITAVATAR = "/editavatar";
 
-<<<<<<< HEAD
-=======
-
 // 댓글
 const WRITECOMMENT = "/writecomment";
 
->>>>>>> 55e5e02e20f5530a38d1d8d239a49c2a335eef37
 // 질문게시판
 const WRITEQUES = "/writeques";
 const DELQUES = "/delques";
