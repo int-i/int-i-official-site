@@ -3,15 +3,16 @@
 	margin: 0;
 }
 .listContainer {
-	position: relative;
-	max-width: 1100px;
+	max-width: 850px;
 	margin: 0 auto;
+	padding-top: 50px;
 	p {
 		font-size: 20px;
 	}
 }
 .buttonContainer {
-	padding: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	display: flex;
 	flex-direction: row-reverse;
 	button {
