@@ -5,7 +5,8 @@ import {
 	GetOneQuestion,
 	PostQuestion,
 	PostDeleteQuestion,
-	PostEditPost
+	PostEditPost,
+	GetSearchQuestion
 } from "../controllers/questionController";
 
 const questionRouter = express.Router();
@@ -22,5 +23,8 @@ questionRouter.post(routes.delques, PostDeleteQuestion);
 
 // 게시글 수정 POST
 questionRouter.post(routes.editques, PostEditPost);
+
+// 게시글 검색 GET
+questionRouter.get('/' + routes.searchone, GetSearchQuestion);
 
 export default questionRouter;

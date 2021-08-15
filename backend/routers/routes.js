@@ -20,6 +20,7 @@ const QUESTION = "/question";
 const ANSWER = "/answer";
 const CODEQ = "/codeq";
 const CODEA = "/codea";
+const SEARCHONE = "/searchone";
 
 const GITHUB = "/github";
 const KAKAO = "/kakao";
@@ -71,6 +72,7 @@ const routes = {
 	editprofile: EDITPROFILE,
 	codeq: CODEQ,
 	codea: CODEA,
+	searchone: SEARCHONE,
 
 	github: GITHUB,
 	kakao: KAKAO,

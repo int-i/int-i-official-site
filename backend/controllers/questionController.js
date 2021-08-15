@@ -112,3 +112,36 @@ export const PostDeleteQuestion = async (req, res, next) => {
     }
 };
 
+export const GetSearchQuestion = async (ctx) => {
+	try{
+		if (ctx.query.option == 'title') {
+			options = [{ title: new RegExp(ctx.query.content) }];
+		}
+		else if (ctx.query.option == 'body') {
+			options = [{ body: new RegExp(ctx.query.content) }];
+		}
+		else if(ctx.query.option == 'title_body'){
+			options = [{ title: new RegExp(ctx.query.content) }, { body: new RegExp(ctx.query.content) }];
+		}
+		else {
+			const err = new Error('검색 옵션이 없습니다.');
+			return res.status(400).send({ searchQuestion: false, reason: "No searching result" });
+		}
+	   
+		const posts = await Post.find({ $or: options })
+		.sort({ _id: -1 })
+		.limit(10)
+		.skip((page - 1) * 10)
+		.lean()
+		.exec();
+		const postCount = await Post.countDocuments(posts).exec();
+		ctx.set('Last-Page', Math.ceil(postCount / 10));
+		ctx.body = posts.map((post) => ({
+		  ...post,
+		  body: removeHtmlAndShorten(post.body),
+		}));
+	
+	  } catch (e) {
+		ctx.throw(500, e);
+	  }
+}
