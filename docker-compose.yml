@@ -1,31 +1,31 @@
-version: "2.4"
+version: "3.9"
+
 services:
-    frontend:
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./frontend
-        volumes:
-            - /app/node_modules
-            - ./frontend:/app
-        container_name: app_frontend
-        stdin_open: true
+  web:
+    build: ./frontend
+    volumes:
+      - web_static:/usr/src/app/build
 
-    nginx:
-        restart: always
-        build:
-            dockerfile: Dockerfile
-            context: ./nginx
-        container_name: app_nginx
-        ports:
-            - "3000:80"
+  api:
+    build: ./backend
+    networks:
+      - backend
 
-    backend:
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./
-        container_name: app_backend
-        volumes:
-            - /app/node_modules
-            - /app/frontend
-            - /app/nginx
-            - ./:/app
+  proxy:
+    image: nginx:alpine
+    depends_on:
+      - api
+    networks:
+      - backend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - web_static:/var/www/app/static
+
+networks:
+  backend:
+
+volumes:
+  web_static:
+
