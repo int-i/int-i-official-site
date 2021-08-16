@@ -33,8 +33,8 @@ const ProfileEditPage = (props) => {
 	const [studentId, SetStudentId] = useState("");
 	const [interest, SetInterest] = useState(""); // 관심 분야
 
-	const [inputTags, SetInputTags] = useState("");
-	const [userTags, SetUserTags] = useState([]); // 관심 태그
+	const [inputTags, SetInputTags] = useState([""]);
+	const [userTags, SetUserTags] = useState([""]); // 관심 태그
 
 	const [about, SetAbout] = useState(""); // 자기소개
 	const [github, SetGithub] = useState("");
@@ -212,7 +212,7 @@ const ProfileEditPage = (props) => {
 			let tempArr = [...userTags];
 			tempArr.push(inputTags);
 			SetUserTags(tempArr);
-			SetInputTags("");
+			SetInputTags([""]);
 		}
 	};
 

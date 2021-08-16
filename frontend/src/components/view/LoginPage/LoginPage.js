@@ -26,7 +26,7 @@ const LoginPage = (props) => {
 			.post("/api/login", LoginData)
 			.then((response) => {
 				if (response.status >= 200 && response.status <= 204) {
-					alert("로그인에 성공하셨습니다!");
+					alert("로그인에 성공했습니다!");
 					props.history.push("/");
 				}
 			})

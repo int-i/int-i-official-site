@@ -61,33 +61,27 @@ export const PostEditProfile = async (req, res, next) => {
 		// else 문 안먹혀서 그냥 if 문으로 바꿈
 		if (exEmail) {
 			if (req.user.email !== email) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist email",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist email",
+				});
 			}
 		}
 		if (exNickname) {
 			if (req.user.nickname !== nickname) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist nickname",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist nickname",
+				});
 			}
 		}
 		if (exStudentId) {
 			// body.studentId 는 String, user.studentId 는 Number.
 			if (req.user.studentId != studentId) {
-				return res
-					.status(400)
-					.json({
-						editSuccess: false,
-						reason: "already exist studentId",
-					});
+				return res.status(400).json({
+					editSuccess: false,
+					reason: "already exist studentId",
+				});
 			}
 		}
 
