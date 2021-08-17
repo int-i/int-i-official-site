@@ -2,7 +2,7 @@
 
 FROM node:alpine
 
-RUN apk add --no-cache tzdata
+RUN apk add --no-cache make g++ python3 tzdata
 ENV TZ Asia/Seoul
 
 WORKDIR /usr/src/app
