@@ -6,7 +6,7 @@ services:
     volumes:
       - web_static:/usr/src/app/build
 
-  api:
+  web_api:
     build: ./backend
     networks:
       - backend
@@ -14,14 +14,14 @@ services:
   proxy:
     image: nginx:alpine
     depends_on:
-      - api
+      - web_api
     networks:
       - backend
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - web_static:/var/www/app/static
+      - web_static:/usr/share/nginx/html
 
 networks:
   backend:

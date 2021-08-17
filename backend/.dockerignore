@@ -118,6 +118,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# React build output
-build/
-

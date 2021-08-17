@@ -4,9 +4,9 @@
 	"description": "[![Build Status](https://travis-ci.com/int-i/int-i-official-site.svg?branch=master)](https://travis-ci.com/int-i/int-i-official-site)\r # 인트아이 공식 홈페이지",
 	"main": "index.js",
 	"scripts": {
-		"start": "node --experimental-modules --es-module-specifier-resolution=node backend/index.js",
-		"backend": "nodemon --experimental-modules --es-module-specifier-resolution=node backend/index.js",
-		"frontend": "npm run start --prefix frontend",
+		"start": "node --experimental-modules --es-module-specifier-resolution=node index.js",
+		"backend": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
+		"frontend": "npm run start --prefix ../frontend",
 		"test": "echo test successful!"
 	},
 	"repository": {
