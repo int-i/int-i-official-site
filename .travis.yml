@@ -6,17 +6,16 @@ services:
     - docker
 
 before_install:
-    - docker build -t sunwoo005/inti-react-test -f ./frontend/Dockerfile.dev ./frontend
+    - docker build -t sunwoo005/inti-react-test -f ./frontend/Dockerfile ./frontend
 
 script:
     - docker run -e CI=true sunwoo005/inti-react-test npm run test
+
 after_success:
     - docker build -t sunwoo005/travis-inti-frontend ./frontend
-    - docker build -t sunwoo005/travis-inti-backend ./
-    - docker build -t sunwoo005/travis-inti-nginx ./nginx
+    - docker build -t sunwoo005/travis-inti-backend ./backend
 
     - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
     - docker push sunwoo005/travis-inti-frontend
     - docker push sunwoo005/travis-inti-backend
-    - docker push sunwoo005/travis-inti-nginx
