@@ -1,31 +1,55 @@
-version: "2.4"
+version: "3.9"
+
 services:
-    frontend:
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./frontend
-        volumes:
-            - /app/node_modules
-            - ./frontend:/app
-        container_name: app_frontend
-        stdin_open: true
+  web:
+    build: ./frontend
+    volumes:
+      - web_static:/usr/src/app/build
 
-    nginx:
-        restart: always
-        build:
-            dockerfile: Dockerfile
-            context: ./nginx
-        container_name: app_nginx
-        ports:
-            - "3000:80"
+  web_api:
+    build: ./backend
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - backend
 
-    backend:
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./
-        container_name: app_backend
-        volumes:
-            - /app/node_modules
-            - /app/frontend
-            - /app/nginx
-            - ./:/app
+  db:
+    image: mongo:5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: inti
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      TZ: Asia/Seoul
+    networks:
+      - backend
+    ports:
+      - "27017-27019:27017-27019"
+    secrets:
+      - db_root_password
+    volumes:
+      - db_data:/data/db
+
+  proxy:
+    image: nginx:alpine
+    depends_on:
+      - web_api
+    networks:
+      - backend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - web_static:/usr/share/nginx/html
+
+networks:
+  backend:
+
+secrets:
+  db_root_password:
+    file: ./db/root_password.txt
+
+volumes:
+  web_static:
+  db_data:
+
