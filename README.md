@@ -9,11 +9,29 @@
 | ---------------------------- |
 | ![Hackathon](/hackathon.jpg) |
 
+## Tech Stack
+
+- Frontend
+  - React.js
+- Backend
+  - Express.js
+  - MongoDB
+- DevOps
+  - AWS
+  - Docker
+  - Travis CI
+
 ## 프로젝트 목적
 
 > 기존 인트아이 질문톡방의 활용성이 저하되어, 좀 더 접근성이 좋은 익명 질문 공간을 만듦과 동시에 과거 존재했던 인트아이 코드 저장소를 다시 개발, 발전시켜 인트아이 회원들의 기술적 향상을 돕는 것을 목적으로 한다.
 
 ## 개발일지
+
+### Frontend
+
+See [frontend/README.md](./frontend/README.md)
+
+### Backend
 
 2021-08-04 저장소 개설, travis ci 배지 추가
 
